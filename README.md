@@ -1,5 +1,8 @@
-# COMP4350
-COMP4350 Project Repository
+# COMP4350 - Team H Repository
+
+[Chat Logs](../COMP4350/docs/Chat Logs Jan1 to Jan19.md)
+
+[Minutes](../COMP4350/docs/Meeting_Minutes)
 
 # Vision Statement
   The ListAssist product helps people organize and keep track of many types of lists. Some find it 

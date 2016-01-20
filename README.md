@@ -1,6 +1,6 @@
 # COMP4350 - Team H Repository
 
-[Chat Logs](COMP4350/docs/Chat Logs Jan1 to Jan19.md)
+[Chat Logs](../COMP4350/docs/Chat Logs Jan1 to Jan19.md)
 
 [Minutes](../COMP4350/master/docs/Meeting_Minutes)
 

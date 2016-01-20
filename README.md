@@ -8,6 +8,8 @@ This is ListAssist, a smart list sharing application to help with getting things
 
 [Technology Selection](docs/Technology Selection and Justification.md)
 
+[User Stories & Project Plan](https://github.com/DailyDilemma/COMP4350/issues) (using GitHub Issues)
+
 [Chat Logs](docs/Chat Logs Jan1 to Jan19.md)
 
 [Minutes](docs/Meeting_Minutes)

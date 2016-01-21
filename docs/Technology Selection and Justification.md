@@ -1,7 +1,7 @@
 #Technology Selection and Justification
 
 ##Server Side Technologies
-For our server side technology stack we considered the Java based Spring MVC Framework, LAMP servers with Django, and Microsoft’s ASP.NET. We selected ASP.NET due to comprehensive nature of the ASP.NET framework and the consistency and productivity of the Visual Studio development environment.
+For our server side technology stack we considered the Java based Spring MVC Framework, LAMP servers with Django, and Microsoft’s ASP.NET. We selected ASP.NET and C# due to comprehensive nature of the ASP.NET framework and the consistency and productivity of the Visual Studio development environment.
 
 One of our concerns given the small amount of time to complete this project is the amount of time spent configuring our development environments to include all the components needed to meet the project requirements. Every technology stack we considered included some kind of unit testing framework, dependency management framework, etc. but the open source technology stacks relied on many small components that must be manually installed and configured to work together. A simple installation of Visual Studio on any Windows system provided nearly all the components required for us to complete this project in one installation and most of those components came preconfigured to work together. As far as performance and quality is concerned ASP.NET can easily produce quality web applications that perform just as well if not better than the open source frameworks.
 

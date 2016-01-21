@@ -93,7 +93,7 @@ Thanks for doing the poll Josh. The grocery list sounds like a good project. As 
 
 2016-01-15 19:42
 Josh Westlake
-Trello board is setup, click this link to become a member https://trello.com/invite/b/DAi1Vyqs/ecfddd6b9544ca0bf9cf041ca16ccc3e/comp4350-project
+Trello board is setup, click this link to become a member
 
 2016-01-15 19:44
 Josh Westlake

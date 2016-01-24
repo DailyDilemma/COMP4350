@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ListAssist.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="ListAssistStoreContainer">
+    <EntitySet Name="Lists" EntityType="ListAssist.Store.Lists" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ListItems" EntityType="ListAssist.Store.ListItems" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="ListListItem" Association="ListAssist.Store.ListListItem">
+      <End Role="List" EntitySet="Lists" />
+      <End Role="ListItem" EntitySet="ListItems" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Lists">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ListItems">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Done" Type="bit" Nullable="false" />
+    <Property Name="ListId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="ListListItem">
+    <End Role="List" Type="ListAssist.Store.Lists" Multiplicity="1" />
+    <End Role="ListItem" Type="ListAssist.Store.ListItems" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="List">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ListItem">
+        <PropertyRef Name="ListId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="ListAssist" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="ListAssistContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Lists" EntityType="ListAssist.List" />
+          <EntitySet Name="ListItems" EntityType="ListAssist.ListItem" />
+          <AssociationSet Name="ListListItem" Association="ListAssist.ListListItem">
+            <End Role="List" EntitySet="Lists" />
+            <End Role="ListItem" EntitySet="ListItems" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="List">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="ListItems" Relationship="ListAssist.ListListItem" FromRole="List" ToRole="ListItem" />
+        </EntityType>
+        <EntityType Name="ListItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Description" Type="String" Nullable="false" />
+          <Property Name="Done" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="List" Relationship="ListAssist.ListListItem" FromRole="ListItem" ToRole="List" />
+          <Property Name="ListId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="ListListItem">
+          <End Type="ListAssist.List" Role="List" Multiplicity="1" />
+          <End Type="ListAssist.ListItem" Role="ListItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="List">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ListItem">
+              <PropertyRef Name="ListId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ListAssistStoreContainer" CdmEntityContainer="ListAssistContainer">
+    <EntitySetMapping Name="Lists">
+      <EntityTypeMapping TypeName="IsTypeOf(ListAssist.List)">
+        <MappingFragment StoreEntitySet="Lists">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ListItems">
+      <EntityTypeMapping TypeName="IsTypeOf(ListAssist.ListItem)">
+        <MappingFragment StoreEntitySet="ListItems">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Done" ColumnName="Done" />
+          <ScalarProperty Name="ListId" ColumnName="ListId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

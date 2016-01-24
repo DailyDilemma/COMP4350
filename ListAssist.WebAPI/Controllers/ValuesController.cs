@@ -7,7 +7,8 @@ using System.Web.Http;
 
 namespace ListAssist.WebAPI.Controllers
 {
-    [Authorize]
+    // The authorize annotation is commented out to bypass authentication for now
+    //[Authorize]
     public class ValuesController : ApiController
     {
         // GET api/values

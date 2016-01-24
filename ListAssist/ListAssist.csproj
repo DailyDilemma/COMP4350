@@ -172,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\Bundles\Foundation.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -190,15 +191,33 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\foundation\foundation.css" />
+    <Content Include="Content\foundation\foundation.mvc.css" />
+    <Content Include="Content\foundation\normalize.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="App_Readme\Foundation for sites\readme.md" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\foundation\fastclick.js" />
+    <Content Include="Scripts\foundation\foundation.abide.js" />
+    <Content Include="Scripts\foundation\foundation.accordion.js" />
+    <Content Include="Scripts\foundation\foundation.alert.js" />
+    <Content Include="Scripts\foundation\foundation.clearing.js" />
+    <Content Include="Scripts\foundation\foundation.dropdown.js" />
+    <Content Include="Scripts\foundation\foundation.equalizer.js" />
+    <Content Include="Scripts\foundation\foundation.interchange.js" />
+    <Content Include="Scripts\foundation\foundation.joyride.js" />
+    <Content Include="Scripts\foundation\foundation.js" />
+    <Content Include="Scripts\foundation\foundation.magellan.js" />
+    <Content Include="Scripts\foundation\foundation.offcanvas.js" />
+    <Content Include="Scripts\foundation\foundation.orbit.js" />
+    <Content Include="Scripts\foundation\foundation.reveal.js" />
+    <Content Include="Scripts\foundation\foundation.slider.js" />
+    <Content Include="Scripts\foundation\foundation.tab.js" />
+    <Content Include="Scripts\foundation\foundation.tooltip.js" />
+    <Content Include="Scripts\foundation\foundation.topbar.js" />
+    <Content Include="Scripts\foundation\jquery.cookie.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -249,9 +268,6 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />

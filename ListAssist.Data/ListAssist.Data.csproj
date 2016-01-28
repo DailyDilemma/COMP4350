@@ -7,8 +7,8 @@
     <ProjectGuid>{E655C54C-D2CC-47A0-8112-B7CBAE6C3DB7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ListAssist.DAL</RootNamespace>
-    <AssemblyName>ListAssist.DAL</AssemblyName>
+    <RootNamespace>ListAssist.Data</RootNamespace>
+    <AssemblyName>ListAssist.Data</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

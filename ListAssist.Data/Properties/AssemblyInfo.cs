@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ListAssist.DAL.Tests")]
+[assembly: AssemblyTitle("ListAssist.Data")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ListAssist.DAL.Tests")]
+[assembly: AssemblyProduct("ListAssist.Data")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("48784de0-76f8-4aa2-b25c-0e24e2811899")]
+[assembly: Guid("e655c54c-d2cc-47a0-8112-b7cbae6c3db7")]
 
 // Version information for an assembly consists of the following four values:
 //

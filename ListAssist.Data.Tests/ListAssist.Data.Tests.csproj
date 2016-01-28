@@ -6,8 +6,8 @@
     <ProjectGuid>{48784DE0-76F8-4AA2-B25C-0E24E2811899}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ListAssist.DAL.Tests</RootNamespace>
-    <AssemblyName>ListAssist.DAL.Tests</AssemblyName>
+    <RootNamespace>ListAssist.Data.Tests</RootNamespace>
+    <AssemblyName>ListAssist.Data.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -64,7 +64,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ListAssist.DAL\ListAssist.Data.csproj">
+    <ProjectReference Include="..\ListAssist.Data\ListAssist.Data.csproj">
       <Project>{e655c54c-d2cc-47a0-8112-b7cbae6c3db7}</Project>
       <Name>ListAssist.Data</Name>
     </ProjectReference>

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace ListAssist.DAL.Tests
+namespace ListAssist.Data.Tests
 {
     [TestClass]
     public class UnitTest1

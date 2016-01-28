@@ -11,9 +11,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListAssist.WebAPI", "ListAs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListAssist.WebAPI.Tests", "ListAssist.WebAPI.Tests\ListAssist.WebAPI.Tests.csproj", "{CCE4B953-1FF6-4FC8-9464-29082054DED4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListAssist.Data", "ListAssist.DAL\ListAssist.Data.csproj", "{E655C54C-D2CC-47A0-8112-B7CBAE6C3DB7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListAssist.Data", "ListAssist.Data\ListAssist.Data.csproj", "{E655C54C-D2CC-47A0-8112-B7CBAE6C3DB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListAssist.Data.Tests", "ListAssist.DAL.Tests\ListAssist.Data.Tests.csproj", "{48784DE0-76F8-4AA2-B25C-0E24E2811899}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListAssist.Data.Tests", "ListAssist.Data.Tests\ListAssist.Data.Tests.csproj", "{48784DE0-76F8-4AA2-B25C-0E24E2811899}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

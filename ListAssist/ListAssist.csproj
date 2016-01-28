@@ -275,7 +275,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ListAssist.DAL\ListAssist.Data.csproj">
+    <ProjectReference Include="..\ListAssist.Data\ListAssist.Data.csproj">
       <Project>{e655c54c-d2cc-47a0-8112-b7cbae6c3db7}</Project>
       <Name>ListAssist.Data</Name>
     </ProjectReference>

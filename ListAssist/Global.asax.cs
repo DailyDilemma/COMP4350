@@ -6,6 +6,8 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using System.Data.Entity;
+using ListAssist.Data;
 
 namespace ListAssist
 {
@@ -18,6 +20,13 @@ namespace ListAssist
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            // Drop, recreate and reseed the database
+            Database.SetInitializer(new DbInitializer());
+            using (var db = new ListAssistContainer())
+            {
+                db.Database.Initialize(false);
+            }
         }
     }
 }

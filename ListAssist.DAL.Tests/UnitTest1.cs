@@ -9,6 +9,7 @@ namespace ListAssist.DAL.Tests
         [TestMethod]
         public void TestMethod1()
         {
+          
         }
     }
 }

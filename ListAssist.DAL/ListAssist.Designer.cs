@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'E:\OneDrive\University\COMP4350\Project\Source\COMP4350\ListAssist.WebAPI\Models\ListAssist.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\Josh Westlake\Source\Repos\COMP4350\ListAssist.DAL\ListAssist.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

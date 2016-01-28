@@ -88,7 +88,6 @@
       <DependentUpon>ListAssist.edmx</DependentUpon>
       <LastGenOutput>ListAssist.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="ListAssist.edmx.sql" />
     <Content Include="ListAssist.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ListAssist.edmx</DependentUpon>

@@ -52,53 +52,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ListAssistContext.cs" />
     <Compile Include="DbInitializer.cs" />
-    <Compile Include="List.cs">
-      <DependentUpon>ListAssist.tt</DependentUpon>
-    </Compile>
-    <Compile Include="ListAssist.Context.cs">
-      <DependentUpon>ListAssist.Context.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="ListAssist.cs">
-      <DependentUpon>ListAssist.tt</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="ListAssist.Designer.cs">
-      <DependentUpon>ListAssist.edmx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
-    <Compile Include="ListItem.cs">
-      <DependentUpon>ListAssist.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Models\LAListItem.cs" />
+    <Compile Include="Models\LAList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EntityDeploy Include="ListAssist.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ListAssist.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ListAssist.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ListAssist.edmx</DependentUpon>
-      <LastGenOutput>ListAssist.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="ListAssist.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ListAssist.edmx</DependentUpon>
-      <LastGenOutput>ListAssist.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ListAssist.edmx.diagram">
-      <DependentUpon>ListAssist.edmx</DependentUpon>
-      <SubType>Designer</SubType>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">

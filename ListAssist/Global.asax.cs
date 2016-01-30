@@ -23,7 +23,7 @@ namespace ListAssist
 
             // Drop, recreate and reseed the database
             Database.SetInitializer(new DbInitializer());
-            using (var db = new ListAssistContainer())
+            using (var db = new ListAssistContext())
             {
                 db.Database.Initialize(false);
             }

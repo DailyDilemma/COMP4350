@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ListAssist.Data.Models;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -7,30 +8,30 @@ using System.Threading.Tasks;
 
 namespace ListAssist.Data
 {
-    public class DbInitializer : DropCreateDatabaseAlways<ListAssistContainer>
+    public class DbInitializer : DropCreateDatabaseAlways<ListAssistContext>
     {
-        protected override void Seed(ListAssistContainer context)
+        protected override void Seed(ListAssistContext context)
         {
-            var lists = new List<List>
+            var lists = new List<LAList>
             {
-                new List {Id=1, Name="Groceries" },
-                new List {Id=2, Name="Christmas" }
+                new LAList {ID=1, Name="Groceries" },
+                new LAList {ID=2, Name="Christmas" }
             };            
 
-            lists.ForEach(s => context.Lists.Add(s));
+            lists.ForEach(s => context.LALists.Add(s));
             context.SaveChanges();
 
-            var listItems = new List<ListItem>
+            var listItems = new List<LAListItem>
             {
-                new ListItem {Id=1, Description="Milk", ListId=1 },
-                new ListItem {Id=2, Description="Oranges", ListId=1 },
-                new ListItem {Id=3, Description="Apples", ListId=1 },
-                new ListItem {Id=4, Description="Eggs", ListId=1 },
-                new ListItem {Id=5, Description="Puppy", ListId=2 },
-                new ListItem {Id=6, Description="Skateboard", ListId=2 },
-                new ListItem {Id=7, Description="Choo Choo Train", ListId=2 },
+                new LAListItem {ID=1, Description="Milk", ListID=1 },
+                new LAListItem {ID=2, Description="Oranges", ListID=1 },
+                new LAListItem {ID=3, Description="Apples", ListID=1 },
+                new LAListItem {ID=4, Description="Eggs", ListID=1 },
+                new LAListItem {ID=5, Description="Puppy", ListID=2 },
+                new LAListItem {ID=6, Description="Skateboard", ListID=2 },
+                new LAListItem {ID=7, Description="Choo Choo Train", ListID=2 },
             };
-            listItems.ForEach(s => context.ListItems.Add(s));
+            listItems.ForEach(s => context.LAListItems.Add(s));
             context.SaveChanges();
 
         }

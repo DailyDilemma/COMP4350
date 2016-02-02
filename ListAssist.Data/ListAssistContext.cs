@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity;
-using System.Data.Entity.ModelConfiguration;
+﻿using System.Data.Entity;
 using ListAssist.Data.Models;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Reflection;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ListAssist.Data
@@ -19,8 +12,14 @@ namespace ListAssist.Data
         public DbSet<LAList> LALists { get; set; }
         public DbSet<LAListItem> LAListItems { get; set; }
 
+        // This method allows you to override the default behaviors for how entity framework 
+        // creates a database from the provided model classes. When overriding entity framework's
+        // default behaviors you use what is known as the "Fluent API" to add additional details
+        // about how things like keys and relationships are built.
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            // Removes the convention whereby table names are automatically pluralized (ie. entity
+            // framework will not longer add an "s" to table names)
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             // LAList Configuration

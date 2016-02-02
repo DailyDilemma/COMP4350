@@ -5,11 +5,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row">
-    <div class="large-12 columns">
-        <h2>Create</h2>
-    </div>
-</div>
+@section PageHeader {Create!}
 
 
 @using (Html.BeginForm())
@@ -39,7 +35,7 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="submit" value="Create" class="button" />
                 </div>
             </div>
         </div>

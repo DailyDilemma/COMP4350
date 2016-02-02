@@ -10,11 +10,32 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
     @Styles.Render("~/Content/foundation/css")
+    @Styles.Render("~/Content/Site.css")
 
     @RenderSection("head", required: false)
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
+    <header id="site-title" class="row">
+        <div class="small-12 columns">
+            <h1>ListAssist</h1>
+        </div>
+    </header>
+    <nav id="general-nav" class="row collapse">
+        <div class="small-6 columns">
+            @Html.ActionLink("Home", "Index")
+        </div>
+        <div class="small-6 columns">
+            @Html.ActionLink("Create", "Create")
+        </div>
+    </nav>
+
+    <div id="page-header" class="row">
+        <div class="small-12 columns">
+            <h3>@RenderSection("PageHeader", required:true)</h3>
+        </div>
+    </div>
+    
     @RenderBody()  
 
     @Scripts.Render("~/bundles/jquery")

@@ -4,37 +4,32 @@
     ViewBag.Title = "Welcome to ListAssist!";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
+@section PageHeader {Welcome to ListAssist! Create and edit your lists here!}
+
 <div class="row">
-    <div class="large-12 columns">
-        <h2>ListAssist, your friendly neighbourhood list assistant!</h2>
+    <div class="small-12 columns">
+        <button class="expand">@Html.ActionLink("Create New List", "Create")</button>
     </div>
-</div>
-
-<div class="large-12 columns">
-    <p>
-        @Html.ActionLink("Create New List", "Create")
-    </p>
-
-    <table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.ID })
-                </td>
-            </tr>
-        }
-    </table>
+    <div class="small-12 columns">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th width="150">@Html.DisplayNameFor(model => model.Name)</th>
+                    <th colspan="3"></th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                    <td>@Html.ActionLink("Edit", "Edit", new { id = item.ID })</td>
+                    <td>@Html.ActionLink("Details", "Details", new { id = item.ID })</td>
+                    <td>@Html.ActionLink("Delete", "Delete", new { id = item.ID })</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
 </div>

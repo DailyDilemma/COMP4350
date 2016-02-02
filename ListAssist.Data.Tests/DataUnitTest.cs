@@ -7,13 +7,20 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace ListAssist.Data.Tests
 {
     [TestClass]
-    public class UnitTest1
+    public class DataUnitTest
     {
+        private LAList testList;
+
+        [TestInitialize]
+        public void TestInitialize()
+        {
+            this.testList = new LAList() { ID = 3, Name = "Test List 1" };
+            Assert.IsNotNull(testList, "Test list is null.");
+        }
+
         [TestMethod]
         public void TestBlankLAList()
         {
-            LAList testList = new LAList();
-            Assert.IsNotNull(testList, "Test list is null.");
 
             LAListItem testInsertItem = new LAListItem();
             testInsertItem.ID = 10;
@@ -21,14 +28,14 @@ namespace ListAssist.Data.Tests
             testInsertItem.Done = false;
             Assert.IsNotNull(testInsertItem, "Test insert item is null.");
 
-            testList.LAListItems.Add(testInsertItem);
+            this.testList.LAListItems.Add(testInsertItem);
             Assert.AreEqual<int>(1, testList.LAListItems.Count, "List item not added.");
-            testList.LAListItems.Remove(testInsertItem);
+            this.testList.LAListItems.Remove(testInsertItem);
             Assert.AreEqual<int>(0, testList.LAListItems.Count, "List item not removed.");
         }
 
         [TestMethod]
-        public void TestPopulatedLAList()
+        public void TestAddListToDB()
         {
             Database.SetInitializer(new DbInitializer());
             using(var db = new ListAssistContext())
@@ -38,12 +45,26 @@ namespace ListAssist.Data.Tests
 
                 var lists = new List<LAList>
                 {
-                    new LAList { ID = 3, Name = "Test List 1"},
+                    this.testList,
                     new LAList { ID = 4, Name = "Test List 2" }
                 };
-                lists.ForEach(s => db.LALists.Add(s));
+                
+                // add the lists to the database along with their associated list items
+                foreach ( LAList newList in lists ){
+                    db.LALists.Add(newList);
+                    foreach (LAListItem newListItem in newList.LAListItems)
+                    {
+                        db.LAListItems.Add(newListItem);
+                    }
+                }
                 db.SaveChanges();
             }
+        }
+
+        [TestCleanup]
+        public void TestCleanup()
+        {
+            testList = null;
         }
     }
 }

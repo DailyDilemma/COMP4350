@@ -1,13 +1,17 @@
 ﻿@model ListAssist.Data.Models.LAList
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "List Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<div class="row">
+    <div class="large-12 columns">
+        <h2>Details</h2>
+    </div>
+</div>
 
-<div>
+<div class="large-12 columns">
     <h4>LAList</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -38,7 +42,10 @@
 
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+
+<div class="large-12 columns">
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</div>

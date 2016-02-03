@@ -1,17 +1,22 @@
 ﻿@model ListAssist.Data.Models.LAList
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Edit List";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Edit</h2>
+<div class="row">
+    <div class="large-12 columns">
+    <h2>Edit</h2>
+    </div>
+</div>
 
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
+    <div class="large-12 columns">
     <div class="form-horizontal">
         <h4>LAList</h4>
         <hr />
@@ -56,9 +61,10 @@
             </div>
         </div>
     </div>
+    </div>
 }
 
-<div>
+<div class="large-12 columns">
     @Html.ActionLink("Back to List", "Index")
 </div>
 

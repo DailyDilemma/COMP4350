@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ListAssist.WebAPI.MappingProfile;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,6 +19,7 @@ namespace ListAssist.WebAPI
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            AutoMapperConfiguration.Configure();
         }
     }
 }

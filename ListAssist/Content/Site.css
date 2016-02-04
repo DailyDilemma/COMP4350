@@ -27,10 +27,11 @@ body {
     -webkit-transition: background-color 0.2s;
     -moz-transition: background-color 0.2s;
     transition: background-color 0.2s;
+    background-color: #A0D3E8;
 }
 
 #general-nav>div:hover {
-    background-color: #e1e1e1;
+    background-color: #61B6D9;
 }
 
 #general-nav>div>a {
@@ -38,6 +39,7 @@ body {
     height: 100%;
     display: block;
     padding: 10px 0px;
+    color: #000;
 }
 
 a {
@@ -48,8 +50,8 @@ a:visited {
     color: #454545;
 }
 
-#page-header {
-    text-align: center;
+#page-header h2 {
+    border-bottom: solid 1px #E1E1E1;
 }
 
 button a {
@@ -60,8 +62,30 @@ button a:visited {
     color: #DDD;
 }
 
+button.secondary a {
+    color: #000;
+}
+
+button.secondary a {
+    color: #333;
+}
+
 table a {
     width: 100%;
     display: block;
     text-align: center;
+}
+
+table input[type="text"] {
+    margin: 0;
+}
+
+table input[type="checkbox"] {
+    height: 30px;
+    width: 30px;
+    margin: 0;
+}
+
+table tbody tr:hover {
+    background-color: #FCD87C;
 }

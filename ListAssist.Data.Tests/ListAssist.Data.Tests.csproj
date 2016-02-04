@@ -61,6 +61,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="DataUnitTest.cs" />
+    <Compile Include="ListAssistContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

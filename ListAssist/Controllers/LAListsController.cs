@@ -33,13 +33,13 @@ namespace ListAssist.Controllers
             {
                 return HttpNotFound();
             }
-            return View(lAList);
+            return View("Details" ,lAList);
         }
 
         // GET: LALists/Create
         public ActionResult Create()
         {
-            return View();
+            return View("Create");
         }
 
         // POST: LALists/Create
@@ -56,7 +56,7 @@ namespace ListAssist.Controllers
                 return RedirectToAction("Index");
             }
 
-            return View(lAList);
+            return View("Create", lAList);
         }
 
         // GET: LALists/Edit/5
@@ -71,7 +71,7 @@ namespace ListAssist.Controllers
             {
                 return HttpNotFound();
             }
-            return View(lAList);
+            return View("Edit", lAList);
         }
 
         // POST: LALists/Edit/5
@@ -87,7 +87,7 @@ namespace ListAssist.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(lAList);
+            return View("Edit",lAList);
         }
 
         // GET: LALists/Delete/5
@@ -102,7 +102,7 @@ namespace ListAssist.Controllers
             {
                 return HttpNotFound();
             }
-            return View(lAList);
+            return View("Delete",lAList);
         }
 
         // POST: LALists/Delete/5

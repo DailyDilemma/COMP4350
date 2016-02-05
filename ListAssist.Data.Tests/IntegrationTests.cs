@@ -9,11 +9,13 @@ namespace ListAssist.Data.Tests
     [TestClass]
     public class DataUnitTest
     {
+        private ListAssistContext db;
+
         [TestInitialize]
         public void TestInitialize()
         {
-            LAList testList1 = new LAList() { ID = 3, Name = "Test List 1" };
-            LAList testList2 = new LAList() { ID = 4, Name = "Test List 2" };
+            LAList testList1 = new LAList() { ID = 30, Name = "Test List 1" };
+            LAList testList2 = new LAList() { ID = 40, Name = "Test List 2" };
 
             LAListItem testInsertItem1 = new LAListItem() { ID = 12, Description = "Test Insert 1", Done = false };
             LAListItem testInsertItem2 = new LAListItem() { ID = 13, Description = "Test Insert 2", Done = false };
@@ -32,37 +34,36 @@ namespace ListAssist.Data.Tests
             testList2.LAListItems.Add(testInsertItem3);
 
             Database.SetInitializer(new DbInitializer());
-            using (var db = new ListAssistContext())
-            {
-                db.Database.Initialize(false);
-                Assert.IsNotNull(db, "List assist context is null.");
+            this.db = new ListAssistContext();
 
-                var lists = new List<LAList>
-                {
-                    testList1,
-                    testList2,
-                };
+            this.db.Database.Initialize(false);
+            Assert.IsNotNull(this.db, "List assist context is null.");
+
+            var lists = new List<LAList>
+            {
+                testList1,
+                testList2,
+            };
 
                 
-                foreach (LAList newList in lists)
+            foreach (LAList newList in lists)
+            {
+                this.db.LALists.Add(newList);
+                foreach (LAListItem newListItem in newList.LAListItems)
                 {
-                    db.LALists.Add(newList);
-                    foreach (LAListItem newListItem in newList.LAListItems)
-                    {
-                        db.LAListItems.Add(newListItem);
-                    }
+                    this.db.LAListItems.Add(newListItem);
                 }
-             
-                db.SaveChanges();
-
-                Assert.IsNotNull(db.LALists.Find(3), "List with ID = 3 not found.");
             }
+
+            this.db.SaveChanges();
+
+            Assert.IsNotNull(this.db.LALists.Find(30), "List with ID = 30 not found.");
         }
 
         [TestMethod]
         public void TestBlankLAList()
         {
-            LAList testList3 = new LAList() { ID = 5, Name = "Test List 3" };
+            LAList testList3 = new LAList() { ID = 50, Name = "Test List 3" };
             LAListItem testInsertItem = new LAListItem() { ID = 10, Description = "Test Insert", Done = false };
 
             Assert.IsNotNull(testInsertItem, "Test insert item is null.");
@@ -76,67 +77,50 @@ namespace ListAssist.Data.Tests
         [TestMethod]
         public void TestAddListToDB()
         {
-            Database.SetInitializer(new DbInitializer());
-            using(var db = new ListAssistContext())
+            var lists = new List<LAList>
             {
-                db.Database.Initialize(false);
-                Assert.IsNotNull(db, "List assist context is null.");
-
-                var lists = new List<LAList>
-                {
-                    new LAList { ID = 6, Name = "Test List 4" }
-                };
+                new LAList { ID = 60, Name = "Test List 4" }
+            };
                 
-                // add the lists to the database along with their associated list items
-                foreach ( LAList newList in lists ){
-                    db.LALists.Add(newList);
-                    foreach (LAListItem newListItem in newList.LAListItems)
-                    {
-                        db.LAListItems.Add(newListItem);
-                    }
+            // add the lists to the database along with their associated list items
+            foreach ( LAList newList in lists ){
+                this.db.LALists.Add(newList);
+                foreach (LAListItem newListItem in newList.LAListItems)
+                {
+                    this.db.LAListItems.Add(newListItem);
                 }
-                db.SaveChanges();
-                Assert.AreEqual<string>(db.LALists.Find(6).Name, "Test List 4", "Test List 4 not found.");
-                Assert.AreEqual<int>(db.LALists.Find(6).LAListItems.Count, 0, "Number of list items is not 0.");
             }
+            this.db.SaveChanges();
+            Assert.AreEqual<string>(this.db.LALists.Find(60).Name, "Test List 4", "Test List 4 not found.");
+            Assert.AreEqual<int>(this.db.LALists.Find(60).LAListItems.Count, 0, "Number of list items is not 0.");
         }
 
         [TestMethod]
         public void TestRemove()
         {
-            Database.SetInitializer(new DbInitializer());
-            using(var db = new ListAssistContext())
-            {
-                db.Database.Initialize(false);
+            Assert.AreEqual<int>(2, this.db.LALists.Find(30).LAListItems.Count, "Test list 1 does not contain 2 list items.");
+            this.db.LALists.Find(30).LAListItems.Remove(new LAListItem() { ID = 12, Description = "Test Insert 1", Done = false });
+            Assert.AreEqual<int>(2, this.db.LALists.Find(30).LAListItems.Count, "Test list still contains 3 items.");
 
-                Assert.AreEqual<int>(2, db.LALists.Find(3).LAListItems.Count, "Test list 3 does not contain 2 list items.");
-                db.LALists.Find(3).LAListItems.Clear();
-                Assert.AreEqual<int>(0, db.LALists.Find(3).LAListItems.Count, "Test list 3 still contains list items.");
-
-                Assert.IsNotNull(db.LALists.Find(3), "List 3 not found.");
-                db.LALists.Remove(db.LALists.Find(3));
-                db.SaveChanges();
-                Assert.IsNull(db.LALists.Find(3), "List 3 not removed.");
-            }
+            Assert.IsNotNull(db.LALists.Find(30), "List 3 not found.");
+            this.db.LALists.Remove(this.db.LALists.Find(30));
+            this.db.SaveChanges();
+            Assert.IsNull(this.db.LALists.Find(30), "List 3 not removed.");
         }
 
         [TestMethod]
         public void TestUpdate()
         {
-            Database.SetInitializer(new DbInitializer());
-            using (var db = new ListAssistContext())
-            {
-                db.Database.Initialize(false);
+            Assert.AreEqual<int>(1, this.db.LALists.Find(40).LAListItems.Count, "Test list 2 does not contain 1 list item.");
+            IEnumerator<LAListItem> itemList1 = this.db.LALists.Find(40).LAListItems.GetEnumerator();
+            Assert.IsNotNull(itemList1.MoveNext(), "Item not found in test list 2.");
+            itemList1.Current.Description = "Update Test";
+            this.db.SaveChanges();
 
-                LAListItem listItem1 = db.LAListItems.Find(14);
-                Assert.IsNotNull(listItem1, "List Item 1 is null.");
-                Assert.AreEqual<int>(2, listItem1.ListID, "List ID doesn't match List Item.");
-                Assert.AreEqual<string>("Test Insert 3", listItem1.Description, "List item 3 description is wrong.");
-                listItem1.Done = true;
-                db.SaveChanges();
-
-                Assert.IsTrue(db.LAListItems.Find(14).Done, "Update of list item failed.");
-            }
+            Assert.AreEqual<int>(1, this.db.LALists.Find(40).LAListItems.Count, "Test list 2 does not contain 1 list item.");
+            IEnumerator<LAListItem> itemList2 = this.db.LALists.Find(40).LAListItems.GetEnumerator();
+            Assert.IsNotNull(itemList2.MoveNext(), "Item not found in test list 2.");
+            Assert.AreEqual<string>("Update Test", itemList2.Current.Description);
         }
     }
 }

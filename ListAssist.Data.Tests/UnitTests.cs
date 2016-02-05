@@ -1,5 +1,7 @@
 ﻿using System;
 using ListAssist.Data.Models;
+using ListAssist.Data;
+using System.Data.Entity;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace ListAssist.Data.Tests
@@ -7,6 +9,14 @@ namespace ListAssist.Data.Tests
     [TestClass]
     public class UnitTests
     {
+        [TestInitialize]
+        public void Initialize()
+        {
+            Database.SetInitializer(new DbInitializer());
+            var db = new ListAssistContext();
+            db.Database.Initialize(false);
+        }
+
         [TestMethod]
         public void TestLAList()
         {

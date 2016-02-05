@@ -5,31 +5,24 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section PageHeader {Details!}
+
 <div class="row">
-    <div class="large-12 columns">
-        <h2>Details</h2>
+    <div class="small-12 columns">
+        <dl>
+            <dt>@Html.DisplayNameFor(model => model.Name)</dt>
+            <dd>@Html.DisplayFor(model => model.Name)</dd>
+        </dl>
     </div>
-</div>
-
-<div class="large-12 columns">
-    <h4>LAList</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-
+    <div class="small-12 large-6 columns end">
         <table class="table">
-            <tbody>
+            <thead>
                 <tr>
-                    <td>Done</td>
-                    <td>Description</td>
+                    <th width="20">Done</th>
+                    <th width="300">Description</th>
                 </tr>
-
+            </thead>
+            <tbody>
                 @foreach (var item in Model.LAListItems)
                 {
                     <tr>
@@ -39,13 +32,8 @@
                 }
             </tbody>
         </table>
-
-    </dl>
-</div>
-
-<div class="large-12 columns">
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+    </div>
+    <div class="small-12 columns">
+        <button class="secondary">@Html.ActionLink("Edit", "Edit", new { id = Model.ID })</button>
+    </div>
 </div>

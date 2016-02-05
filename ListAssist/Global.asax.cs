@@ -28,5 +28,12 @@ namespace ListAssist
                 db.Database.Initialize(false);
             }
         }
+
+        protected void Session_Start()
+        {
+            // Redirect to the startup page for the project
+            Response.Redirect("~/LALists");
+        }
+
     }
 }

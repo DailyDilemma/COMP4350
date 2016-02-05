@@ -5,68 +5,46 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row">
-    <div class="large-12 columns">
-    <h2>Edit</h2>
-    </div>
-</div>
-
+@section PageHeader {Edit!}
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-
-    <div class="large-12 columns">
-    <div class="form-horizontal">
-        <h4>LAList</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.ID)
-
-        <div class="form-group">
+    <div class="row">
+        <div class="small-12 columns">
+            @Html.HiddenFor(model => model.ID)
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
-            </div>
-
-
+            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
         </div>
-
-        <div class="form-group">
-
+        <div class="small-12 large-6 columns">
             <table class="table">
-                <tbody>
+                <thead>
                     <tr>
-                        <td>Done</td>
-                        <td>Description</td>
+                        <th width="20">Done</th>
+                        <th width="300">Description</th>
                     </tr>
-
-                    @foreach (var item in Model.LAListItems)
+                </thead>
+                <tbody>
+                @foreach (var item in Model.LAListItems)
                 {
-                        <tr>
-                            <td>@Html.CheckBoxFor(modelItem => item.Done)</td>
-                            <td>@Html.EditorFor(modelItem => item.Description)
-                                @Html.ValidationMessageFor(modelItem => item.Description, "", new { @class = "text-danger" })
-                            </td>
-                        </tr>
-                    }
+                    <tr>
+                        <td>@Html.CheckBoxFor(modelItem => item.Done)</td>
+                        <td>
+                            @Html.EditorFor(modelItem => item.Description)
+                            @Html.ValidationMessageFor(modelItem => item.Description, "", new { @class = "text-danger" })
+                        </td>
+                    </tr>
+                }
                 </tbody>
             </table>
         </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+        <div class="small-12 columns">
+            <button type="submit" value="Save" class="button">Save</button>
         </div>
-    </div>
-    </div>
+    </div>      
 }
-
-<div class="large-12 columns">
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

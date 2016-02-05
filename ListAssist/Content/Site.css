@@ -1,24 +1,91 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿html {
+    background-color: #ABABAB;
+    padding-top: 10px;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+body {
+    margin: auto;
+    max-width: 62.5rem; /*same as foundation*/
+    -webkit-box-shadow: 5px 5px 5px #000;
+    -moz-box-shadow: 5px 5px 5px #000;
+    box-shadow: 5px 5px 5px #000;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+#site-title {
+    color: #454545;
+    border-bottom: solid 4px #ABABAB;
+    text-align: center;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+#general-nav {
+    margin-bottom: 10px;
+    text-align: center;
+    border-bottom: solid 4px #ABABAB;
+}
+
+#general-nav>div {
+    -webkit-transition: background-color 0.2s;
+    -moz-transition: background-color 0.2s;
+    transition: background-color 0.2s;
+    background-color: #A0D3E8;
+}
+
+#general-nav>div:hover {
+    background-color: #61B6D9;
+}
+
+#general-nav>div>a {
+    width: 100%;
+    height: 100%;
+    display: block;
+    padding: 10px 0px;
+    color: #000;
+}
+
+a {
+    color: #000;
+}
+
+a:visited {
+    color: #454545;
+}
+
+#page-header h2 {
+    border-bottom: solid 1px #E1E1E1;
+}
+
+button a {
+    color: #FFF;
+}
+
+button a:visited {
+    color: #DDD;
+}
+
+button.secondary a {
+    color: #000;
+}
+
+button.secondary a {
+    color: #333;
+}
+
+table a {
+    width: 100%;
+    display: block;
+    text-align: center;
+}
+
+table input[type="text"] {
+    margin: 0;
+}
+
+table input[type="checkbox"] {
+    height: 30px;
+    width: 30px;
+    margin: 0;
+}
+
+table tbody tr:hover {
+    background-color: #FCD87C;
 }

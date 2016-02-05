@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListAssist.Data", "ListAssi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ListAssist.Data.Tests", "ListAssist.Data.Tests\ListAssist.Data.Tests.csproj", "{48784DE0-76F8-4AA2-B25C-0E24E2811899}"
 EndProject
+Project("{F088123C-0E9E-452A-89E6-6BA2F21D5CAC}") = "ListAssistModellingProject", "ListAssistModdelingProject\ListAssistModellingProject.modelproj", "{09876882-0386-4D13-8FCE-11D89697F1B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{48784DE0-76F8-4AA2-B25C-0E24E2811899}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{48784DE0-76F8-4AA2-B25C-0E24E2811899}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{48784DE0-76F8-4AA2-B25C-0E24E2811899}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09876882-0386-4D13-8FCE-11D89697F1B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09876882-0386-4D13-8FCE-11D89697F1B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09876882-0386-4D13-8FCE-11D89697F1B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09876882-0386-4D13-8FCE-11D89697F1B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

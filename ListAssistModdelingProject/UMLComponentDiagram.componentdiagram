@@ -1,0 +1,304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<componentModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm5="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" dslVersion="1.0.0.0" Id="a7d35d77-1dcc-423f-8f17-bd7b88ae80cc" name="UMLComponentDiagram" linkedPackageId="7fff0d90-d0a7-4056-8e59-52ad94ab9302" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner">
+  <packagedElements>
+    <componentModelHasComponents>
+      <component Id="b8b3e7c7-91b4-41cf-a180-471d45b70d77" name="Web App Controller" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="9cc6f606-c446-47b3-9af2-2ca63180f225" />
+        <suppliersInternal>
+          <dependency Id="d2ac5a7a-8b05-45eb-b7b2-05f81e845ff1">
+            <providedInterfaceMoniker Id="951478d5-3e97-4b1f-bfe9-5c5bbc743a39" LastKnownName="Port1" />
+            <elementDefinition Id="20ed1e9b-1c54-49b2-b145-719f537e2ab6" />
+          </dependency>
+          <dependency Id="5f8890c9-b13a-40c3-a014-7c150f97b269">
+            <componentMoniker Id="0a84fac8-29d1-4e07-bcef-494ba078f7e3" LastKnownName="Web App View" />
+            <elementDefinition Id="9d512d6a-f945-487c-a312-7e9cb46e237c" />
+          </dependency>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <part Id="67cdda48-a05c-46f7-9ca5-c1299a1ec6ad" name="AccountController" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="true">
+            <elementDefinition Id="12172431-6754-4fa3-82fd-88d0ee2efc30" />
+            <type_NamedElement>
+              <componentMoniker Id="92d7b0fe-87a2-4dd6-a466-a5eae96f8cb1" LastKnownName="Component2" />
+            </type_NamedElement>
+          </part>
+          <part Id="4fe38217-71bd-45e6-acc4-74f9c9654102" name="HomeController" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="true">
+            <elementDefinition Id="6651ea23-cda3-4d83-8c8e-0f02a343f226" />
+            <type_NamedElement>
+              <componentMoniker Id="dbb360fb-afc4-41b7-abeb-5dc8a563624c" LastKnownName="Component5" />
+            </type_NamedElement>
+          </part>
+          <part Id="6023627f-1064-498e-b0ae-e1831e0eb4b7" name="ManageController" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="true">
+            <elementDefinition Id="225b9cd3-350d-44fb-bb62-8108b992751f" />
+            <type_NamedElement>
+              <componentMoniker Id="be52427b-36e9-4661-a491-621da026af56" LastKnownName="Component16" />
+            </type_NamedElement>
+          </part>
+          <part Id="e0339dc1-ef2b-423b-8849-13f6e6da444a" name="LAListsController" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="true">
+            <elementDefinition Id="811e76e3-cb95-417b-b849-5f6f6d7898bb" />
+            <type_NamedElement>
+              <componentMoniker Id="0825d7e5-ad70-452c-b92a-daa7840824d2" LastKnownName="Component17" />
+            </type_NamedElement>
+          </part>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="41543071-d0a3-4bae-ad5a-6e4048403971" name="Web API Controller" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="a745cc97-ccd8-41a1-92ed-1ec30cdd543c" />
+        <suppliersInternal>
+          <dependency Id="69806b9c-511c-4acf-9185-2992510b82ea">
+            <providedInterfaceMoniker Id="951478d5-3e97-4b1f-bfe9-5c5bbc743a39" LastKnownName="Port1" />
+            <elementDefinition Id="4b42c59d-ee53-411d-b977-1ba165b710b7" />
+          </dependency>
+          <dependency Id="d2086fe2-1eb9-47da-bf34-208f767e1f40">
+            <componentMoniker Id="021eec3b-95f5-4882-abdf-7f9f795efcdf" LastKnownName="Web API View" />
+            <elementDefinition Id="a2d621d7-69e7-4195-b1d1-2f07c821367c" />
+          </dependency>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <part Id="818e7ca3-410a-4389-80db-dc0873005640" name="HomeController" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="true">
+            <elementDefinition Id="5c4a9dd0-d8ab-4827-a225-ce826a7c9da4" />
+            <type_NamedElement>
+              <componentMoniker Id="cf565ec9-97b8-4b0a-a233-cd180d525b50" LastKnownName="Component18" />
+            </type_NamedElement>
+          </part>
+          <part Id="cbbbef3e-9432-40ea-b889-05667394e166" name="ListItemsController" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="true">
+            <elementDefinition Id="69626ed6-72f8-4dd7-9213-559d2a5796be" />
+            <type_NamedElement>
+              <componentMoniker Id="ebdd7b65-4671-4142-85b4-3e932caa2d86" LastKnownName="Component19" />
+            </type_NamedElement>
+          </part>
+          <part Id="3b3f1923-ea5d-4560-aa09-173e28f6810e" name="ListsController" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="true">
+            <elementDefinition Id="5e36c853-b4b7-44ca-ae93-76bc1a8aa16e" />
+            <type_NamedElement>
+              <componentMoniker Id="607e7ab0-a24f-4a50-ba2d-efbebb961f7c" LastKnownName="Component20" />
+            </type_NamedElement>
+          </part>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="985fcfd6-36a4-439f-95c8-730cbef3478b" name="Model" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="984a898f-731d-4ff6-bd1f-bec7a740872e" />
+        <ownedAttributesInternal>
+          <requiredInterface Id="338234d8-805d-4045-9645-fd257b6ea483" name="Port2" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="709ad8f2-860d-4d55-95f8-a63c3bf01169" />
+            <type_NamedElement>
+              <interfaceMoniker Id="3b28255a-1dd0-458d-8b43-a7d9c8e58796" />
+            </type_NamedElement>
+          </requiredInterface>
+          <providedInterface Id="951478d5-3e97-4b1f-bfe9-5c5bbc743a39" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="913e1922-cf71-4dfc-b34c-40569707249d" />
+            <type_NamedElement>
+              <interfaceMoniker Id="0bdba240-5031-49c7-984c-e2c605ae00e2" LastKnownName="ManageLists" />
+            </type_NamedElement>
+          </providedInterface>
+          <part Id="cfa805fb-1590-4e54-8a32-502141a7c760" name="AccountViewModels" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="true">
+            <elementDefinition Id="42747a04-dd48-4cce-a8fc-877e4a92cdfb" />
+            <type_NamedElement>
+              <componentMoniker Id="8ae575d6-4908-4cee-a665-9a1b889406eb" LastKnownName="Component6" />
+            </type_NamedElement>
+          </part>
+          <part Id="de01b48f-70e0-4a03-a343-1731333c0e65" name="IdentityModels" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="true">
+            <elementDefinition Id="a1761959-0178-486f-8b58-461de0d82fae" />
+            <type_NamedElement>
+              <componentMoniker Id="e830ecc0-3b64-4dc9-a0cb-2c97508c4b2b" LastKnownName="Component7" />
+            </type_NamedElement>
+          </part>
+          <part Id="e6adebe2-1a64-44d2-b6d7-038bbad2a8fa" name="ManageViewModels" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="true">
+            <elementDefinition Id="396ec7c7-a467-4819-8b16-2e5679d7814a" />
+            <type_NamedElement>
+              <componentMoniker Id="5b9bb343-c264-4593-abb8-cbec35233811" LastKnownName="Component13" />
+            </type_NamedElement>
+          </part>
+          <part Id="f90c694e-2fce-4d1f-9b8f-42e916d66c8c" name="LAList" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="true">
+            <elementDefinition Id="6525b054-e9c8-4d33-8ecb-084382393104" />
+            <type_NamedElement>
+              <componentMoniker Id="30928343-a575-4333-a853-823ac352e20a" LastKnownName="Component14" />
+            </type_NamedElement>
+          </part>
+          <part Id="e51f650c-f154-4b65-99f2-7a83d02d2923" name="ShoppingListItem" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="true">
+            <elementDefinition Id="cfad0d56-c2e1-4c55-9892-2514d9dac3ad" />
+            <type_NamedElement>
+              <componentMoniker Id="060e212b-60ed-45d8-b86d-6fae72f5ba08" LastKnownName="Component15" />
+            </type_NamedElement>
+          </part>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="754394ca-d780-45fa-b9d6-fb3a1c63a762" name="Entity Framework" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="87d7121a-650c-470a-868d-954663717f42" />
+        <suppliersInternal>
+          <dependency Id="2d030a4c-348f-4170-b9ef-990cf4e0c4cf">
+            <providedInterfaceMoniker Id="8b91dab1-b127-4d2c-8aa9-b24fdb502b77" LastKnownName="Port1" />
+            <elementDefinition Id="4b3c43e3-3b83-4e7a-a66c-c6808e7c3d77" />
+          </dependency>
+        </suppliersInternal>
+        <ownedAttributesInternal>
+          <providedInterface Id="ddfd99eb-c291-4f41-99b0-b2bbc2deba7c" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="72c0ba69-dcde-49d5-abef-2b5a8a0b4334" />
+            <type_NamedElement>
+              <interfaceMoniker Id="e6347b2d-e2f9-45cb-93ec-998196955644" LastKnownName="Persistence" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="ae0dbc4d-6579-49e0-8fa5-d0dc05a402fe" name="Database" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="49f29e77-2b1e-48e8-98b1-9d645534dfa4" />
+        <ownedAttributesInternal>
+          <providedInterface Id="8b91dab1-b127-4d2c-8aa9-b24fdb502b77" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="376344bf-fa9c-433a-be33-27a82eb07694" />
+            <type_NamedElement>
+              <interfaceMoniker Id="2493c000-6123-49be-9d99-02a82cec269f" LastKnownName="&lt;&lt;requires&gt;&gt;" />
+            </type_NamedElement>
+          </providedInterface>
+          <part Id="91c53de1-870f-4ce2-bea2-7b8570c9789d" name="DBInitializer" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="true">
+            <elementDefinition Id="c11d3049-163a-4fdd-aede-c5b5964decbc" />
+            <type_NamedElement>
+              <componentMoniker Id="08fc6128-6e7c-433a-8b83-08005bff518e" LastKnownName="Component21" />
+            </type_NamedElement>
+          </part>
+          <part Id="70ff9e46-048d-4030-b1f1-b587526e110a" name="ListAssistContext" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="true">
+            <elementDefinition Id="4d501ac4-a221-47e8-890c-72a3109d36be" />
+            <type_NamedElement>
+              <componentMoniker Id="795c57f4-fea5-46cd-9c1b-e5c680e9e1c9" LastKnownName="Component22" />
+            </type_NamedElement>
+          </part>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <modelContainsNamedElements>
+      <Interface Id="e6347b2d-e2f9-45cb-93ec-998196955644" name="Persistence" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="c8f465e6-384e-40b4-8bea-a108a9c61106" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="2493c000-6123-49be-9d99-02a82cec269f" name="&lt;&lt;requires&gt;&gt;" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="55a7134d-a4f3-485d-b51d-baf621234510" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="3b28255a-1dd0-458d-8b43-a7d9c8e58796" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="0ee1355e-cb2e-4b76-a422-6618f8f2a6e2" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="0bdba240-5031-49c7-984c-e2c605ae00e2" name="ManageLists" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="a442e366-5be3-425d-896c-f6cc9f940c30" />
+      </Interface>
+    </modelContainsNamedElements>
+    <componentModelHasComponents>
+      <component Id="0a84fac8-29d1-4e07-bcef-494ba078f7e3" name="Web App View" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="2ee9435a-9da1-424e-afb1-94f2b27d748d" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="021eec3b-95f5-4882-abdf-7f9f795efcdf" name="Web API View" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="13f7d1a0-a4f4-4914-8969-9e96c4e9695c" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="92d7b0fe-87a2-4dd6-a466-a5eae96f8cb1" name="Component2" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="dcc47a85-4cf4-46f4-b738-29e1f5dd3855" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="dbb360fb-afc4-41b7-abeb-5dc8a563624c" name="Component5" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="1948cdf3-5ab7-4c3d-b40e-fd19c0e74552" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="8ae575d6-4908-4cee-a665-9a1b889406eb" name="Component6" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="bac9d7f6-f994-4418-9fce-11fb5f600a9b" />
+        <ownedAttributesInternal>
+          <providedInterface Id="ccaf5efe-8cb7-44d6-befb-5b3f9c341e4e" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="9ee0638a-835c-4a62-a8d9-fb2c7adbae3e" />
+            <type_NamedElement>
+              <interfaceMoniker Id="85a1d121-790d-4154-adfc-fd62eab6f5b3" LastKnownName="Interface4" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="e830ecc0-3b64-4dc9-a0cb-2c97508c4b2b" name="Component7" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="65b5c9ad-3256-41ce-bb38-098635dd4265" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="5b9bb343-c264-4593-abb8-cbec35233811" name="Component13" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="1f5e161e-364e-44e0-a704-057fc66bfcb7" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="30928343-a575-4333-a853-823ac352e20a" name="Component14" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="eaa1762b-7763-4278-a8d9-b8310d74fa49" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="060e212b-60ed-45d8-b86d-6fae72f5ba08" name="Component15" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="8d237355-2fd6-45a3-8ea9-3005ba7d4e73" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="be52427b-36e9-4661-a491-621da026af56" name="Component16" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="828ae2d8-bf38-447c-a38b-78aa4ee604be" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="0825d7e5-ad70-452c-b92a-daa7840824d2" name="Component17" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="1405554c-b13a-4181-96d8-f8329515b1cf" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="cf565ec9-97b8-4b0a-a233-cd180d525b50" name="Component18" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="c45c92c5-e7ac-4c26-8588-992cd418cd7f" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="ebdd7b65-4671-4142-85b4-3e932caa2d86" name="Component19" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="a8cdacf9-e0be-42ab-b918-0b443805c835" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="607e7ab0-a24f-4a50-ba2d-efbebb961f7c" name="Component20" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="399bffa2-5a15-47a3-aefc-9d3e4fcb07b3" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="08fc6128-6e7c-433a-8b83-08005bff518e" name="Component21" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="249cb9e8-df7d-4c66-95c9-5582a5507c3f" />
+      </component>
+    </componentModelHasComponents>
+    <componentModelHasComponents>
+      <component Id="795c57f4-fea5-46cd-9c1b-e5c680e9e1c9" name="Component22" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="bcfffee5-ce09-49df-9cd4-a658355341e6" />
+      </component>
+    </componentModelHasComponents>
+    <modelContainsNamedElements>
+      <Interface Id="85a1d121-790d-4154-adfc-fd62eab6f5b3" name="Interface4" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="c8cb8095-5cd2-4cfe-a03c-68575caef8b7" />
+      </Interface>
+    </modelContainsNamedElements>
+  </packagedElements>
+  <package Id="7fff0d90-d0a7-4056-8e59-52ad94ab9302" name="ListAssistModdelingProject">
+    <elementDefinition Id="33491014-32d1-4515-b215-4a7bfcc9e4bf" />
+    <profileInstances>
+      <packageHasProfileInstances Id="77d54ec6-7c96-4c96-a6c8-2f30388fbc1d">
+        <profileInstance Id="94e56d14-dde2-4dda-aee7-de3d5ed91fe1" name="StandardProfileL2">
+          <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+        </profileInstance>
+        <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+      </packageHasProfileInstances>
+      <packageHasProfileInstances Id="b0279e1e-8f1b-493b-b308-ec6276c49fba">
+        <profileInstance Id="8a6b8ee6-92ae-42fc-b8b5-b897f8b5dbf9" name="StandardProfileL3">
+          <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+        </profileInstance>
+        <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+      </packageHasProfileInstances>
+    </profileInstances>
+  </package>
+</componentModel>

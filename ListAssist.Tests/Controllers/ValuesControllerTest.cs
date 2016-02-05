@@ -1,12 +1,12 @@
-﻿//using System;
+﻿// These are just the sample template unit tests, I'm leaving them in to show the overall idea but currently they don't acutally work or do anything useful
+
+//using System;
 //using System.Collections.Generic;
 //using System.Linq;
 //using System.Net.Http;
 //using System.Text;
-//using System.Web.Http;
 //using Microsoft.VisualStudio.TestTools.UnitTesting;
-//using ListAssist.WebAPI;
-//using ListAssist.WebAPI.Controllers;
+//using ListAssist.Controllers;
 
 //namespace ListAssist.WebAPI.Tests.Controllers
 //{

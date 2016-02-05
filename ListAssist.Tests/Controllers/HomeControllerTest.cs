@@ -1,54 +1,56 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web.Mvc;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ListAssist;
-using ListAssist.Controllers;
+﻿// These are just the sample template unit tests, I'm leaving them in to show the overall idea but currently they don't acutally work or do anything useful
 
-namespace ListAssist.Tests.Controllers
-{
-    [TestClass]
-    public class HomeControllerTest
-    {
-        [TestMethod]
-        public void Index()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
+//using System;
+//using System.Collections.Generic;
+//using System.Linq;
+//using System.Text;
+//using System.Web.Mvc;
+//using Microsoft.VisualStudio.TestTools.UnitTesting;
+//using ListAssist;
+//using ListAssist.Controllers;
 
-            // Act
-            ViewResult result = controller.Index() as ViewResult;
+//namespace ListAssist.Tests.Controllers
+//{
+//    [TestClass]
+//    public class HomeControllerTest
+//    {
+//        [TestMethod]
+//        public void Index()
+//        {
+//            // Arrange
+//            HomeController controller = new HomeController();
 
-            // Assert
-            Assert.IsNotNull(result);
-        }
+//            // Act
+//            ViewResult result = controller.Index() as ViewResult;
 
-        [TestMethod]
-        public void About()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
+//            // Assert
+//            Assert.IsNotNull(result);
+//        }
 
-            // Act
-            ViewResult result = controller.About() as ViewResult;
+//        [TestMethod]
+//        public void About()
+//        {
+//            // Arrange
+//            HomeController controller = new HomeController();
 
-            // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
-        }
+//            // Act
+//            ViewResult result = controller.About() as ViewResult;
 
-        [TestMethod]
-        public void Contact()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
+//            // Assert
+//            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
+//        }
 
-            // Act
-            ViewResult result = controller.Contact() as ViewResult;
+//        [TestMethod]
+//        public void Contact()
+//        {
+//            // Arrange
+//            HomeController controller = new HomeController();
 
-            // Assert
-            Assert.IsNotNull(result);
-        }
-    }
-}
+//            // Act
+//            ViewResult result = controller.Contact() as ViewResult;
+
+//            // Assert
+//            Assert.IsNotNull(result);
+//        }
+//    }
+//}

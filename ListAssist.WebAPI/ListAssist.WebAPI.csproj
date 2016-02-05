@@ -191,6 +191,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="Controllers\ListItemsController.cs" />
     <Compile Include="Controllers\ListsController.cs" />
     <Compile Include="MappingProfile\AutoMapperConfiguration.cs" />

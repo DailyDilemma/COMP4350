@@ -14,8 +14,8 @@ namespace ListAssist.Data
         {
             var lists = new List<LAList>
             {
-                new LAList {ID=1, Name="Groceries" },
-                new LAList {ID=2, Name="Christmas" }
+                new LAList {ID=1, Name="Groceries", Owner="Josh" },
+                new LAList {ID=2, Name="Christmas", Owner="Josh" }
             };            
 
             lists.ForEach(s => context.LALists.Add(s));

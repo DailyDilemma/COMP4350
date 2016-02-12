@@ -61,6 +61,7 @@
     <Compile Include="DbInitializer.cs" />
     <Compile Include="Models\LAListItem.cs" />
     <Compile Include="Models\LAList.cs" />
+    <Compile Include="Models\LAShoppingList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

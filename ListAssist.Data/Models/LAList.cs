@@ -16,6 +16,12 @@ namespace ListAssist.Data.Models
 
         public int ID { get; set; }
         public string Name { get; set; }
+
+        [Required(ErrorMessage ="Fill me out you dummy!")]
+        [MaxLength(50, ErrorMessage ="No more than 50 chars")]
+        [Display(Name="The Owner of the List")]
+        public string Owner { get; set; }
+
         public virtual ICollection<LAListItem> LAListItems { get; set; }
     }
 }

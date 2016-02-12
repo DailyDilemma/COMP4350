@@ -1,13 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using System.Data.Entity;
 using ListAssist.Data;
+using System.Xml;
+using System.Data.Entity.Infrastructure;
+using System.Text;
 
 namespace ListAssist
 {
@@ -21,12 +21,23 @@ namespace ListAssist
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+#if DEBUG 
             // Drop, recreate and reseed the database
             Database.SetInitializer(new DbInitializer());
             using (var db = new ListAssistContext())
             {
                 db.Database.Initialize(false);
             }
+
+            // Recreate a edmx diagram from the latest model
+            using (var ctx = new ListAssistContext())
+            {
+                using (var writer = new XmlTextWriter(HttpRuntime.AppDomainAppPath.TrimEnd('\\') + @".Data\EntityModelDiagram.edmx", Encoding.Default))
+                {
+                    EdmxWriter.WriteEdmx(ctx, writer);
+                }
+            }
+#endif 
         }
 
         protected void Session_Start()

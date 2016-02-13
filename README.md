@@ -6,6 +6,8 @@ This is ListAssist, a smart list sharing application to help with getting things
 
 [Detailed User Stories for Iteration 2](https://github.com/DailyDilemma/COMP4350/milestones/Iteration%202)
 
+[Installation Instructions](docs/readme.md)
+
 [Chat Logs](docs/Iteration 1 Chat Logs.md)
 
 [Meeting Minutes](docs/Meeting_Minutes)

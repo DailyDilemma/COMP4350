@@ -14,7 +14,8 @@ Right now everything can be run from within the Visual Studio environment. Next
 iteration it will be deployed to AWS and full deployment instructions should be
 available then.
 
-To start, load the ListAssist solution in Visual Studio 2015. From there...
+To start, load the ListAssist solution in Visual Studio 2015. From there follow the
+instructions for the module you want to use.
 
 ###ListAssist (Web Application)
 - With the ListAssist project set as the startup project (should be by default),

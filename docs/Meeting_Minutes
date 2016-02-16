@@ -102,16 +102,16 @@ Daniel Bouchard
 	Matt Deutscher
 
 Topics:
-Josh proposed the idea of remote meetings.
-Voice with screen sharing via Trello, Skype, Log-Me-In...
-Discussion of plan for iteration 2.
-Break it up, each person responsible for a feature end to end.
-Some discussion on Swagger, lots of documentation to go through...
-Some reminders on branching: branch small, merge often.
-Decided to freeze code 2 days before due date.
-Will divide the features, decide who is doing what during the remote meeting later.
-Discussion of coding standards:
-In the Wiki?
-Put in anything to describe reasons for a decision.
+- Josh proposed the idea of remote meetings.
+    - Voice with screen sharing via Trello, Skype, Log-Me-In...
+- Discussion of plan for iteration 2.
+    - Break it up, each person responsible for a feature end to end.
+- Some discussion on Swagger, lots of documentation to go through...
+- Some reminders on branching: branch small, merge often.
+- Decided to freeze code 2 days before due date.
+- Will divide the features, decide who is doing what during the remote meeting later.
+- Discussion of coding standards:
+    - In the Wiki?
+        - Put in anything to describe reasons for a decision.
 
 ------------------------------------------------------------------------------------

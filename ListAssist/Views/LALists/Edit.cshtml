@@ -27,13 +27,15 @@
                     </tr>
                 </thead>
                 <tbody>
-                @foreach (var item in Model.LAListItems)
+                @for(var i =0; i < Model.LAListItems.Count; i++)
                 {
+                    @Html.HiddenFor(model => model.LAListItems[i].ID)
+                    @Html.HiddenFor(model => model.LAListItems[i].ListID)
                     <tr>
-                        <td>@Html.CheckBoxFor(modelItem => item.Done)</td>
+                        <td>@Html.CheckBoxFor(model => model.LAListItems[i].Done)</td>
                         <td>
-                            @Html.EditorFor(modelItem => item.Description)
-                            @Html.ValidationMessageFor(modelItem => item.Description, "", new { @class = "text-danger" })
+                            @Html.EditorFor(model => model.LAListItems[i].Description)
+                            @Html.ValidationMessageFor(model => model.LAListItems[i].Description, "", new { @class = "text-danger" })
                         </td>
                     </tr>
                 }

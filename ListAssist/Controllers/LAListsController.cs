@@ -79,11 +79,17 @@ namespace ListAssist.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name")] LAList lAList)
+        public ActionResult Edit(LAList lAList)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(lAList).State = EntityState.Modified;
+                db.LALists.Attach(lAList);
+
+                foreach (var listItem in lAList.LAListItems)
+                {
+                    db.Entry(listItem).State = EntityState.Modified;
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

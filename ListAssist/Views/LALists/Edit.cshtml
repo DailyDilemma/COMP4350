@@ -37,6 +37,9 @@
                             @Html.EditorFor(model => model.LAListItems[i].Description)
                             @Html.ValidationMessageFor(model => model.LAListItems[i].Description, "", new { @class = "text-danger" })
                         </td>
+                        <td>
+                            @Html.ActionLink("X", "RemoveListItem", new { id=Model.LAListItems[i].ID })
+                        </td>
                     </tr>
                 }
                 </tbody>

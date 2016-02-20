@@ -96,6 +96,31 @@ namespace ListAssist.Controllers
             return View("Edit",lAList);
         }
 
+        public ActionResult RemoveListItem(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            LAListItem lAListItem = db.LAListItems.Find(id);
+            if (lAListItem == null)
+            {
+                return HttpNotFound();
+            }
+            return View("RemoveListItem", lAListItem); 
+        }
+
+        [HttpPost, ActionName("RemoveListItem")]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveListItem(int id)
+        {
+            LAListItem lAListItem = db.LAListItems.Find(id);
+            int listID = lAListItem.ListID;
+            db.LAListItems.Remove(lAListItem);
+            db.SaveChanges();
+            return RedirectToAction("Edit", new { id = listID });
+        }
+
         // GET: LALists/Delete/5
         public ActionResult Delete(int? id)
         {

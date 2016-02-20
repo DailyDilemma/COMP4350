@@ -271,6 +271,7 @@
     <Content Include="Views\LALists\Details.cshtml" />
     <Content Include="Views\LALists\Edit.cshtml" />
     <Content Include="Views\LALists\Index.cshtml" />
+    <Content Include="Views\LALists\RemoveListItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

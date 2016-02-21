@@ -47,7 +47,7 @@ namespace ListAssist.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name")] LAList lAList)
+        public ActionResult Create([Bind(Include = "Name")] LAList lAList)
         {
             if (ModelState.IsValid)
             {

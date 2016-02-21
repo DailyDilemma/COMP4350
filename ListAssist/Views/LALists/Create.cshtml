@@ -11,13 +11,8 @@
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="row">
-        <div class="small-12 columns">
-            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-            @Html.LabelFor(model => model.ID, htmlAttributes: new { @class = "" })
-            @Html.EditorFor(model => model.ID, new { htmlAttributes = new { @class = "" } })
-            @Html.ValidationMessageFor(model => model.ID, "", new { @class = "text-danger" })
-        </div>
         <div class="small-12 columns">
             @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "" })
             @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "" } })

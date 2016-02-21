@@ -25,7 +25,7 @@ namespace ListAssist.Data
             // LAList Configuration
             modelBuilder.Entity<LAList>().HasKey(s => s.ID);
             modelBuilder.Entity<LAList>().Property(t => t.ID)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             // LAListItems Configuration
             modelBuilder.Entity<LAListItem>()

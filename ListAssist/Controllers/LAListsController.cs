@@ -18,7 +18,7 @@ namespace ListAssist.Controllers
         // GET: LALists
         public ActionResult Index()
         {
-            return View(db.LALists.ToList());
+            return View(db.LALists.OrderBy(item => item.Name).ToList());
         }
 
         // GET: LALists/Details/5

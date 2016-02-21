@@ -53,7 +53,7 @@ namespace ListAssist.Controllers
             {
                 db.LALists.Add(lAList);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit", lAList);
             }
 
             return View("Create", lAList);

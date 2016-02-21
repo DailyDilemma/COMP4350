@@ -11,27 +11,18 @@ namespace ListAssist.Data
     public class DbInitializer : DropCreateDatabaseAlways<ListAssistContext>
     {
         protected override void Seed(ListAssistContext context)
-        {
-            var lists = new List<LAList>
-            {
-                new LAList {ID=1, Name="Groceries" },
-                new LAList {ID=2, Name="Christmas" }
-            };            
-
-            lists.ForEach(s => context.LALists.Add(s));
+        {         
+            context.LALists.Add(new LAList { Name = "Groceries" });
+            context.LALists.Add(new LAList { Name = "Christmas" });
             context.SaveChanges();
 
-            var listItems = new List<LAListItem>
-            {
-                new LAListItem {ID=1, Description="Milk", ListID=1 },
-                new LAListItem {ID=2, Description="Oranges", ListID=1 },
-                new LAListItem {ID=3, Description="Apples", ListID=1 },
-                new LAListItem {ID=4, Description="Eggs", ListID=1 },
-                new LAListItem {ID=5, Description="Puppy", ListID=2 },
-                new LAListItem {ID=6, Description="Skateboard", ListID=2 },
-                new LAListItem {ID=7, Description="Choo Choo Train", ListID=2 },
-            };
-            listItems.ForEach(s => context.LAListItems.Add(s));
+            context.LALists.Find(1).LAListItems.Add(new LAListItem { Description = "Milk", ListID = 1 });
+            context.LALists.Find(1).LAListItems.Add(new LAListItem { Description = "Oranges", ListID = 1 });
+            context.LALists.Find(1).LAListItems.Add(new LAListItem { Description = "Apples", ListID = 1 });
+            context.LALists.Find(1).LAListItems.Add(new LAListItem { Description = "Eggs", ListID = 1 });
+            context.LALists.Find(2).LAListItems.Add(new LAListItem { Description = "Puppy", ListID = 2 });
+            context.LALists.Find(2).LAListItems.Add(new LAListItem { Description = "Skateboard", ListID = 2 });
+            context.LALists.Find(2).LAListItems.Add(new LAListItem { Description = "Choo Choo Train", ListID = 2 });
             context.SaveChanges();
 
         }

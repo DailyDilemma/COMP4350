@@ -31,7 +31,7 @@ namespace ListAssist.Tests.Controllers
         [TestMethod]
         public void TestCreate()
         {
-            LAList testList = new LAList() { ID = 80, Name = "Test List 5" };
+            LAList testList = new LAList() { Name = "Test List 5" };
             LAListsController testController = new LAListsController();
             var result = testController.Create() as ViewResult;
 

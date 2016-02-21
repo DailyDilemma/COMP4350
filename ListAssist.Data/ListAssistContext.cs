@@ -25,14 +25,12 @@ namespace ListAssist.Data
             // LAList Configuration
             modelBuilder.Entity<LAList>().HasKey(s => s.ID);
             modelBuilder.Entity<LAList>().Property(t => t.ID)
-                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+            modelBuilder.Entity<LAList>().HasMany(l => l.LAListItems).WithMany();
 
             // LAListItems Configuration
-            modelBuilder.Entity<LAListItem>()
-                        .HasRequired(l => l.LAList)
-                        .WithMany(l => l.LAListItems)
-                        .HasForeignKey(l => l.ListID);
-                        
+            modelBuilder.Entity<LAListItem>().HasKey(s => s.ID);
+            modelBuilder.Entity<LAListItem>().Property(t => t.ID).HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
         }
     }    
 }

@@ -9,27 +9,34 @@
 
 <div class="row">
     <div class="small-12 columns">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th width="150">@Html.DisplayNameFor(model => model.Name)</th>
-                    <th colspan="3"></th>
-                </tr>
-            </thead>
-            <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@Html.DisplayFor(modelItem => item.Name)</td>
-                    <td>@Html.ActionLink("Edit", "Edit", new { id = item.ID })</td>
-                    <td>@Html.ActionLink("Details", "Details", new { id = item.ID })</td>
-                    <td>@Html.ActionLink("Delete", "Delete", new { id = item.ID })</td>
-                </tr>
-            }
-            </tbody>
-        </table>
+        <button class="button expand success round">@Html.ActionLink("Create New List", "Create")</button>
     </div>
-    <div class="small-12 columns">
-        <button class="button">@Html.ActionLink("Create New List", "Create")</button>
+    <div class="small-12 columns listGrid">
+        <div class="small-3 columns show-for-medium-up">
+            @Html.DisplayNameFor(model => model.Name)
+        </div>
+        <div class="small-9 columns show-for-medium-up">
+            Actions
+        </div>
+    @foreach (var item in Model)
+    {
+        <div class="small-12 columns itemWrapper">
+            <div class="small-4 columns show-for-small-only smallListLabel">
+                @Html.DisplayNameFor(model => model.Name):
+            </div>
+            <div class="small-8 medium-3 columns listName">
+                @Html.DisplayFor(modelItem => item.Name)
+            </div>
+            <div class="small-4 medium-3 columns listAction">
+                <button class="button expand">@Html.ActionLink("Edit", "Edit", new { id = item.ID })</button>
+            </div>
+            <div class="small-4 medium-3 columns listAction">
+                <button class="button expand">@Html.ActionLink("Details", "Details", new { id = item.ID })</button>
+            </div>
+            <div class="small-4 medium-3 columns listAction">
+                <button class="alert expand">@Html.ActionLink("Delete", "Delete", new { id = item.ID })</button>
+            </div>
+        </div>
+    }
     </div>
 </div>

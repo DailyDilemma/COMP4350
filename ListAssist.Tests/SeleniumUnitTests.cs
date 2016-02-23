@@ -6,9 +6,9 @@ using OpenQA.Selenium.Firefox;
 namespace ListAssist.Tests
 {
     [TestClass]
-    public class SeleniumUnitTest
+    public class SeleniumUnitTests
     {
-        static IWebDriver driverFF;
+        static IWebDriver driverFF;  // FF to identify browser if more added later
 
         [AssemblyInitialize]
         public static void SetUp(TestContext context)
@@ -17,11 +17,15 @@ namespace ListAssist.Tests
 
         }
 
+        /* Scenario
+        1. Open app in browser
+        2. Maximize app
+        */
         [TestMethod]
         public void TestOpenApp()
         {
             driverFF.Navigate().GoToUrl("http://localhost:2850");
-            
+            driverFF.Manage().Window.Maximize();
         }
 
         [AssemblyCleanup]

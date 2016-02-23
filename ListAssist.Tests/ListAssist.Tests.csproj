@@ -100,7 +100,7 @@
     <Compile Include="Controllers\LAListsControllerTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Controllers\HomeControllerTest.cs" />
-    <Compile Include="SeleniumUnitTest.cs" />
+    <Compile Include="SeleniumUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App.config">

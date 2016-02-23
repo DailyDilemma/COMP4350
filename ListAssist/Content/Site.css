@@ -84,7 +84,7 @@ table input[type="text"] {
     margin: 0;
 }
 
-table input[type="checkbox"] {
+input[type="checkbox"] {
     height: 30px;
     width: 30px;
     margin: 0;
@@ -107,12 +107,6 @@ table tbody tr:hover {
 .listGrid>.listName:nth-child(odd),
 .listGrid>.listAction:nth-child(3n) {
     background-color: #EEE;
-}
-
-.listName {
-    padding: 10px 2px 10px 5px;
-    font-weight: bold;
-    font-size: 16px;
 }
 
 .smallListLabel {
@@ -145,4 +139,24 @@ table tbody tr:hover {
 
 .itemWrapper:hover {
     background-color: #FCD87C;
+}
+
+.listGrid .listName, .listGrid .itemDescription {
+    padding: 10px 5px 10px 5px;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: left;
+}
+
+.listGrid .listAction, .listGrid .itemCheck {
+    text-align: center;
+}
+
+.listGrid .itemCheck {
+    line-height: 0;
+    padding: 7px 0px;
+}
+
+.listGrid .itemCheck input[type='checkbox'] {
+    cursor: pointer;
 }

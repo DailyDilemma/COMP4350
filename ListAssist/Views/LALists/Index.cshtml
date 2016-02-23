@@ -21,20 +21,22 @@
     @foreach (var item in Model)
     {
         <div class="small-12 columns itemWrapper">
-            <div class="small-4 columns show-for-small-only smallListLabel">
-                @Html.DisplayNameFor(model => model.Name):
-            </div>
-            <div class="small-8 medium-3 columns listName">
-                @Html.DisplayFor(modelItem => item.Name)
-            </div>
-            <div class="small-4 medium-3 columns listAction">
-                <button class="button expand">@Html.ActionLink("Edit", "Edit", new { id = item.ID })</button>
-            </div>
-            <div class="small-4 medium-3 columns listAction">
-                <button class="button expand">@Html.ActionLink("Details", "Details", new { id = item.ID })</button>
-            </div>
-            <div class="small-4 medium-3 columns listAction">
-                <button class="alert expand">@Html.ActionLink("Delete", "Delete", new { id = item.ID })</button>
+            <div class="row">
+                <div class="small-4 columns show-for-small-only smallListLabel">
+                    @Html.DisplayNameFor(model => model.Name):
+                </div>
+                <div class="small-8 medium-3 columns listName">
+                    @Html.DisplayFor(modelItem => item.Name)
+                </div>
+                <div class="small-4 medium-3 columns listAction">
+                    <button class="button expand">@Html.ActionLink("Edit", "Edit", new { id = item.ID })</button>
+                </div>
+                <div class="small-4 medium-3 columns listAction">
+                    <button class="button expand">@Html.ActionLink("Details", "Details", new { id = item.ID })</button>
+                </div>
+                <div class="small-4 medium-3 columns listAction">
+                    <button class="alert expand">@Html.ActionLink("Delete", "Delete", new { id = item.ID })</button>
+                </div>
             </div>
         </div>
     }

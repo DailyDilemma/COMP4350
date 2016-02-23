@@ -272,6 +272,7 @@
     <Content Include="Views\LALists\Edit.cshtml" />
     <Content Include="Views\LALists\Index.cshtml" />
     <Content Include="Views\LALists\RemoveListItem.cshtml" />
+    <Content Include="Views\LALists\AddListItem.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

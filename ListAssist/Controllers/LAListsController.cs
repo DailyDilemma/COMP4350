@@ -79,15 +79,46 @@ namespace ListAssist.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name")] LAList lAList)
+        public ActionResult Edit(LAList lAList)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(lAList).State = EntityState.Modified;
+                db.LALists.Attach(lAList);
+
+                foreach (var listItem in lAList.LAListItems)
+                {
+                    db.Entry(listItem).State = EntityState.Modified;
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View("Edit",lAList);
+        }
+
+        public ActionResult RemoveListItem(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            LAListItem lAListItem = db.LAListItems.Find(id);
+            if (lAListItem == null)
+            {
+                return HttpNotFound();
+            }
+            return View("RemoveListItem", lAListItem); 
+        }
+
+        [HttpPost, ActionName("RemoveListItem")]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveListItem(int id)
+        {
+            LAListItem lAListItem = db.LAListItems.Find(id);
+            int listID = lAListItem.ListID;
+            db.LAListItems.Remove(lAListItem);
+            db.SaveChanges();
+            return RedirectToAction("Edit", new { id = listID });
         }
 
         // GET: LALists/Delete/5

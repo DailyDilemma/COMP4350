@@ -16,6 +16,6 @@ namespace ListAssist.Data.Models
 
         public int ID { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<LAListItem> LAListItems { get; set; }
+        public virtual List<LAListItem> LAListItems { get; set; }
     }
 }

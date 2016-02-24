@@ -1,4 +1,6 @@
-﻿namespace ListAssist.WebAPI.Models
+﻿using System;
+
+namespace ListAssist.WebAPI.Models
 {
     public class ShoppingListItem
     {
@@ -19,6 +21,17 @@
         }
 
         /// <summary>
+        /// The frequency this item is checked. (Times checked/Days since it was added)
+        /// </summary>
+        public double Frequency
+        {
+            get
+            {
+                return TimesBought / (DateTime.Now - DateAdded).TotalDays;
+            }
+        }
+
+        /// <summary>
         /// Id for database purposes
         /// </summary>
         private int Id
@@ -32,6 +45,32 @@
         private int ListId
         {
             get; set;
+        }
+
+        /// <summary>
+        /// The number of times this item has been checked since it was added to the list.
+        /// </summary>
+        private int TimesBought
+        {
+            get; set;
+        }
+
+        /// <summary>
+        /// The date the item was added to it's list.
+        /// </summary>
+        private DateTime DateAdded
+        {
+            get; set;
+        }
+
+        public void setDateAdded(DateTime date)
+        {
+            this.DateAdded = date;
+        }
+
+        public void setTimesBought(int times)
+        {
+            this.TimesBought = times;
         }
     }
 }

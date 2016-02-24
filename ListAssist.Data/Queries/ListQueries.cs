@@ -1,7 +1,9 @@
 ﻿using ListAssist.Data.Models;
+
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System;
 
 namespace ListAssist.Data.Queries
 {
@@ -94,13 +96,15 @@ namespace ListAssist.Data.Queries
 
                     if (duplicate == null)
                     {
+                        item.TimesBought = 0;
+                        item.DateAdded = DateTime.Now;
                         db.LAListItems.Add(item);
                     }
-                    //else if (duplicate.Done)
-                    //{
-                    //    duplicate.Done = false;
-                    //    db.Entry(duplicate).State = EntityState.Modified;
-                    //}
+                    else if (duplicate.Done)
+                    {
+                        duplicate.Done = false;
+                        db.Entry(duplicate).State = EntityState.Modified;
+                    }
 
                     db.SaveChanges();
 

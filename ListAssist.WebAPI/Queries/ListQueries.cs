@@ -5,6 +5,7 @@ using ListAssist.WebAPI.Models;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System;
 
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
@@ -105,6 +106,8 @@ namespace ListAssist.WebAPI.Queries
 
                     if (duplicate == null)
                     {
+                        item.setDateAdded(DateTime.Now);
+                        item.setTimesBought(0);
                         shoppingList.LAListItems.Add(Mapper.Map<ShoppingListItem, LAListItem>(item));
                         db.Entry(shoppingList).State = EntityState.Modified;
                         db.SaveChanges();
@@ -151,6 +154,7 @@ namespace ListAssist.WebAPI.Queries
 
             if(updatedItem != null)
             {
+                updatedItem.TimesBought++;
                 updatedItem.Done = true;
                 db.Entry(updatedItem).State = EntityState.Modified;
                 db.SaveChanges();

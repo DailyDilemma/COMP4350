@@ -12,10 +12,10 @@
         <button class="button expand success round">@Html.ActionLink("Create New List", "Create")</button>
     </div>
     <div class="small-12 columns listGrid">
-        <div class="small-3 columns show-for-medium-up">
+        <div class="small-3 columns show-for-medium-up listHeader">
             @Html.DisplayNameFor(model => model.Name)
         </div>
-        <div class="small-9 columns show-for-medium-up">
+        <div class="small-9 columns show-for-medium-up listHeader">
             Actions
         </div>
     @foreach (var item in Model)

@@ -8,20 +8,20 @@
 @section PageHeader {Details!}
 
 <div class="row">
-    <div class="small-4 medium-2 columns">
-        @Html.DisplayNameFor(model => model.Name)
+    <div class="small-3 medium-2 large-1 columns listDetailsLabel">
+        @Html.DisplayNameFor(model => model.Name):
     </div>
-    <div class="small-8 medium-6 columns">
+    <div class="small-9 medium-6 large-7 columns listDetailsName">
         @Html.DisplayFor(model => model.Name)
     </div>
     <div class="small-12 medium-4 columns">
         <button class="button expand">@Html.ActionLink("Edit", "Edit", new { id = Model.ID })</button>
     </div>
     <div class="small-12 medium-6 columns listGrid">
-        <div class="small-4 medium-3 columns">
+        <div class="small-4 medium-3 columns listHeader">
             Done
         </div>
-        <div class="small-8 medium-9 columns">
+        <div class="small-8 medium-9 columns listHeader">
             Description
         </div>
     @foreach (var item in Model.LAListItems)
@@ -33,16 +33,34 @@
                 </div>
                 <div class="small-8 medium-9 columns itemDescription">
                     @Html.DisplayFor(modelItem => item.Description)
-                </div>   
+                </div>
+                <div name="itemDetails" class="small-12 columns hide">
+                    <p>Put the details here...</p>
+                    <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                </div>
             </div>
         </div>
     }
     </div>
     <div class="medium-6 columns show-for-medium-up listGrid">
-        <div class="medium-12 columns">
+        <div class="small-12 listHeader">
             Details
-        <div class="medium-12 columns panel">
-            We could put details about an item in here
+        </div>
+        <div class="small-12 panel details">
+            Click on an item to see some details
         </div>
     </div>
 </div>
+
+<script>
+    $(".itemWrapper .itemDescription").click(function () {
+        $(".itemWrapper").each(function () {
+            $("[name='itemDetails']").addClass("hide").removeClass("show-for-small-only");
+        });
+
+        var data = $(this).parent().find("[name='itemDetails']").html();
+        $(".panel.details").html(data);
+
+        $(this).parent().find("[name='itemDetails']").addClass("show-for-small-only");
+    });
+</script>

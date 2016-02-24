@@ -1,4 +1,4 @@
-﻿using ListAssist.WebAPI.Queries;
+﻿using ListAssist.WebAPI.Helpers;
 using ListAssist.WebAPI.Models;
 using System.Net;
 using System.Web.Http;
@@ -39,31 +39,9 @@ namespace ListAssist.WebAPI.Controllers
         /// <response code="200">Success.</response>
         /// <response code="500">Unable to modify item's checked value.</response>
         [HttpPost]
-        public HttpStatusCode CheckOffItemFromList(int itemId, int listId)
+        public HttpStatusCode RemoveItemFromList(int itemId, int listId)
         {
-            if (ListQueries.CheckOffItemFromList(listId, itemId))
-            {
-                return HttpStatusCode.OK;
-            }
-
-            return HttpStatusCode.InternalServerError;
-        }
-
-        /// <summary>
-        /// Delete an existing item from a list.
-        /// </summary>
-        /// <remarks>
-        /// Delete an existing item from an existing shopping list.
-        /// </remarks>
-        /// <param name="listId">The id of the list the item is being removed from.</param>
-        /// <param name="item">The item being removed from the list.</param>
-        /// <response code="200">Success.</response>
-        /// <response code="500">Unable to remove item from list.</response>
-        /// <response code="404">Unable to find item in list.</response>
-        [HttpDelete]
-        public HttpStatusCode DeleteItemFromList(int itemId, int listId)
-        {
-            if(ListQueries.DeleteItemFromList(itemId, listId))
+            if (ListQueries.RemoveItemFromList(listId, itemId))
             {
                 return HttpStatusCode.OK;
             }

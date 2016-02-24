@@ -1,10 +1,11 @@
-﻿using ListAssist.WebAPI.Queries;
+﻿using ListAssist.Data.Models;
+using ListAssist.WebAPI.Helpers;
 using ListAssist.WebAPI.Models;
-
+using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Collections.Generic;
 using System.Web.Http.Description;
 
 namespace ListAssist.WebAPI.Controllers
@@ -23,8 +24,6 @@ namespace ListAssist.WebAPI.Controllers
         [ResponseType(typeof(List<ShoppingList>))]
         public HttpResponseMessage AllLists()
         {
-            var test = ListQueries.GetLists();
-
             return Request.CreateResponse(HttpStatusCode.OK,ListQueries.GetLists());
         }
 
@@ -86,32 +85,9 @@ namespace ListAssist.WebAPI.Controllers
 
             if (result != null)
             {
-                return Request.CreateResponse(HttpStatusCode.OK, result);
+                Request.CreateResponse(HttpStatusCode.OK, result);
             }
             return Request.CreateResponse(HttpStatusCode.NotFound);
-        }
-
-        /// <summary>
-        /// Update a list's name in the database.
-        /// </summary>
-        /// <remarks>
-        /// Change the name of a shopping list.
-        /// </remarks>
-        /// <param name="newName">The new name of the list.</param>
-        /// <param name="id">The id of the list being updated.</param>
-        /// <response code="200">Success.</response>
-        /// <response code="500">Internal Error. Please try again.</response>
-        [HttpPut]
-        public HttpStatusCode UpdateList(int id, string newName)
-        {
-            var result = ListQueries.UpdateList(id, newName);
-
-            if(result)
-            {
-                return HttpStatusCode.OK;
-            }
-
-            return HttpStatusCode.InternalServerError;
         }
     }
 }

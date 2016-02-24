@@ -1,7 +1,12 @@
-﻿using System.Net;
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.Entity;
+using System.Linq;
+using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using ListAssist.Data;
-using ListAssist.Data.Queries;
 using ListAssist.Data.Models;
 
 namespace ListAssist.Controllers
@@ -13,7 +18,7 @@ namespace ListAssist.Controllers
         // GET: LALists
         public ActionResult Index()
         {
-            return View(ListQueries.GetLists());
+            return View(db.LALists.OrderBy(item => item.Name).ToList());
         }
 
         // GET: LALists/Details/5
@@ -23,14 +28,11 @@ namespace ListAssist.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            LAList lAList = ListQueries.GetList((int) id);
-
+            LAList lAList = db.LALists.Find(id);
             if (lAList == null)
             {
                 return HttpNotFound();
             }
-
             return View("Details" ,lAList);
         }
 
@@ -49,10 +51,9 @@ namespace ListAssist.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (ListQueries.AddList(lAList))
-                {
-                    return RedirectToAction("Edit", lAList);
-                }
+                db.LALists.Add(lAList);
+                db.SaveChanges();
+                return RedirectToAction("Edit", lAList);
             }
 
             return View("Create", lAList);
@@ -65,9 +66,7 @@ namespace ListAssist.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            LAList lAList = ListQueries.GetList((int) id);
-
+            LAList lAList = db.LALists.Find(id);
             if (lAList == null)
             {
                 return HttpNotFound();
@@ -84,8 +83,14 @@ namespace ListAssist.Controllers
         {
             if (ModelState.IsValid)
             {
-                ListQueries.UpdateList(lAList);
+                db.Entry(lAList).State = EntityState.Modified;
+                db.LALists.Attach(lAList);
 
+                foreach (var listItem in lAList.LAListItems)
+                {
+                    db.Entry(listItem).State = EntityState.Modified;
+                }
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
             return View("Edit",lAList);
@@ -98,14 +103,11 @@ namespace ListAssist.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
-            LAList lAList = ListQueries.GetList((int) id);
-
+            LAList lAList = db.LALists.Find(id);
             if (lAList == null)
             {
                 return HttpNotFound();
             }
-
             return View("Delete",lAList);
         }
 
@@ -114,8 +116,9 @@ namespace ListAssist.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ListQueries.RemoveList(id);
-
+            LAList lAList = db.LALists.Find(id);
+            db.LALists.Remove(lAList);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
@@ -125,14 +128,11 @@ namespace ListAssist.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
             LAListItem lAListItem = db.LAListItems.Find(id);
-
             if (lAListItem == null)
             {
                 return HttpNotFound();
             }
-
             return View("RemoveListItem", lAListItem);
         }
 
@@ -140,8 +140,10 @@ namespace ListAssist.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult RemoveListItem(int id)
         {
-            int listID = ListQueries.DeleteItemFromList(id);
-
+            LAListItem lAListItem = db.LAListItems.Find(id);
+            int listID = lAListItem.ListID;
+            db.LAListItems.Remove(lAListItem);
+            db.SaveChanges();
             return RedirectToAction("Edit", new { id = listID });
         }
 
@@ -162,8 +164,8 @@ namespace ListAssist.Controllers
         {
             if ( ModelState.IsValid )
             {
-                ListQueries.AddItemToList(lAListItem);
-
+                db.LAListItems.Add(lAListItem);
+                db.SaveChanges();
                 return RedirectToAction("Edit", new { id = lAListItem.ListID });
             }
 

@@ -7,22 +7,24 @@
 
 @section PageHeader {Delete!}
 
-
 <div class="row">
     <div class="small-12 columns">
         <h3>Are you sure you want to delete this?</h3>
-        <dl>
-            <dt>@Html.DisplayNameFor(model => model.Name)</dt>
-            <dd>@Html.DisplayFor(model => model.Name)</dd>
-        </dl>
+    </div>
+    <div class="small-3 medium-2 large-1 columns listDetailsLabel">
+        @Html.DisplayNameFor(model => model.Name):
+    </div>
+    <div class="small-9 medium-6 large-7 columns end listDetailsName">
+        @Html.DisplayFor(model => model.Name)
     </div>
 </div>
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     <div class="row">
-        <div class="small-12 columns">
-            <button type="submit" class="button warning">Delete</button>
+        <div class="small-12 medium-8 columns">
+            <button type="submit" class="button warning expand round">Delete</button>
         </div>
     </div>
 }

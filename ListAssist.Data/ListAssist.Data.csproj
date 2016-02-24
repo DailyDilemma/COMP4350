@@ -59,6 +59,7 @@
     </Compile>
     <Compile Include="ListAssistContext.cs" />
     <Compile Include="DbInitializer.cs" />
+    <Compile Include="Queries\ListQueries.cs" />
     <Compile Include="Models\LAListItem.cs" />
     <Compile Include="Models\LAList.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

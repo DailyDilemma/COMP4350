@@ -1,8 +1,7 @@
 ﻿using ListAssist.WebAPI.MappingProfile;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using ListAssist.Data;
+
+using System.Data.Entity;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
@@ -20,6 +19,15 @@ namespace ListAssist.WebAPI
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
             AutoMapperConfiguration.Configure();
+
+#if DEBUG
+            // Drop, recreate and reseed the database
+            Database.SetInitializer(new DbInitializer());
+            using (var db = new ListAssistContext())
+            {
+                db.Database.Initialize(false);
+            }
+#endif
         }
     }
 }

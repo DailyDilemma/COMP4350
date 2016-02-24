@@ -52,6 +52,14 @@ button, .button {
     padding: 5px 0px;
 }
 
+button.create, .button.create {
+    padding: 18px 0px;
+}
+
+button.warning, button.warning {
+    padding: 18px 0px;
+}
+
 button a {
     color: #FFF;
     display: block;
@@ -87,7 +95,9 @@ button.secondary a {
 .smallListLabel {
     padding-top: 13px;
     padding-bottom: 13px;
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
 }
 
 .listGrid .listAction button {
@@ -115,7 +125,7 @@ button.secondary a {
     text-align: center;
 }
 
-.listGrid .itemCheck {
+.row .columns.listGrid .columns.itemCheck {
     line-height: 0;
     padding: 7px 0px;
 }
@@ -140,7 +150,7 @@ button.secondary a {
     border-right: solid 2px #FFF;
 }
 
-.listDetailsName, .listDetailsLabel {
+.listDetailsName, .listDetailsLabel, .listDetailsEdit {
     background-color: #ABABAB;
     padding-top: 7px;
     padding-bottom: 7px;
@@ -150,9 +160,47 @@ button.secondary a {
 }
 
 .listDetailsLabel {
-    text-align: right;
+    text-align: center;
+}
+
+.listDetailsName {
+    text-align: left;
 }
 
 [name='itemDetails'] {
     visibility: visible;
+}
+
+.listDetailsEdit label {
+    width: 20%;
+    display: inline-block;
+    margin: 0;
+    text-align: center;
+}
+
+.listDetailsEdit input {
+    width: 75%;
+    display: inline-block;
+    margin: 0;
+}
+
+.listDetailsEdit+div>button[type='submit'] {
+    padding: 16px;
+}
+
+.listGrid .itemWrapper .itemDescription>input {
+    padding: 4px 8px;
+    margin: 3px 0px;
+}
+
+.row .columns.listGrid .columns.itemWrapper .removeItem {
+    text-align: center;
+    font-weight: bold;
+    padding: 5px;
+}
+
+.listGrid .itemWrapper .removeItem a {
+    color: red;
+    font-size: 22px;
+    padding: 8px;
 }

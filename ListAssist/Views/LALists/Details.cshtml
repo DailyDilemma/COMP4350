@@ -15,7 +15,7 @@
         @Html.DisplayFor(model => model.Name)
     </div>
     <div class="small-12 medium-4 columns">
-        <button class="button expand">@Html.ActionLink("Edit", "Edit", new { id = Model.ID })</button>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "button expand" })
     </div>
     <div class="small-12 medium-6 columns listGrid">
         <div class="small-4 medium-3 columns listHeader">

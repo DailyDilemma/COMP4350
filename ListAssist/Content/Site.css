@@ -49,7 +49,7 @@ body {
 
 button, .button {
     margin: 4px 0px;
-    padding: 5px 0px;
+    padding: 10px 0px;
 }
 
 button.create, .button.create {
@@ -58,6 +58,10 @@ button.create, .button.create {
 
 button.warning, button.warning {
     padding: 18px 0px;
+}
+
+.itemWrapper a.button {
+    padding: 5px 0px;
 }
 
 button a {

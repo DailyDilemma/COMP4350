@@ -52,9 +52,7 @@
             </div>
         }
             <div class="small-12 columns">
-                <button class="button expand success round">
-                    @Html.ActionLink("Add Item", "AddListItem", new { id = Model.ID })
-                </button>
+                @Html.ActionLink("Add Item", "AddListItem", new { id = Model.ID }, new { @class = "button expand success round" })
             </div>
         </div>
         <div class="medium-6 columns show-for-medium-up listGrid">

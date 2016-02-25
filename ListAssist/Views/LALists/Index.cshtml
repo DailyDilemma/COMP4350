@@ -9,7 +9,7 @@
 
 <div class="row">
     <div class="small-12 columns">
-        <button class="button expand success round">@Html.ActionLink("Create New List", "Create")</button>
+        @Html.ActionLink("Create New List", "Create", "", new { @class = "button expand success round" })
     </div>
     <div class="small-12 columns listGrid">
         <div class="small-3 columns show-for-medium-up listHeader">
@@ -29,13 +29,13 @@
                     @Html.DisplayFor(modelItem => item.Name)
                 </div>
                 <div class="small-4 medium-3 columns listAction">
-                    <button class="button expand">@Html.ActionLink("Edit", "Edit", new { id = item.ID })</button>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.ID }, new { @class = "button expand" })
                 </div>
                 <div class="small-4 medium-3 columns listAction">
-                    <button class="button expand">@Html.ActionLink("Details", "Details", new { id = item.ID })</button>
+                    @Html.ActionLink("Details", "Details", new { id = item.ID }, new { @class = "button expand" })
                 </div>
                 <div class="small-4 medium-3 columns listAction">
-                    <button class="alert expand">@Html.ActionLink("Delete", "Delete", new { id = item.ID })</button>
+                    @Html.ActionLink("Delete", "Delete", new { id = item.ID }, new { @class = "button alert expand" })
                 </div>
             </div>
         </div>

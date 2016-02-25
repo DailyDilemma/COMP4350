@@ -8,32 +8,59 @@
 @section PageHeader {Details!}
 
 <div class="row">
-    <div class="small-12 columns">
-        <dl>
-            <dt>@Html.DisplayNameFor(model => model.Name)</dt>
-            <dd>@Html.DisplayFor(model => model.Name)</dd>
-        </dl>
+    <div class="small-3 medium-2 large-1 columns listDetailsLabel">
+        @Html.DisplayNameFor(model => model.Name):
     </div>
-    <div class="small-12 large-6 columns end">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th width="20">Done</th>
-                    <th width="300">Description</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.LAListItems)
-                {
-                    <tr>
-                        <td>@Html.CheckBoxFor(modelItem => item.Done)</td>
-                        <td>@Html.DisplayFor(modelItem => item.Description)</td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+    <div class="small-9 medium-6 large-7 columns listDetailsName">
+        @Html.DisplayFor(model => model.Name)
     </div>
-    <div class="small-12 columns">
-        <button class="secondary">@Html.ActionLink("Edit", "Edit", new { id = Model.ID })</button>
+    <div class="small-12 medium-4 columns">
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID }, new { @class = "button expand" })
+    </div>
+    <div class="small-12 medium-6 columns listGrid">
+        <div class="small-4 medium-3 columns listHeader">
+            Done
+        </div>
+        <div class="small-8 medium-9 columns listHeader">
+            Description
+        </div>
+    @foreach (var item in Model.LAListItems)
+    {
+        <div class="small-12 columns itemWrapper">
+            <div class="row">
+                <div class="small-4 medium-3 columns itemCheck">
+                    @Html.CheckBoxFor(modelItem => item.Done)
+                </div>
+                <div class="small-8 medium-9 columns itemDescription">
+                    @Html.DisplayFor(modelItem => item.Description)
+                </div>
+                <div name="itemDetails" class="small-12 columns hide">
+                    <p>Put the details here...</p>
+                    <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                </div>
+            </div>
+        </div>
+    }
+    </div>
+    <div class="medium-6 columns show-for-medium-up listGrid">
+        <div class="small-12 listHeader">
+            Details
+        </div>
+        <div class="small-12 panel details">
+            Click on an item to see some details
+        </div>
     </div>
 </div>
+
+<script>
+    $(".itemWrapper .itemDescription").click(function () {
+        $(".itemWrapper").each(function () {
+            $("[name='itemDetails']").addClass("hide").removeClass("show-for-small-only");
+        });
+
+        var data = $(this).parent().find("[name='itemDetails']").html();
+        $(".panel.details").html(data);
+
+        $(this).parent().find("[name='itemDetails']").addClass("show-for-small-only");
+    });
+</script>

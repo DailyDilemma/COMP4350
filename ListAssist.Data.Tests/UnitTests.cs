@@ -20,11 +20,11 @@ namespace ListAssist.Data.Tests
         [TestMethod]
         public void TestLAList()
         {
-            LAList testList = new LAList() { ID = 1, Name = "Test List" };
+            LAList testList = new LAList() { Name = "Test List" };
 
             int id = testList.ID;
-            Assert.AreEqual<int>(1, id);
-
+            Assert.IsNotNull(id);
+            
             string name = testList.Name;
             Assert.IsNotNull(name);
             Assert.AreEqual<string>("Test List", name);
@@ -33,10 +33,10 @@ namespace ListAssist.Data.Tests
         [TestMethod]
         public void TestLAListItem()
         {
-            LAListItem testListItem = new LAListItem() { ID = 1, Description = "Test List Item", Done = true };
+            LAListItem testListItem = new LAListItem() { Description = "Test List Item", Done = true };
 
             int id = testListItem.ID;
-            Assert.AreEqual<int>(1, id);
+            Assert.IsNotNull(id);
 
             string description = testListItem.Description;
             Assert.IsNotNull(description);

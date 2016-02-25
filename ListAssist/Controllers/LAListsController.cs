@@ -18,7 +18,7 @@ namespace ListAssist.Controllers
         // GET: LALists
         public ActionResult Index()
         {
-            return View(db.LALists.ToList());
+            return View(db.LALists.OrderBy(item => item.Name).ToList());
         }
 
         // GET: LALists/Details/5
@@ -47,13 +47,13 @@ namespace ListAssist.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Name")] LAList lAList)
+        public ActionResult Create([Bind(Include = "Name")] LAList lAList)
         {
             if (ModelState.IsValid)
             {
                 db.LALists.Add(lAList);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Edit", lAList);
             }
 
             return View("Create", lAList);
@@ -79,11 +79,17 @@ namespace ListAssist.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Name")] LAList lAList)
+        public ActionResult Edit(LAList lAList)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(lAList).State = EntityState.Modified;
+                db.LALists.Attach(lAList);
+
+                foreach (var listItem in lAList.LAListItems)
+                {
+                    db.Entry(listItem).State = EntityState.Modified;
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -114,6 +120,56 @@ namespace ListAssist.Controllers
             db.LALists.Remove(lAList);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult RemoveListItem(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            LAListItem lAListItem = db.LAListItems.Find(id);
+            if (lAListItem == null)
+            {
+                return HttpNotFound();
+            }
+            return View("RemoveListItem", lAListItem);
+        }
+
+        [HttpPost, ActionName("RemoveListItem")]
+        [ValidateAntiForgeryToken]
+        public ActionResult RemoveListItem(int id)
+        {
+            LAListItem lAListItem = db.LAListItems.Find(id);
+            int listID = lAListItem.ListID;
+            db.LAListItems.Remove(lAListItem);
+            db.SaveChanges();
+            return RedirectToAction("Edit", new { id = listID });
+        }
+
+        public ActionResult AddListItem(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            LAListItem lAListItem = new LAListItem() { ListID = (int)id };
+            
+            return View("AddListItem", lAListItem);
+        }
+
+        [HttpPost, ActionName("AddListItem")]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddListItem([Bind(Include = "ListID,Description")]LAListItem lAListItem)
+        {
+            if ( ModelState.IsValid )
+            {
+                db.LAListItems.Add(lAListItem);
+                db.SaveChanges();
+                return RedirectToAction("Edit", new { id = lAListItem.ListID });
+            }
+
+            return View("AddListItem", lAListItem);
         }
 
         protected override void Dispose(bool disposing)

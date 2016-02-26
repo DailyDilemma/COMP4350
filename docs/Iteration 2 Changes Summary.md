@@ -18,4 +18,6 @@
  
 ##What Didn't Make It In
 
-##The New Plan
+* Well, a lot quite frankly. Everything that was originally slated for Iteration 2 has been moved into Iteration 3. 
+  * All of the issues labelled [From Last Iteration - Fix First](https://github.com/DailyDilemma/COMP4350/issues?q=is%3Aopen+is%3Aissue+milestone%3A%22Iteration+3%22+label%3A%22From+Last+Iteration+-+Fix+First%21%22) were pushed forward.
+  * The issues labelled [High Priority](https://github.com/DailyDilemma/COMP4350/issues?q=is%3Aopen+is%3Aissue+milestone%3A%22Iteration+3%22+label%3A%22Priority%3A+High%22) are the ones we think we might actually be able to do.

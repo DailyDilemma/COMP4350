@@ -26,6 +26,9 @@ namespace ListAssist.Tests.Controllers
             var result = testController.Details(1) as ViewResult;
 
             Assert.AreEqual("Details", result.ViewName);
+
+            var nullResult = testController.Details(10) as ViewResult;
+            Assert.IsNull(nullResult);
         }
 
         [TestMethod]
@@ -45,6 +48,24 @@ namespace ListAssist.Tests.Controllers
             var result = testController.Edit(1) as ViewResult;
 
             Assert.AreEqual("Edit", result.ViewName);
+        }
+
+        [TestMethod]
+        public void TestAddListItem()
+        {
+            LAListsController testController = new LAListsController();
+            var result = testController.AddListItem(new LAListItem { ListID = 1, Description="Test", Done=false}) as RedirectToRouteResult;
+            
+            Assert.AreEqual("Edit", result.RouteValues["action"]);
+        }
+
+        [TestMethod]
+        public void TestRemoveListItem()
+        {
+            LAListsController testController = new LAListsController();
+            var result = testController.RemoveListItem(1) as RedirectToRouteResult;
+
+            Assert.AreEqual("Edit", result.RouteValues["action"]);
         }
 
         [TestMethod]

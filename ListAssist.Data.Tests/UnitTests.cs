@@ -45,5 +45,69 @@ namespace ListAssist.Data.Tests
             Boolean done = testListItem.Done;
             Assert.IsTrue(done);
         }
+
+        [TestMethod]
+        public void TestAddListItem()
+        {
+            LAList testList = new LAList { Name = "Test List 1" };
+            Assert.IsNotNull(testList);
+
+            LAListItem testListItem = new LAListItem { Description = "Test Item 1", Done = true };
+            Assert.IsNotNull(testListItem);
+
+            Assert.AreEqual<int>(0, testList.LAListItems.Count);
+            testList.LAListItems.Add(testListItem);
+            Assert.AreEqual<int>(1, testList.LAListItems.Count);
+
+            testList = null;
+            testListItem = null;
+        }
+
+        [TestMethod]
+        public void TestRemoveListItem()
+        {
+            LAList testList = new LAList { Name = "Test List 2" };
+            Assert.IsNotNull(testList);
+
+            LAListItem testListItem = new LAListItem { Description = "Test Item 2", Done = false };
+            Assert.IsNotNull(testListItem);
+
+            Assert.AreEqual<int>(0, testList.LAListItems.Count);
+            testList.LAListItems.Add(testListItem);
+            Assert.AreEqual<int>(1, testList.LAListItems.Count);
+
+            testList.LAListItems.Remove(testListItem);
+            Assert.AreEqual<int>(0, testList.LAListItems.Count);
+
+            testList = null;
+            testListItem = null;
+        }
+
+        [TestMethod]
+        public void TestEditListItem()
+        {
+            LAList testList = new LAList { Name = "Test List 3" };
+            Assert.IsNotNull(testList);
+
+            LAListItem testListItem = new LAListItem { Description = "Test Item 3", Done = false };
+            Assert.IsNotNull(testListItem);
+
+            Assert.AreEqual<int>(0, testList.LAListItems.Count);
+            testList.LAListItems.Add(testListItem);
+            Assert.AreEqual<int>(1, testList.LAListItems.Count);
+
+            LAListItem updateListItem = testList.LAListItems.Find(x => x.ID == 0);
+            Assert.IsNotNull(updateListItem);
+            updateListItem.Done = true;
+            updateListItem = null;
+
+            LAListItem foundListItem = testList.LAListItems.Find(x => x.ID == 0);
+            Assert.IsNotNull(foundListItem);
+            Assert.IsTrue(foundListItem.Done);
+            foundListItem = null;
+
+            testList = null;
+            testListItem = null;
+        }
     }
 }

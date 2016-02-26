@@ -2,6 +2,12 @@
 
 This is ListAssist, a smart list sharing application to help with getting things done.
 
+## Iteration 2 Deliverables
+
+[AWS Hosted Front End](http://ec2-52-36-187-54.us-west-2.compute.amazonaws.com/)
+
+For the full list of changes, [click here](docs/Iteration 2 Changes Summary.md).
+
 ## Iteration 1 Deliverables
 
 [Detailed User Stories for Iteration 2](https://github.com/DailyDilemma/COMP4350/milestones/Iteration%202)

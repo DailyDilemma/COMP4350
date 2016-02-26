@@ -14,7 +14,7 @@
 * Following up on the feedback from Iteration 1, we...
   * Removed the ID field from the list creation screen, the system now properly assigns an ID automatically without prompting.
   * A queries class was created to establish an interface between the controllers and the database so the controllers don't call the database directly.
-  * In addition to the Selenium tests, more unit tests were added for the WebAPI and web project.
+* In addition to the Selenium tests, more unit tests were added for the WebAPI and web project.
  
 ##What Didn't Make It In
 

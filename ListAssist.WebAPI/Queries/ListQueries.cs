@@ -9,7 +9,7 @@ using System.Linq;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
 
-namespace ListAssist.WebAPI.Helpers
+namespace ListAssist.WebAPI.Queries
 {
     public static class ListQueries
     {
@@ -20,15 +20,35 @@ namespace ListAssist.WebAPI.Helpers
             return db.LALists.ProjectTo<ShoppingList>().ToList();
         }
 
+        public static ShoppingList GetList(int listId)
+        {
+            var entityList = db.LALists.Where(s => s.ID == listId);
+            var shoppingList = entityList.ProjectTo<ShoppingList>().FirstOrDefault();
+
+            return shoppingList;
+        }
+        
         public static bool AddList(string listName)
         {
-            var ShoppingList = new LAList();
-            ShoppingList.Name = listName;
+            bool success = false;
 
-            db.LALists.Add(ShoppingList);
-            db.SaveChanges();
+            if (listName != null)
+            {
+                var duplicate = db.LALists.Where(e => e.Name.Equals(listName));
 
-            return true;
+                if (duplicate == null)
+                {
+                    var ShoppingList = new LAList();
+                    ShoppingList.Name = listName;
+
+                    db.LALists.Add(ShoppingList);
+                    db.SaveChanges();
+
+                    success = true;
+                }
+            }
+
+            return success;
         }
 
         public static bool RemoveList(int ListId)
@@ -47,39 +67,84 @@ namespace ListAssist.WebAPI.Helpers
             return success;
         }
 
-        public static ShoppingList GetList(int listId)
-        {
-            var entityList = db.LALists.Where(s => s.ID == listId);
-            var shoppingList = entityList.ProjectTo<ShoppingList>().FirstOrDefault();
-
-            return shoppingList;
-        }
-
-        public static bool AddItemToList(int listId, ShoppingListItem item)
+        public static bool UpdateList(int listId, string newName)
         {
             var success = false;
 
-            Mapper.CreateMap<ShoppingListItem, LAListItem>()
-                .ForMember(e => e.Done, opt => opt.MapFrom(s => s.Checked));
-            Mapper.CreateMap<ShoppingList, LAList>()
-                .ForMember(e => e.LAListItems, opt => opt.MapFrom(s => s.ShoppingListItems));
-
-            var shoppingList = GetList(listId);
-
-            if (shoppingList != null)
+            if (newName != null)
             {
-                shoppingList.ShoppingListItems.Add(item);
-                
-                db.LALists.Add(Mapper.Map<ShoppingList, LAList>(shoppingList));
-                db.SaveChanges();
+                var updatedList = db.LALists.Where(e => e.ID == listId).FirstOrDefault();
 
-                success = true;
+                if (updatedList != null)
+                {
+                    updatedList.Name = newName;
+                    db.Entry(updatedList).State = EntityState.Modified;
+                    db.SaveChanges();
+
+                    success = true;
+                }
             }
 
             return success;
         }
 
-        public static bool RemoveItemFromList(int listId, int itemId)
+        public static bool AddItemToList(int listId, ShoppingListItem item)
+        {
+            Mapper.CreateMap<ShoppingListItem, LAListItem>()
+                .ForMember(e => e.Done, opt => opt.MapFrom(s => s.Checked));
+
+            var success = false;
+            
+            if (item != null)
+            {
+                var shoppingList = db.LALists.Find(listId);
+
+                if (shoppingList != null)
+                {
+                    var duplicate = db.LAListItems.Where(e => (e.ListID == listId) && (e.Description.Equals(item.Description))).FirstOrDefault();
+
+                    if (duplicate == null)
+                    {
+                        shoppingList.LAListItems.Add(Mapper.Map<ShoppingListItem, LAListItem>(item));
+                        db.Entry(shoppingList).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+                    else
+                    {
+                        duplicate.Done = false;
+                        db.Entry(duplicate).State = EntityState.Modified;
+                        db.SaveChanges();
+                    }
+
+                    success = true;
+                }
+            }
+
+            return success;
+        }
+
+        public static bool DeleteItemFromList(int itemId, int listId)
+        {
+            var success = false;
+            var list = db.LALists.Find(listId);
+            
+            if(list != null)
+            {
+                var item = db.LAListItems.Find(itemId);
+                
+                if(item != null)
+                {
+                    db.LAListItems.Remove(item);
+                    db.SaveChanges();
+                    success = true;
+                }
+            }
+
+            
+            return success;
+        }
+
+        public static bool CheckOffItemFromList(int listId, int itemId)
         {
             var updatedItem = db.LAListItems.Where(n => (n.ID == itemId) && (n.ListID == listId)).FirstOrDefault();
             var success = false;
@@ -89,6 +154,7 @@ namespace ListAssist.WebAPI.Helpers
                 updatedItem.Done = true;
                 db.Entry(updatedItem).State = EntityState.Modified;
                 db.SaveChanges();
+
                 success = true;
             }
 

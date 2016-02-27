@@ -8,9 +8,9 @@ This is ListAssist, a smart list sharing application to help with getting things
 
 AWS Hosted Front End Web API
 
-Chat Logs
+[Chat Logs](docs/Iteration 2 Chat Logs.md)
 
-Meeting Minutes
+[Meeting Minutes](docs/Meeting Minutes)
 
 For the full list of changes, [click here](docs/Iteration 2 Changes Summary.md).
 

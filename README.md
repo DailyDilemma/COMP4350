@@ -6,7 +6,7 @@ This is ListAssist, a smart list sharing application to help with getting things
 
 [AWS Hosted Front End](http://ec2-52-36-187-54.us-west-2.compute.amazonaws.com/)
 
-AWS Hosted Front End Web API
+[AWS Hosted Front End Web API](http://ec2-52-36-187-54.us-west-2.compute.amazonaws.com:8080/swagger/ui/index)
 
 [Chat Logs](docs/Iteration 2 Chat Logs.md)
 

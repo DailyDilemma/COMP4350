@@ -10,7 +10,7 @@ This is ListAssist, a smart list sharing application to help with getting things
 
 [Chat Logs](docs/Iteration 2 Chat Logs.md)
 
-[Meeting Minutes](docs/Meeting Minutes)
+[Meeting Minutes](docs/Meeting_Minutes)
 
 For the full list of changes, [click here](docs/Iteration 2 Changes Summary.md).
 

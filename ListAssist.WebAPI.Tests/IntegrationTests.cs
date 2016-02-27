@@ -46,7 +46,7 @@ namespace ListAssist.WebAPI.Tests
                 Database.SetInitializer(new DbInitializer());
                 this.db = new ListAssistContext();
 
-                this.db.Database.Initialize(true);
+                this.db.Database.Initialize(false);
                 Assert.IsNotNull(this.db, "List assist context is null.");
 
                 var lists = new List<LAList>

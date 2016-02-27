@@ -11,6 +11,7 @@
   * Checking an item off the list [[Issue #19](https://github.com/DailyDilemma/COMP4350/issues/19)]
 * Automated Acceptance Testing with Selenium
   * NOTE: Requires Firefox! With Firefox installed run all tests from Visual Studio and the acceptance tests will automatically launch the browser and report their success in the Visual Studio test runner window.
+  * NOTE: When testing, in order for Selenium to work properly the ListAssist project MUST be the startup project!
 * Following up on the feedback from Iteration 1, we...
   * Removed the ID field from the list creation screen, the system now properly assigns an ID automatically without prompting.
   * A queries class was created to establish an interface between the controllers and the database so the controllers don't call the database directly.

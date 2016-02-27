@@ -2,16 +2,28 @@
 using ListAssist.WebAPI.Models;
 using System.Net;
 using System.Web.Http;
+using ListAssist.Data;
+using System;
 
 namespace ListAssist.WebAPI.Controllers
 {
     public class ListItemsController : ApiController
     {
+        private ListQueries queries;
+
+        public ListItemsController()
+        {
+            var db = new ListAssistContext("ListAssistContext");
+            db.Database.Initialize(false);
+
+            this.queries = new ListQueries(db);
+        }
         /// <summary>
         /// Add a new item to a list.
         /// </summary>
         /// <remarks>
         /// Add a new item to your shopping list.
+        /// DateAdded, TimesBought and Frequency are read-only fields.
         /// </remarks>
         /// <param name="listId">The id of the list the item is being added to.</param>
         /// <param name="item">The item being added to the list.</param>
@@ -20,7 +32,7 @@ namespace ListAssist.WebAPI.Controllers
         [HttpPut]
         public HttpStatusCode AddItemToList(int listId, ShoppingListItem item)
         {
-            if (ListQueries.AddItemToList(listId, item))
+            if (queries.AddItemToList(listId, item))
             {
                 return HttpStatusCode.OK;
             }
@@ -41,7 +53,7 @@ namespace ListAssist.WebAPI.Controllers
         [HttpPost]
         public HttpStatusCode CheckOffItemFromList(int itemId, int listId)
         {
-            if (ListQueries.CheckOffItemFromList(listId, itemId))
+            if (queries.CheckOffItemFromList(listId, itemId))
             {
                 return HttpStatusCode.OK;
             }
@@ -63,7 +75,7 @@ namespace ListAssist.WebAPI.Controllers
         [HttpDelete]
         public HttpStatusCode DeleteItemFromList(int itemId, int listId)
         {
-            if(ListQueries.DeleteItemFromList(itemId, listId))
+            if(queries.DeleteItemFromList(itemId, listId))
             {
                 return HttpStatusCode.OK;
             }

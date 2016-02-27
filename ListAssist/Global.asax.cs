@@ -23,14 +23,14 @@ namespace ListAssist
 
 #if DEBUG 
             // Drop, recreate and reseed the database
-            Database.SetInitializer(new DbInitializer());
-            using (var db = new ListAssistContext())
-            {
-                db.Database.Initialize(false);
-            }
+            //Database.SetInitializer(new DbInitializer());
+            //using (var db = new ListAssistContext("ListAssistContext"))
+            //{
+            //    db.Database.Initialize(false);
+            //}
 
             // Recreate a edmx diagram from the latest model
-            using (var ctx = new ListAssistContext())
+            using (var ctx = new ListAssistContext("ListAssistContext"))
             {
                 using (var writer = new XmlTextWriter(HttpRuntime.AppDomainAppPath.TrimEnd('\\') + @".Data\EntityModelDiagram.edmx", Encoding.Default))
                 {

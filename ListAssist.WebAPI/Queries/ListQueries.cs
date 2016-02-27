@@ -12,16 +12,26 @@ using AutoMapper;
 
 namespace ListAssist.WebAPI.Queries
 {
-    public static class ListQueries
+    public class ListQueries
     {
-        private static ListAssistContext db = new ListAssistContext();
+        private ListAssistContext db;
+
+        public ListQueries(ListAssistContext db)
+        {
+            if(db == null)
+            {
+                throw new ArgumentNullException("Missing db");
+            }
+
+            this.db = db;
+        }
                 
-        public static List<ShoppingList> GetLists()
+        public List<ShoppingList> GetLists()
         {
             return db.LALists.ProjectTo<ShoppingList>().ToList();
         }
 
-        public static ShoppingList GetList(int listId)
+        public ShoppingList GetList(int listId)
         {
             var entityList = db.LALists.Where(s => s.ID == listId);
             var shoppingList = entityList.ProjectTo<ShoppingList>().FirstOrDefault();
@@ -29,7 +39,7 @@ namespace ListAssist.WebAPI.Queries
             return shoppingList;
         }
         
-        public static bool AddList(string listName)
+        public bool AddList(string listName)
         {
             bool success = false;
 
@@ -52,7 +62,7 @@ namespace ListAssist.WebAPI.Queries
             return success;
         }
 
-        public static bool RemoveList(int ListId)
+        public bool RemoveList(int ListId)
         {
             var ListToDelete = db.LALists.Find(ListId);
             var success = false;
@@ -68,7 +78,7 @@ namespace ListAssist.WebAPI.Queries
             return success;
         }
 
-        public static bool UpdateList(int listId, string newName)
+        public bool UpdateList(int listId, string newName)
         {
             var success = false;
 
@@ -89,7 +99,7 @@ namespace ListAssist.WebAPI.Queries
             return success;
         }
 
-        public static bool AddItemToList(int listId, ShoppingListItem item)
+        public bool AddItemToList(int listId, ShoppingListItem item)
         {
             Mapper.CreateMap<ShoppingListItem, LAListItem>()
                 .ForMember(e => e.Done, opt => opt.MapFrom(s => s.Checked));
@@ -106,9 +116,12 @@ namespace ListAssist.WebAPI.Queries
 
                     if (duplicate == null)
                     {
-                        item.setDateAdded(DateTime.Now);
-                        item.setTimesBought(0);
-                        shoppingList.LAListItems.Add(Mapper.Map<ShoppingListItem, LAListItem>(item));
+                        var newItem = Mapper.Map<ShoppingListItem, LAListItem>(item);
+
+                        newItem.DateAdded = DateTime.Now;
+                        newItem.TimesBought = 0;
+
+                        shoppingList.LAListItems.Add(newItem);
                         db.Entry(shoppingList).State = EntityState.Modified;
                         db.SaveChanges();
                     }
@@ -126,7 +139,7 @@ namespace ListAssist.WebAPI.Queries
             return success;
         }
 
-        public static bool DeleteItemFromList(int itemId, int listId)
+        public bool DeleteItemFromList(int itemId, int listId)
         {
             var success = false;
             var list = db.LALists.Find(listId);
@@ -147,7 +160,7 @@ namespace ListAssist.WebAPI.Queries
             return success;
         }
 
-        public static bool CheckOffItemFromList(int listId, int itemId)
+        public bool CheckOffItemFromList(int listId, int itemId)
         {
             var updatedItem = db.LAListItems.Where(n => (n.ID == itemId) && (n.ListID == listId)).FirstOrDefault();
             var success = false;

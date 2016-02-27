@@ -13,7 +13,7 @@ namespace ListAssist.Data.Tests
         public void Initialize()
         {
             Database.SetInitializer(new DbInitializer());
-            var db = new ListAssistContext();
+            var db = new ListAssistContext("ListAssistUnitTests");
             db.Database.Initialize(false);
         }
 

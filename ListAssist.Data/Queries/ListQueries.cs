@@ -7,21 +7,31 @@ using System;
 
 namespace ListAssist.Data.Queries
 {
-    public static class ListQueries
+    public class ListQueries
     {
-        private static ListAssistContext db = new ListAssistContext();
+        private ListAssistContext db;
 
-        public static List<LAList> GetLists()
+        public ListQueries(ListAssistContext db)
+        {
+            if(db == null)
+            {
+                throw new ArgumentNullException("Missing db.");
+            }
+
+            this.db = db;
+        }
+
+        public List<LAList> GetLists()
         {
             return db.LALists.OrderBy(e => e.Name).ToList();
         }
 
-        public static LAList GetList(int id)
+        public LAList GetList(int id)
         {
             return db.LALists.Find(id);
         }
 
-        public static bool AddList(LAList list)
+        public bool AddList(LAList list)
         {
             bool success = false;
 
@@ -41,7 +51,7 @@ namespace ListAssist.Data.Queries
             return success;
         }
 
-        public static bool RemoveList(int id)
+        public bool RemoveList(int id)
         {
             bool success = false;
             var list = db.LALists.Find(id);
@@ -57,7 +67,7 @@ namespace ListAssist.Data.Queries
             return success;
         }
 
-        public static bool UpdateList(LAList list)
+        public bool UpdateList(LAList list)
         {
             bool success = false;
 
@@ -82,7 +92,7 @@ namespace ListAssist.Data.Queries
             return success;
         }
 
-        public static bool AddItemToList(LAListItem item)
+        public bool AddItemToList(LAListItem item)
         {
             var success = false;
 
@@ -115,7 +125,7 @@ namespace ListAssist.Data.Queries
             return success;
         }
 
-        public static int DeleteItemFromList(int id)
+        public int DeleteItemFromList(int id)
         {
             int listId = -1;
             var item = db.LAListItems.Find(id);
@@ -129,6 +139,13 @@ namespace ListAssist.Data.Queries
             }
 
             return listId;
+        }
+
+        public LAListItem GetItem(int id)
+        {
+            var item = db.LAListItems.Find(id);
+
+            return item;
         }
     }
 }

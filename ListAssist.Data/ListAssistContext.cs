@@ -7,7 +7,7 @@ namespace ListAssist.Data
 {
     public class ListAssistContext : DbContext
     {
-        public ListAssistContext() : base("ListAssistContext") { }
+        public ListAssistContext(string dbName) : base(dbName) { }
 
         public DbSet<LAList> LALists { get; set; }
         public DbSet<LAListItem> LAListItems { get; set; }

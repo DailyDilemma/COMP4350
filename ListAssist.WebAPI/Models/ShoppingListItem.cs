@@ -49,18 +49,20 @@ namespace ListAssist.WebAPI.Models
 
         /// <summary>
         /// The number of times this item has been checked since it was added to the list.
+        /// Read only.
         /// </summary>
-        private int TimesBought
+        public int TimesBought
         {
-            get; set;
+            get; private set;
         }
 
         /// <summary>
         /// The date the item was added to it's list.
+        /// Read only.
         /// </summary>
-        private DateTime DateAdded
+        public DateTime DateAdded
         {
-            get; set;
+            get; private set;
         }
 
         public void setDateAdded(DateTime date)

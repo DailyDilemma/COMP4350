@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using ListAssist.WebAPI.Controllers;
 
 namespace ListAssist.WebAPI
 {
@@ -22,11 +23,12 @@ namespace ListAssist.WebAPI
 
 #if DEBUG
             // Drop, recreate and reseed the database
-            Database.SetInitializer(new DbInitializer());
-            using (var db = new ListAssistContext())
-            {
-                db.Database.Initialize(false);
-            }
+            
+            //Database.SetInitializer(new DbInitializer());
+            //using (var db = new ListAssistContext("ListAssistContext"))
+            //{
+            //    db.Database.Initialize(false);
+            //}
 #endif
         }
     }

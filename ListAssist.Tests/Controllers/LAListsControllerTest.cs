@@ -11,11 +11,12 @@ namespace ListAssist.Tests.Controllers
     [TestClass]
     public class LAListsControllerTest
     {
+        private ListAssistContext db;
         [TestInitialize]
         public void Initialize()
         {
             Database.SetInitializer(new DbInitializer());
-            var db = new ListAssistContext();
+            db = new ListAssistContext("ListAssistSeleniumTests");
             db.Database.Initialize(false);
         }
 

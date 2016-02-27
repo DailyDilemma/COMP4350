@@ -6,11 +6,22 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Collections.Generic;
 using System.Web.Http.Description;
+using ListAssist.Data;
+using System;
 
 namespace ListAssist.WebAPI.Controllers
 {
     public class ListsController : ApiController
     {
+        private ListQueries queries;
+        
+        public ListsController()
+        {
+            var db = new ListAssistContext("ListAssistContext");
+            db.Database.Initialize(false);
+
+            this.queries = new ListQueries(db);
+        }
         /// <summary>
         /// Retrieve all existing shopping lists from the database
         /// </summary>
@@ -23,9 +34,9 @@ namespace ListAssist.WebAPI.Controllers
         [ResponseType(typeof(List<ShoppingList>))]
         public HttpResponseMessage AllLists()
         {
-            var test = ListQueries.GetLists();
+            var test = queries.GetLists();
 
-            return Request.CreateResponse(HttpStatusCode.OK,ListQueries.GetLists());
+            return Request.CreateResponse(HttpStatusCode.OK, queries.GetLists());
         }
 
         /// <summary>
@@ -40,7 +51,7 @@ namespace ListAssist.WebAPI.Controllers
         [HttpPost]
         public HttpStatusCode AddList(string listName)
         {
-            if(ListQueries.AddList(listName))
+            if(queries.AddList(listName))
             {
                 return HttpStatusCode.OK;
             }
@@ -60,7 +71,7 @@ namespace ListAssist.WebAPI.Controllers
         [HttpDelete]
         public HttpStatusCode RemoveList(int listId)
         {
-            if (ListQueries.RemoveList(listId))
+            if (queries.RemoveList(listId))
             {
                 return HttpStatusCode.OK;
             }
@@ -82,7 +93,7 @@ namespace ListAssist.WebAPI.Controllers
         [ResponseType(typeof(ShoppingList))]
         public HttpResponseMessage SingleList(int id)
         {
-            var result = ListQueries.GetList(id);
+            var result = queries.GetList(id);
 
             if (result != null)
             {
@@ -104,7 +115,7 @@ namespace ListAssist.WebAPI.Controllers
         [HttpPut]
         public HttpStatusCode UpdateList(int id, string newName)
         {
-            var result = ListQueries.UpdateList(id, newName);
+            var result = queries.UpdateList(id, newName);
 
             if(result)
             {

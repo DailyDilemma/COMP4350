@@ -12,6 +12,7 @@ namespace ListAssist.Data.Tests
     [TestClass]
     public class DataUnitTest
     {
+        private ListQueries queries;
         private ListAssistContext db;
 
         [TestInitialize]
@@ -20,9 +21,9 @@ namespace ListAssist.Data.Tests
             LAList testList1 = new LAList() { Name = "Test List 1" };
             LAList testList2 = new LAList() { Name = "Test List 2" };
 
-            LAListItem testInsertItem1 = new LAListItem() { Description = "Test Insert 1", Done = false };
-            LAListItem testInsertItem2 = new LAListItem() { Description = "Test Insert 2", Done = false };
-            LAListItem testInsertItem3 = new LAListItem() { Description = "Test Insert 3", Done = false };
+            LAListItem testInsertItem1 = new LAListItem() { Description = "Test Insert 1", Done = false, DateAdded = new System.DateTime(2016, 01, 01), TimesBought = 3 };
+            LAListItem testInsertItem2 = new LAListItem() { Description = "Test Insert 2", Done = false, DateAdded = new System.DateTime(2016, 01, 21), TimesBought = 3 };
+            LAListItem testInsertItem3 = new LAListItem() { Description = "Test Insert 3", Done = false, DateAdded = new System.DateTime(2016, 02, 01), TimesBought = 10 };
 
             Assert.IsNotNull(testList1, "Test list 1 is null.");
             Assert.IsNotNull(testList2, "Test list 2 is null.");
@@ -37,7 +38,8 @@ namespace ListAssist.Data.Tests
             testList2.LAListItems.Add(testInsertItem3);
 
             Database.SetInitializer(new DbInitializer());
-            this.db = new ListAssistContext();
+            this.db = new ListAssistContext("ListAssistTests");
+            this.queries = new ListQueries(db);
 
             this.db.Database.Initialize(true);
             Assert.IsNotNull(this.db, "List assist context is null.");
@@ -83,7 +85,7 @@ namespace ListAssist.Data.Tests
         [TestMethod]
         public void TestGetAllLists()
         {
-            var lists = ListQueries.GetLists();
+            var lists = queries.GetLists();
 
             Assert.IsNotNull(lists);
             Assert.AreEqual(4, lists.Count);
@@ -92,7 +94,7 @@ namespace ListAssist.Data.Tests
         [TestMethod]
         public void TestGetSingleList()
         {
-            var list = ListQueries.GetList(3);
+            var list = queries.GetList(3);
 
             Assert.IsNotNull(list);
             Assert.AreEqual(3, list.ID);
@@ -103,7 +105,7 @@ namespace ListAssist.Data.Tests
         [TestMethod]
         public void TestGetNonExistantList()
         {
-            var list = ListQueries.GetList(99);
+            var list = queries.GetList(99);
 
             Assert.AreEqual(null, list);
         }
@@ -111,7 +113,7 @@ namespace ListAssist.Data.Tests
         [TestMethod]
         public void TestGetListBadListID()
         {
-            var list = ListQueries.GetList(-99);
+            var list = queries.GetList(-99);
 
             Assert.AreEqual(null, list);
         }
@@ -119,7 +121,7 @@ namespace ListAssist.Data.Tests
         [TestMethod]
         public void TestGetListZeroListID()
         {
-            var list = ListQueries.GetList(0);
+            var list = queries.GetList(0);
 
             Assert.AreEqual(null, list);
         }
@@ -137,11 +139,11 @@ namespace ListAssist.Data.Tests
             // add the lists to the database along with their associated list items
             foreach ( LAList newList in lists ){
 
-                ListQueries.AddList(newList);
+                queries.AddList(newList);
 
                 foreach (LAListItem newListItem in newList.LAListItems)
                 {
-                    ListQueries.AddItemToList(newListItem);
+                    queries.AddItemToList(newListItem);
                 }
             }
 
@@ -155,10 +157,10 @@ namespace ListAssist.Data.Tests
         public void TestAddListWithItems()
         {
             var newList = new LAList() { Name = "List with items" };
-            newList.LAListItems.Add(new LAListItem() { Description = "Test Item 1", Done = true });
-            newList.LAListItems.Add(new LAListItem() { Description = "Test Item 2", Done = false });
+            newList.LAListItems.Add(new LAListItem() { Description = "Test Item 4", Done = true, DateAdded = new System.DateTime(2016, 01, 01), TimesBought = 3 });
+            newList.LAListItems.Add(new LAListItem() { Description = "Test Item 5", Done = false, DateAdded = new System.DateTime(2016, 01, 01), TimesBought = 3 });
 
-            var result = ListQueries.AddList(newList);
+            var result = queries.AddList(newList);
 
             Assert.AreEqual(true, result);
             Assert.AreEqual(5, db.LALists.ToList().Count);
@@ -173,7 +175,7 @@ namespace ListAssist.Data.Tests
         public void AddDuplicateList()
         {
             var newList = new LAList() { Name = "Test List 1" };
-            var result = ListQueries.AddList(newList);
+            var result = queries.AddList(newList);
 
             Assert.AreEqual(false, result);
             Assert.AreEqual(4, db.LALists.ToList().Count);
@@ -183,7 +185,7 @@ namespace ListAssist.Data.Tests
         public void AddListWithNullName()
         {
             var newList = new LAList();
-            var result = ListQueries.AddList(newList);
+            var result = queries.AddList(newList);
 
             Assert.AreEqual(false, result);
             Assert.AreEqual(4, db.LALists.ToList().Count);
@@ -196,7 +198,7 @@ namespace ListAssist.Data.Tests
 
             Assert.IsNotNull(firstList, "List 3 not found.");
 
-            var result = ListQueries.RemoveList(firstList.ID);
+            var result = queries.RemoveList(firstList.ID);
 
             Assert.AreEqual(true, result);
             Assert.IsNull(db.LALists.Where(e => e.Name.Equals("Test List 1")).FirstOrDefault(), "List 3 not removed.");
@@ -205,7 +207,7 @@ namespace ListAssist.Data.Tests
         [TestMethod]
         public void TestRemoveNonExistingList()
         {
-            var result = ListQueries.RemoveList(99);
+            var result = queries.RemoveList(99);
 
             Assert.AreEqual(false, result);
             Assert.AreEqual(4, db.LALists.ToList().Count);
@@ -214,7 +216,7 @@ namespace ListAssist.Data.Tests
         [TestMethod]
         public void TestRemoveBadListID()
         {
-            var result = ListQueries.RemoveList(-11);
+            var result = queries.RemoveList(-11);
 
             Assert.AreEqual(false, result);
             Assert.AreEqual(4, db.LALists.ToList().Count);
@@ -223,7 +225,7 @@ namespace ListAssist.Data.Tests
         [TestMethod]
         public void TestRemoveZeroListID()
         {
-            var result = ListQueries.RemoveList(0);
+            var result = queries.RemoveList(0);
 
             Assert.AreEqual(false, result);
             Assert.AreEqual(4, db.LALists.ToList().Count);
@@ -236,14 +238,14 @@ namespace ListAssist.Data.Tests
             {
                 Description = "Test Item",
                 Done = true,
-                ListID = 3
+                ListID = 2
             };
 
-            var result = ListQueries.AddItemToList(newItem);
+            var result = queries.AddItemToList(newItem);
 
             Assert.AreEqual(true, result);
             Assert.IsNotNull(db.LAListItems.Where(e => e.Description.Equals("Test Item")).FirstOrDefault());
-            Assert.AreEqual(3, db.LALists.Find(3).LAListItems.Count);
+            Assert.AreEqual(2, db.LALists.Find(3).LAListItems.Count);
         }
 
         [TestMethod]
@@ -255,7 +257,7 @@ namespace ListAssist.Data.Tests
                 ListID = 3
             };
 
-            var result = ListQueries.AddItemToList(newItem);
+            var result = queries.AddItemToList(newItem);
 
             Assert.AreEqual(true, result);
             Assert.IsNotNull(db.LAListItems.Where(e => e.Description.Equals("Test Insert 1")).FirstOrDefault());
@@ -276,13 +278,13 @@ namespace ListAssist.Data.Tests
         //        Done = true
         //    };
 
-        //    var result = ListQueries.AddItemToList(newItem);
+        //    var result = ListAddItemToList(newItem);
 
         //    Assert.AreEqual(true, result);
         //    Assert.IsNotNull(db.LAListItems.Where(e => e.Description.Equals("Test Insert 0")).FirstOrDefault());
         //    Assert.AreEqual(3, db.LALists.Find(3).LAListItems.Count);
 
-        //    result = ListQueries.AddItemToList(newItem);
+        //    result = ListAddItemToList(newItem);
 
         //    Assert.AreEqual(true, result);
         //    Assert.IsNotNull(db.LAListItems.Where(e => e.Description.Equals("Test Insert 0")).FirstOrDefault());
@@ -297,7 +299,7 @@ namespace ListAssist.Data.Tests
         [TestMethod]
         public void TestAddNullItem()
         {
-            var result = ListQueries.AddItemToList(null);
+            var result = queries.AddItemToList(null);
 
             Assert.AreEqual(false, result);
             Assert.AreEqual(2, db.LALists.Find(3).LAListItems.Count);
@@ -308,7 +310,7 @@ namespace ListAssist.Data.Tests
         {
             var newItem = new LAListItem() { Description = "Test Insert 0", Done = false };
             var itemCount = db.LAListItems.ToList().Count;
-            var result = ListQueries.AddItemToList(newItem);
+            var result = queries.AddItemToList(newItem);
 
             Assert.AreEqual(false, result);
             Assert.AreEqual(itemCount, db.LAListItems.ToList().Count);
@@ -322,7 +324,7 @@ namespace ListAssist.Data.Tests
 
             Assert.IsNotNull(item);
 
-            var result = ListQueries.DeleteItemFromList(item.ID);
+            var result = queries.DeleteItemFromList(item.ID);
 
             Assert.AreEqual(3, result);
             Assert.AreEqual(true, itemCount > db.LAListItems.ToList().Count);
@@ -333,7 +335,7 @@ namespace ListAssist.Data.Tests
         {
             var itemCount = db.LAListItems.ToList().Count;
 
-            var result = ListQueries.DeleteItemFromList(99);
+            var result = queries.DeleteItemFromList(99);
 
             Assert.AreEqual(-1, result);
             Assert.AreEqual(itemCount, db.LAListItems.ToList().Count);
@@ -344,7 +346,7 @@ namespace ListAssist.Data.Tests
         {
             var itemCount = db.LAListItems.ToList().Count;
 
-            var result = ListQueries.DeleteItemFromList(-99);
+            var result = queries.DeleteItemFromList(-99);
 
             Assert.AreEqual(-1, result);
             Assert.AreEqual(itemCount, db.LAListItems.ToList().Count);
@@ -359,7 +361,7 @@ namespace ListAssist.Data.Tests
             
             list.Name = "Updated Name";
 
-            var result = ListQueries.UpdateList(list);
+            var result = queries.UpdateList(list);
 
             Assert.AreEqual(true, result);
             Assert.AreEqual("Updated Name", db.LALists.Find(3).Name);
@@ -375,7 +377,7 @@ namespace ListAssist.Data.Tests
 
             list.Name = null;
 
-            var result = ListQueries.UpdateList(list);
+            var result = queries.UpdateList(list);
 
             Assert.AreEqual(false, result);
            // Assert.AreEqual("Test List 1", db.LALists.Find(3).Name);
@@ -391,7 +393,7 @@ namespace ListAssist.Data.Tests
 
             list.LAListItems = null;
 
-            var result = ListQueries.UpdateList(list);
+            var result = queries.UpdateList(list);
 
             Assert.AreEqual(false, result);
             Assert.AreEqual("Test List 1", db.LALists.Find(3).Name);

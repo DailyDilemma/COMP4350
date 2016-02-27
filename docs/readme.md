@@ -36,6 +36,7 @@ instructions for the module you want to use.
 
 ###ListAssist Testing
 - Standard Visual Studio test suite, press CTRL-R,A to run all tests.
+- NOTE: When testing, in order for Selenium to work properly the ListAssist project MUST be the startup project!
 - If the test explorer window doesn't open automatically, from the main menu go
   to Test -> Windows -> Test Explorer
 

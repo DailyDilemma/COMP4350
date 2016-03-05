@@ -37,7 +37,7 @@ namespace ListAssist.Data.Tests
             testList2.LAListItems.Add(testInsertItem3);
 
             Database.SetInitializer(new DbInitializer());
-            this.db = new ListAssistContext();
+            this.db = new ListAssistContext("DataTests");
 
             this.db.Database.Initialize(false);
             Assert.IsNotNull(this.db, "List assist context is null.");

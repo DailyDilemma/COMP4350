@@ -18,6 +18,15 @@ namespace ListAssist.Data.Tests
         }
 
         [TestMethod]
+        public void TestConnectionStringBuilder()
+        {
+            DbConStringBuilder builder = new Data.DbConStringBuilder("TestDatabaseName");
+            Assert.AreEqual<string>(
+                @"Data Source=(localdb)\MSSQLLocalDB;initial catalog=TestDatabaseName;integrated security=True".ToLower(), 
+                builder.getConnectionString().ToLower());
+        }
+
+        [TestMethod]
         public void TestLAList()
         {
             LAList testList = new LAList() { Name = "Test List" };

@@ -9,6 +9,9 @@ namespace ListAssist.Data
     {
         public ListAssistContext() : base("ListAssistContext") { }
 
+        // Allow the creation of the context using a custom connection string
+        public ListAssistContext(string connectionStringName) : base(connectionStringName) { }
+
         public DbSet<LAList> LALists { get; set; }
         public DbSet<LAListItem> LAListItems { get; set; }
 

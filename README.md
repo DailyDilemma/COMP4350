@@ -4,7 +4,7 @@ This is ListAssist, a smart list sharing application to help with getting things
 
 ## Iteration 3 Deliverables
 
-[Android Studio Repository](https://github.com/evolmatt/ListAssistAndroid.git)
+[Android Studio Repository](https://github.com/DailyDilemma/ListAssist)
 
 ## Iteration 2 Deliverables
 

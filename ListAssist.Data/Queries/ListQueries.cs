@@ -58,17 +58,20 @@ namespace ListAssist.Data.Queries
         public static bool UpdateList(LAList list)
         {
             bool success = false;
+            var dbList = db.LALists.Find(list.ID);
 
             if (list != null)
             {
                 if (list.Name != null && list.LAListItems != null)
                 {
-                    db.Entry(list).State = EntityState.Modified;
-                    db.LALists.Attach(list);
+                    db.Entry(dbList).CurrentValues.SetValues(list);
+                    db.Entry(dbList).State = EntityState.Modified;                    
 
                     foreach (var listItem in list.LAListItems)
                     {
-                        db.Entry(listItem).State = EntityState.Modified;
+                        var dbListItem = db.LAListItems.Find(listItem.ID);
+                        db.Entry(dbListItem).CurrentValues.SetValues(listItem);
+                        db.Entry(dbListItem).State = EntityState.Modified;
                     }
 
                     db.SaveChanges();

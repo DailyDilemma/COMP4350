@@ -34,9 +34,9 @@ namespace ListAssist.WebAPI.Queries
 
             if (listName != null)
             {
-                var duplicate = db.LALists.Where(e => e.Name.Equals(listName));
+                var duplicate = db.LALists.Any(e => e.Name.Equals(listName));
 
-                if (duplicate == null)
+                if (!duplicate)
                 {
                     var ShoppingList = new LAList();
                     ShoppingList.Name = listName;

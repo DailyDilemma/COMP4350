@@ -1,19 +1,49 @@
-﻿using System.Net;
+﻿using System.Collections.Generic;
+using System.Net;
+using System.Net.Http;
 using System.Web.Mvc;
 using ListAssist.Data;
 using ListAssist.Data.Queries;
 using ListAssist.Data.Models;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace ListAssist.Controllers
 {
     public class LAListsController : Controller
     {
-        private ListAssistContext db = new ListAssistContext();
+        private HttpClient newClient;
+
+        public LAListsController()
+        {
+            this.newClient = new HttpClient();
+            newClient.BaseAddress = new System.Uri("http://localhost:3693/");
+            newClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+        }
 
         // GET: LALists
         public ActionResult Index()
         {
-            return View(ListQueries.GetLists());
+
+            HttpResponseMessage responseMsg = this.newClient.GetAsync("api/Lists/").Result;
+            JArray jsonArray = JArray.Parse(responseMsg.Content.ReadAsStringAsync().Result);
+
+            List<LAList> lAList = new List<LAList>();
+
+            foreach (var jsonItem in jsonArray)
+            {
+                LAList newList = jsonItem.ToObject<LAList>();
+                List<LAListItem> listItems = jsonItem["ShoppingListItems"].ToObject<List<LAListItem>>();
+
+                foreach (var item in listItems)
+                {
+                    newList.LAListItems.Add(item);
+                }
+
+                lAList.Add(newList);
+            }
+
+            return View(lAList);
         }
 
         // GET: LALists/Details/5
@@ -24,7 +54,17 @@ namespace ListAssist.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            LAList lAList = ListQueries.GetList((int) id);
+            HttpResponseMessage responseMsg = this.newClient.GetAsync("api/Lists/" + id).Result;
+            JObject jsonObj = JObject.Parse(responseMsg.Content.ReadAsStringAsync().Result);
+
+
+            LAList lAList = jsonObj.ToObject<LAList>();
+            List<LAListItem> listItems = jsonObj["ShoppingListItems"].ToObject<List<LAListItem>>();
+
+            foreach (LAListItem item in listItems)
+            {
+                lAList.LAListItems.Add(item);
+            }
 
             if (lAList == null)
             {
@@ -47,12 +87,11 @@ namespace ListAssist.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Name")] LAList lAList)
         {
-            if (ModelState.IsValid)
+            HttpResponseMessage responseMsg = this.newClient.PostAsync("api/Lists", new StringContent(lAList.Name)).Result;
+
+            if (responseMsg.StatusCode == HttpStatusCode.OK)
             {
-                if (ListQueries.AddList(lAList))
-                {
-                    return RedirectToAction("Edit", lAList);
-                }
+                return RedirectToAction("Edit", lAList);
             }
 
             return View("Create", lAList);
@@ -66,7 +105,17 @@ namespace ListAssist.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            LAList lAList = ListQueries.GetList((int) id);
+            HttpResponseMessage responseMsg = this.newClient.GetAsync("api/Lists/" + id).Result;
+            JObject jsonObj = JObject.Parse(responseMsg.Content.ReadAsStringAsync().Result);
+          
+
+            LAList lAList = jsonObj.ToObject<LAList>();
+            List<LAListItem> listItems = jsonObj["ShoppingListItems"].ToObject<List<LAListItem>>();
+
+            foreach (LAListItem item in listItems)
+            {
+                lAList.LAListItems.Add(item);
+            }
 
             if (lAList == null)
             {
@@ -82,10 +131,10 @@ namespace ListAssist.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(LAList lAList)
         {
-            if (ModelState.IsValid)
-            {
-                ListQueries.UpdateList(lAList);
+            HttpResponseMessage responseMsg = this.newClient.PutAsync<LAList>("api/Lists", lAList, new System.Net.Http.Formatting.JsonMediaTypeFormatter()).Result;
 
+            if (responseMsg.StatusCode == HttpStatusCode.OK)
+            {
                 return RedirectToAction("Index");
             }
             return View("Edit",lAList);
@@ -99,7 +148,8 @@ namespace ListAssist.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            LAList lAList = ListQueries.GetList((int) id);
+            HttpResponseMessage responseMsg = this.newClient.GetAsync("api/Lists/" + id).Result;
+            LAList lAList = responseMsg.Content.ReadAsAsync<LAList>().Result;
 
             if (lAList == null)
             {
@@ -114,7 +164,7 @@ namespace ListAssist.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            ListQueries.RemoveList(id);
+            HttpResponseMessage responseMsg = this.newClient.DeleteAsync("api/Lists/" + id).Result;
 
             return RedirectToAction("Index");
         }
@@ -126,7 +176,8 @@ namespace ListAssist.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            LAListItem lAListItem = db.LAListItems.Find(id);
+            HttpResponseMessage responseMsg = this.newClient.GetAsync("api/ListItems/" + id).Result;
+            LAListItem lAListItem = responseMsg.Content.ReadAsAsync<LAListItem>().Result;
 
             if (lAListItem == null)
             {
@@ -140,9 +191,9 @@ namespace ListAssist.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult RemoveListItem(int id)
         {
-            int listID = ListQueries.DeleteItemFromList(id);
+            //int listID = ListQueries.DeleteItemFromList(id);
 
-            return RedirectToAction("Edit", new { id = listID });
+            return RedirectToAction("Edit");
         }
 
         public ActionResult AddListItem(int? id)
@@ -151,9 +202,9 @@ namespace ListAssist.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            LAListItem lAListItem = new LAListItem() { ListID = (int)id };
+            //LAListItem lAListItem = new LAListItem() { ListID = (int)id };
             
-            return View("AddListItem", lAListItem);
+            return View("AddListItem");
         }
 
         [HttpPost, ActionName("AddListItem")]
@@ -162,7 +213,7 @@ namespace ListAssist.Controllers
         {
             if ( ModelState.IsValid )
             {
-                ListQueries.AddItemToList(lAListItem);
+                //ListQueries.AddItemToList(lAListItem);
 
                 return RedirectToAction("Edit", new { id = lAListItem.ListID });
             }
@@ -172,10 +223,6 @@ namespace ListAssist.Controllers
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing)
-            {
-                db.Dispose();
-            }
             base.Dispose(disposing);
         }
     }

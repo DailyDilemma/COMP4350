@@ -6,9 +6,11 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Collections.Generic;
 using System.Web.Http.Description;
+using System.Web.Http.Cors;
 
 namespace ListAssist.WebAPI.Controllers
 {
+    [EnableCors(origins: "http://localhost:2850", headers:"*", methods:"*")]
     public class ListsController : ApiController
     {
         /// <summary>

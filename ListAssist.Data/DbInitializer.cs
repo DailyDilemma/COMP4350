@@ -10,8 +10,8 @@ namespace ListAssist.Data
         {
             var lists = new List<LAList>
             {
-                new LAList {ID=1, Name="Groceries" },
-                new LAList {ID=2, Name="Christmas" }
+                new LAList {Name="Groceries" },
+                new LAList {Name="Christmas" }
             };            
 
             lists.ForEach(s => context.LALists.Add(s));
@@ -19,13 +19,13 @@ namespace ListAssist.Data
 
             var listItems = new List<LAListItem>
             {
-                new LAListItem {ID=1, Description="Milk", ListID=1 },
-                new LAListItem {ID=2, Description="Oranges", ListID=1 },
-                new LAListItem {ID=3, Description="Apples", ListID=1 },
-                new LAListItem {ID=4, Description="Eggs", ListID=1 },
-                new LAListItem {ID=5, Description="Puppy", ListID=2 },
-                new LAListItem {ID=6, Description="Skateboard", ListID=2 },
-                new LAListItem {ID=7, Description="Choo Choo Train", ListID=2 },
+                new LAListItem {Description="Milk", ListID=1 },
+                new LAListItem {Description="Oranges", ListID=1 },
+                new LAListItem {Description="Apples", ListID=1 },
+                new LAListItem {Description="Eggs", ListID=1 },
+                new LAListItem {Description="Puppy", ListID=2 },
+                new LAListItem {Description="Skateboard", ListID=2 },
+                new LAListItem {Description="Choo Choo Train", ListID=2 },
             };
             listItems.ForEach(s => context.LAListItems.Add(s));
             context.SaveChanges();

@@ -28,7 +28,7 @@ namespace ListAssist.WebAPI.Models
         /// <summary>
         /// Id used for database purposes.
         /// </summary>
-        private int Id
+        public int Id
         {
             get; set;
         }

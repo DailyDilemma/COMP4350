@@ -63,7 +63,7 @@ namespace ListAssist.Tests.Controllers
         public void TestRemoveListItem()
         {
             LAListsController testController = new LAListsController();
-            var result = testController.RemoveListItem(1) as RedirectToRouteResult;
+            var result = testController.RemoveListItem(1,1) as RedirectToRouteResult;
 
             Assert.AreEqual("Edit", result.RouteValues["action"]);
         }

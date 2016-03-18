@@ -194,11 +194,12 @@ namespace ListAssist.WebAPI.Tests
             {
                 var newItem = new ShoppingListItem()
                 {
+                    ListId = 3,
                     Description = "Test Item",
                     Checked = true
                 };
 
-                var result = ListQueries.AddItemToList(3, newItem);
+                var result = ListQueries.AddItemToList(newItem);
 
                 Assert.AreEqual(true, result);
                 Assert.IsNotNull(db.LAListItems.Where(e => e.Description.Equals("Test Item")).FirstOrDefault());
@@ -210,11 +211,12 @@ namespace ListAssist.WebAPI.Tests
             {
                 var newItem = new ShoppingListItem()
                 {
+                    ListId = 3,
                     Description = "Test Insert 1",
                     Checked = false
                 };
 
-                var result = ListQueries.AddItemToList(3, newItem);
+                var result = ListQueries.AddItemToList(newItem);
 
                 Assert.AreEqual(true, result);
                 Assert.IsNotNull(db.LAListItems.Where(e => e.Description.Equals("Test Insert 1")).FirstOrDefault());
@@ -256,7 +258,7 @@ namespace ListAssist.WebAPI.Tests
             [TestMethod]
             public void TestAddNullItem()
             {
-                var result = ListQueries.AddItemToList(3, null);
+                var result = ListQueries.AddItemToList(null);
 
                 Assert.AreEqual(false, result);
                 Assert.AreEqual(2, db.LALists.Find(3).LAListItems.Count);
@@ -265,9 +267,9 @@ namespace ListAssist.WebAPI.Tests
             [TestMethod]
             public void TestAddItemToNoList()
             {
-                var newItem = new ShoppingListItem() { Description = "Test Insert 0", Checked = false };
+                var newItem = new ShoppingListItem() { ListId = -1, Description = "Test Insert 0", Checked = false };
                 var itemCount = db.LAListItems.ToList().Count;
-                var result = ListQueries.AddItemToList(-1, newItem);
+                var result = ListQueries.AddItemToList(newItem);
 
                 Assert.AreEqual(false, result);
                 Assert.AreEqual(itemCount, db.LAListItems.ToList().Count);
@@ -317,7 +319,7 @@ namespace ListAssist.WebAPI.Tests
                 var result = ListQueries.UpdateList(3, listName);
 
                 Assert.AreEqual(true, result);
-                //Assert.AreEqual("Updated Name", db.LALists.Find(3).Name);
+                Assert.AreEqual("Updated Name", db.LALists.Find(3).Name);
                 Assert.AreEqual(2, db.LALists.Find(3).LAListItems.Count);
             }
 
@@ -327,7 +329,7 @@ namespace ListAssist.WebAPI.Tests
                 var result = ListQueries.UpdateList(3, null);
 
                 Assert.AreEqual(false, result);
-                // Assert.AreEqual("Test List 1", db.LALists.Find(3).Name);
+                Assert.AreEqual("Test List 1", db.LALists.Find(3).Name);
                 Assert.AreEqual(2, db.LALists.Find(3).LAListItems.Count);
             }
         }

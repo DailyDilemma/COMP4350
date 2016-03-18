@@ -25,7 +25,7 @@ namespace ListAssist.WebAPI
             Database.SetInitializer(new DbInitializer());
             using (var db = new ListAssistContext())
             {
-                db.Database.Initialize(false);
+                db.Database.Initialize(true);
             }
 #endif
         }

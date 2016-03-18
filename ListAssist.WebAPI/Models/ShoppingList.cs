@@ -10,14 +10,6 @@ namespace ListAssist.WebAPI.Models
         }
 
         /// <summary>
-        /// Id used for database purposes.
-        /// </summary>
-        public int Id
-        {
-            get; set;
-        }
-
-        /// <summary>
         /// Name of the shopping list.
         /// </summary>
         public string Name
@@ -33,5 +25,12 @@ namespace ListAssist.WebAPI.Models
             get; set;
         }
 
+        /// <summary>
+        /// Id used for database purposes.
+        /// </summary>
+        public int Id
+        {
+            get; set;
+        }
     }
 }

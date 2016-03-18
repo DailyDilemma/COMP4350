@@ -26,7 +26,7 @@ namespace ListAssist.Tests
         3. Remove a list.
         */
         [TestMethod]
-        public void TestOpenApp()
+        public void TestSeleniumOpenApp()
         {
             var expectedTitle = "Welcome to ListAssist!";
 
@@ -35,29 +35,30 @@ namespace ListAssist.Tests
         }
 
         [TestMethod]
-        public void TestCreateNewEmptyList()
+        public void TestSeleniumCreateNewEmptyList()
         {
             var expectedListName = "Empty List";
 
             driver.FindElement(By.LinkText("Create New List")).Click();
 
             IWebElement element = driver.FindElement(By.Name("Name"));
+            element.Clear();
             element.SendKeys("Empty List");
             driver.FindElement(By.XPath("//button[@type='submit']")).Click();
 
-            driver.FindElement(By.LinkText("Home")).Click();
+            driver.FindElement(By.CssSelector("button.button.expand")).Click();
 
             element = driver.FindElement(By.TagName("body"));
             Assert.IsTrue(element.Text.Contains(expectedListName));
         }
 
         [TestMethod]
-        public void TestRemoveNewEmptyList()
+        public void TestSeleniumRemoveNewEmptyList()
         {
             var deletedListName = "Empty List";
 
             driver.Navigate().GoToUrl(baseURL + "/LALists");
-            driver.FindElement(By.XPath("(//a[contains(text(),'Delete')])[2]")).Click();
+            driver.FindElement(By.XPath("(//a[contains(text(),'Delete')])[3]")).Click();
             driver.FindElement(By.XPath("//button[@type='submit']")).Click();
 
             IWebElement element = driver.FindElement(By.TagName("body"));
@@ -70,10 +71,10 @@ namespace ListAssist.Tests
         3. Remove items from a list.
         */
         [TestMethod]
-        public void TestViewListItems()
+        public void TestSeleniumViewListItems()
         {
             driver.Navigate().GoToUrl(baseURL + "/LALists");
-            driver.FindElement(By.XPath("(//a[contains(text(),'Details')])[2]")).Click();
+            driver.FindElement(By.LinkText("Details")).Click();
 
             IWebElement element = driver.FindElement(By.TagName("body"));
             Assert.IsTrue(element.Text.Contains("Milk"));
@@ -85,10 +86,10 @@ namespace ListAssist.Tests
         }
 
         [TestMethod]
-        public void TestAddListItems()
+        public void TestSeleniumAddListItems()
         {
             driver.Navigate().GoToUrl(baseURL + "/LALists");
-            driver.FindElement(By.XPath("(//a[contains(text(),'Edit')])[2]")).Click();
+            driver.FindElement(By.LinkText("Edit")).Click();
             driver.FindElement(By.LinkText("Add Item")).Click();
             driver.FindElement(By.Id("Description")).Clear();
             driver.FindElement(By.Id("Description")).SendKeys("Pepperoni");
@@ -97,6 +98,8 @@ namespace ListAssist.Tests
             driver.FindElement(By.Id("Description")).Clear();
             driver.FindElement(By.Id("Description")).SendKeys("Noodles");
             driver.FindElement(By.XPath("//button[@type='submit']")).Click();
+            driver.FindElement(By.CssSelector("button.button.expand")).Click();
+            driver.FindElement(By.LinkText("Details")).Click();
 
             try
             {
@@ -120,14 +123,16 @@ namespace ListAssist.Tests
         }
 
         [TestMethod]
-        public void TestRemoveListItems()
+        public void TestSeleniumRemoveListItems()
         {
             driver.Navigate().GoToUrl(baseURL + "/LALists");
-            driver.FindElement(By.XPath("(//a[contains(text(),'Edit')])[2]")).Click();
+            driver.FindElement(By.LinkText("Edit")).Click();
             driver.FindElement(By.XPath("(//a[contains(text(),'X')])[5]")).Click();
             driver.FindElement(By.XPath("//button[@type='submit']")).Click();
             driver.FindElement(By.XPath("(//a[contains(text(),'X')])[5]")).Click();
             driver.FindElement(By.XPath("//button[@type='submit']")).Click();
+            driver.FindElement(By.CssSelector("button.button.expand")).Click();
+            driver.FindElement(By.LinkText("Details")).Click();
 
             Assert.AreEqual(0, driver.FindElements(By.Id("LAListItems_4__Description")).Count);
             Assert.AreEqual(0, driver.FindElements(By.Id("LAListItems_5__Description")).Count);

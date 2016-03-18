@@ -105,6 +105,7 @@
     <Content Include="App.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="JasmineTests.js" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

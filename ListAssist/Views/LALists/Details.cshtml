@@ -53,14 +53,7 @@
 </div>
 
 <script>
-    $(".itemWrapper .itemDescription").click(function () {
-        $(".itemWrapper").each(function () {
-            $("[name='itemDetails']").addClass("hide").removeClass("show-for-small-only");
-        });
-
-        var data = $(this).parent().find("[name='itemDetails']").html();
-        $(".panel.details").html(data);
-
-        $(this).parent().find("[name='itemDetails']").addClass("show-for-small-only");
+    $(function () {
+        detailsControl();
     });
 </script>

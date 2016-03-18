@@ -1,0 +1,64 @@
+<!-- saved from url=(0014)about:internet -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Jasmine Spec Runner</title>
+    <link rel="stylesheet" type="text/css" href="file:///C:/Users/user/AppData/Local/Microsoft/VisualStudio/14.0/Extensions/opjm3bxx.lwm/TestFiles/jasmine/v2/jasmine.css"/>
+<script type="text/javascript" src="file:///C:/Users/user/AppData/Local/Microsoft/VisualStudio/14.0/Extensions/opjm3bxx.lwm/TestFiles/jasmine/v2/jasmine.js"></script>
+<script type="text/javascript" src="file:///C:/Users/user/AppData/Local/Microsoft/VisualStudio/14.0/Extensions/opjm3bxx.lwm/TestFiles/jasmine/v2/jasmine-html.js"></script>
+<script type="text/javascript" src="file:///C:/Users/user/AppData/Local/Microsoft/VisualStudio/14.0/Extensions/opjm3bxx.lwm/TestFiles/jasmine/v2/boot.js"></script>
+<link rel="shortcut icon" type="image/png" href="file:///C:/Users/user/AppData/Local/Microsoft/VisualStudio/14.0/Extensions/opjm3bxx.lwm/TestFiles/jasmine/v2/jasmine_favicon.png"/>
+
+    
+    
+    
+    <script type="text/javascript" src="file:///C:/Users/user/Source/COMP4350/ListAssist.Tests/JasmineTests.js"></script>
+
+    <script type="text/javascript">
+
+        (function () {
+            var amdTestPaths = [];
+            if (window.require && typeof window.require === "function" && amdTestPaths.length > 0) {
+                if (window.chutzpah) {
+                    window.chutzpah.usingModuleLoader = true;
+                }
+
+                if("") {
+                    require.config({
+                        baseUrl: ""
+                    });
+                }
+
+                require.config({
+                    map: {
+                        '*': {
+                            
+                            }
+                    }
+                });
+
+                window.require(amdTestPaths, function () {
+
+                    console.log("!!_!! Stating Jasmine from AMD callback...");
+                    window.initializeJasmine();
+                });
+            }
+            else {
+                var currentWindowOnload = window.onload;
+
+                window.onload = function() {
+                    if (currentWindowOnload) {
+                        currentWindowOnload();
+                    }
+                    window.initializeJasmine();
+                };
+            }
+
+        })();
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

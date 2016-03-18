@@ -21,7 +21,7 @@
         /// <summary>
         /// Id for database purposes
         /// </summary>
-        private int Id
+        public int Id
         {
             get; set;
         }
@@ -29,7 +29,7 @@
         /// <summary>
         /// Id of the shopping list this item belongs to.
         /// </summary>
-        private int ListId
+        public int ListId
         {
             get; set;
         }

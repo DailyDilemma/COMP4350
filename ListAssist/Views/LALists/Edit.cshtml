@@ -42,7 +42,7 @@
                         @Html.ValidationMessageFor(model => model.LAListItems[i].Description, "", new { @class = "text-danger" })
                     </div>
                     <div class="small-2 columns removeItem">
-                        @Html.ActionLink("X", "RemoveListItem", new { id = Model.LAListItems[i].ID })
+                        @Html.ActionLink("X", "RemoveListItem", new { itemID = Model.LAListItems[i].ID, listID = Model.LAListItems[i].ListID })
                     </div>
                     <div name="itemDetails" class="small-12 columns hide">
                         <p>Put the details here...</p>

@@ -6,6 +6,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Collections.Generic;
 using System.Web.Http.Description;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace ListAssist.WebAPI.Controllers
 {
@@ -38,14 +40,16 @@ namespace ListAssist.WebAPI.Controllers
         /// <response code="200">Success.</response>
         /// <response code="500">Internal Error. Please try again.</response>
         [HttpPost]
-        public HttpStatusCode AddList(string listName)
+        public HttpResponseMessage AddList(string listName)
         {
-            if(ListQueries.AddList(listName))
+            int insertedId = ListQueries.AddList(listName);
+
+            if(insertedId > 0)
             {
-                return HttpStatusCode.OK;
+                return Request.CreateResponse(HttpStatusCode.OK, insertedId);
             }
 
-            return HttpStatusCode.InternalServerError;
+            return Request.CreateResponse(HttpStatusCode.InternalServerError);
         }
 
         /// <summary>
@@ -102,12 +106,40 @@ namespace ListAssist.WebAPI.Controllers
         /// <response code="200">Success.</response>
         /// <response code="500">Internal Error. Please try again.</response>
         [HttpPut]
-        public HttpStatusCode UpdateList(int id, string newName)
+        public HttpStatusCode UpdateList()
         {
-            var result = ListQueries.UpdateList(id, newName);
+            JObject jsonObj = null;
+            ShoppingList newList = null;
+            ShoppingListItem newItem = null;
+
+            jsonObj = JObject.Parse(Request.Content.ReadAsStringAsync().Result);
+            newList = new ShoppingList();
+            newList.Id = (int)jsonObj["ID"];
+            newList.Name = jsonObj["Name"].ToString();
+
+            foreach (var jsonItem in jsonObj["LAListItems"].Children())
+            {
+                newItem = new ShoppingListItem();
+                newItem.Id = (int)jsonItem["ID"];
+                newItem.ListId = (int)jsonItem["ListID"];
+                newItem.Description = jsonItem["Description"].ToString();
+                newItem.Checked = (bool)jsonItem["Done"];
+
+                newList.ShoppingListItems.Add(newItem);
+            }
+
+            var result = ListQueries.UpdateList(newList.Id, newList.Name);
 
             if(result)
             {
+                foreach (var item in newList.ShoppingListItems)
+                {
+                    if (!ListQueries.UpdateItemFromList(item))
+                    {
+                        return HttpStatusCode.InternalServerError;
+                    }
+                }
+
                 return HttpStatusCode.OK;
             }
 

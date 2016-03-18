@@ -1,7 +1,9 @@
 ﻿using ListAssist.WebAPI.Queries;
 using ListAssist.WebAPI.Models;
 using System.Net;
+using System.Net.Http;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace ListAssist.WebAPI.Controllers
 {
@@ -18,14 +20,27 @@ namespace ListAssist.WebAPI.Controllers
         /// <response code="200">Success.</response>
         /// <response code="500">Unable to add item to list.</response>
         [HttpPut]
-        public HttpStatusCode AddItemToList(int listId, ShoppingListItem item)
+        public HttpStatusCode AddItemToList(ShoppingListItem item)
         {
-            if (ListQueries.AddItemToList(listId, item))
+            if (ListQueries.AddItemToList(item))
             {
                 return HttpStatusCode.OK;
             }
 
             return HttpStatusCode.InternalServerError;
+        }
+
+        [HttpGet]
+        [ResponseType(typeof(ShoppingListItem))]
+        public HttpResponseMessage GetItemFromList(int listId, int itemId)
+        {
+            var result = ListQueries.GetItemFromList(listId, itemId);
+
+            if (result != null)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+            return Request.CreateResponse(HttpStatusCode.NotFound);
         }
 
         /// <summary>

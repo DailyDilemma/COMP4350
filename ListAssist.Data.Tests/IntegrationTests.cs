@@ -39,7 +39,7 @@ namespace ListAssist.Data.Tests
             Database.SetInitializer(new DbInitializer());
             this.db = new ListAssistContext("DataTests");
 
-            this.db.Database.Initialize(false);
+            this.db.Database.Initialize(true);
             Assert.IsNotNull(this.db, "List assist context is null.");
 
             var lists = new List<LAList>

@@ -14,4 +14,4 @@
 ##What Didn't Make It In
 
 * Somehow, amazingly, we are 3 iterations into a todo list app and we still can't check an item off. 
-* We did a lot of changes to the API at the last minute that WOULD have made many things work, but there wasn't enough time to modify our clients to accomodate all the fixes made to our WebAPI.
+* We did a lot of changes to the API at the last minute that WOULD have made many things work, but there wasn't enough time to modify our clients to accomodate all the fixes made to our WebAPI. We opted to freeze development while things were still reasonably stable and we'll integrate the fixes next iteration.

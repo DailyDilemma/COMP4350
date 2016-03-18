@@ -6,6 +6,10 @@ This is ListAssist, a smart list sharing application to help with getting things
 
 [Android Studio Repository](https://github.com/DailyDilemma/ListAssist)
 
+[Chat Logs](docs/Iteration3ChatLogs.md)
+
+[Meeting Minutes](docs/Meeting_Minutes)
+
 ## Iteration 2 Deliverables
 
 [AWS Hosted Front End](http://ec2-52-36-187-54.us-west-2.compute.amazonaws.com/)

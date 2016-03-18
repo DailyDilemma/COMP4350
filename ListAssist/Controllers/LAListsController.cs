@@ -103,7 +103,7 @@ namespace ListAssist.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Name")] LAList lAList)
         {
-            HttpResponseMessage responseMsg = this.newClient.PostAsync(string.Format("api/Lists?listname={0}", lAList.Name), new StringContent(lAList.Name)).Result;
+            HttpResponseMessage responseMsg = this.newClient.PostAsync(string.Format("api/Lists/{0}", lAList.Name), new StringContent(lAList.Name)).Result;
 
             if (responseMsg.StatusCode == HttpStatusCode.OK)
             {
@@ -205,7 +205,7 @@ namespace ListAssist.Controllers
         {
             HttpResponseMessage responseMsg = null;
 
-            responseMsg = this.newClient.DeleteAsync("api/Lists?listId=" + id).Result;
+            responseMsg = this.newClient.DeleteAsync("api/Lists/" + id).Result;
 
             return RedirectToAction("Index");
         }
@@ -221,7 +221,7 @@ namespace ListAssist.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
 
-            responseMsg = this.newClient.GetAsync(string.Format("api/ListItems?listId={0}&itemId={1}", listID, itemID)).Result;
+            responseMsg = this.newClient.GetAsync(string.Format("api/ListItems/list/{0}/item/{1}", listID, itemID)).Result;
             if(responseMsg.StatusCode == HttpStatusCode.OK)
             {
                 jsonObj = JObject.Parse(responseMsg.Content.ReadAsStringAsync().Result);
@@ -246,14 +246,14 @@ namespace ListAssist.Controllers
             LAList lAList = null;
             List<LAListItem> listItems = null;
 
-            responseMsg = this.newClient.GetAsync(string.Format("api/ListItems?listId={0}&itemId={1}", listID, itemID)).Result;
+            responseMsg = this.newClient.GetAsync(string.Format("api/ListItems/list/{0}/item/{1}", listID, itemID)).Result;
             
             if(responseMsg.StatusCode == HttpStatusCode.OK)
             {
                 jsonObj = JObject.Parse(responseMsg.Content.ReadAsStringAsync().Result);
                 lAListItem = jsonObj.ToObject<LAListItem>();
 
-                responseMsg = this.newClient.DeleteAsync(string.Format("api/ListItems?itemId={0}&listId={1}", itemID, listID)).Result;
+                responseMsg = this.newClient.DeleteAsync(string.Format("api/ListItems/list/{0}/item/{1}", listID, itemID)).Result;
                 if (responseMsg.StatusCode == HttpStatusCode.OK)
                 {
                     responseMsg = this.newClient.GetAsync(string.Format("api/Lists/{0}", listID)).Result;
@@ -296,7 +296,7 @@ namespace ListAssist.Controllers
             LAList lAList = null;
             List<LAListItem> listItems = null;
 
-            responseMsg = this.newClient.PutAsync("api/ListItems", new ObjectContent<LAListItem>(lAListItem, new System.Net.Http.Formatting.JsonMediaTypeFormatter())).Result;
+            responseMsg = this.newClient.PostAsync("api/ListItems", new ObjectContent<LAListItem>(lAListItem, new System.Net.Http.Formatting.JsonMediaTypeFormatter())).Result;
             if (responseMsg.StatusCode == HttpStatusCode.OK)
             {
                 responseMsg = this.newClient.GetAsync(string.Format("api/Lists/{0}", lAListItem.ListID)).Result;

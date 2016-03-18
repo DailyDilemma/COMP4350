@@ -17,7 +17,13 @@ namespace ListAssist.Controllers
         public LAListsController()
         {
             this.newClient = new HttpClient();
+#if DEBUG
+            // When in Debug mode, use the dev server api address
             newClient.BaseAddress = new System.Uri("http://localhost:3693/");
+#else
+            // When in Release mode, use the production server api address
+            newClient.BaseAddress = new System.Uri("http://localhost:8080/");
+#endif
             newClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
         }
 

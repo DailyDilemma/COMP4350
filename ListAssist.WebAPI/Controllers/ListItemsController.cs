@@ -15,11 +15,10 @@ namespace ListAssist.WebAPI.Controllers
         /// <remarks>
         /// Add a new item to your shopping list.
         /// </remarks>
-        /// <param name="listId">The id of the list the item is being added to.</param>
         /// <param name="item">The item being added to the list.</param>
         /// <response code="200">Success.</response>
         /// <response code="500">Unable to add item to list.</response>
-        [HttpPut]
+        [HttpPost]
         public HttpStatusCode AddItemToList(ShoppingListItem item)
         {
             if (ListQueries.AddItemToList(item))
@@ -30,6 +29,13 @@ namespace ListAssist.WebAPI.Controllers
             return HttpStatusCode.InternalServerError;
         }
 
+        /// <summary>
+        /// Gets an item from a selected list.
+        /// </summary>
+        /// <param name="listId">The ID of the list.</param>
+        /// <param name="itemId">The ID of the list item in the selected list.</param>
+        /// <response code="200">Success.</response>
+        /// <response code="404">List item not found.</response>
         [HttpGet]
         [ResponseType(typeof(ShoppingListItem))]
         public HttpResponseMessage GetItemFromList(int listId, int itemId)
@@ -53,7 +59,7 @@ namespace ListAssist.WebAPI.Controllers
         /// <param name="listId">The list the item belongs to.</param>
         /// <response code="200">Success.</response>
         /// <response code="500">Unable to modify item's checked value.</response>
-        [HttpPost]
+        [HttpPut]
         public HttpStatusCode CheckOffItemFromList(int itemId, int listId)
         {
             if (ListQueries.CheckOffItemFromList(listId, itemId))
@@ -70,8 +76,8 @@ namespace ListAssist.WebAPI.Controllers
         /// <remarks>
         /// Delete an existing item from an existing shopping list.
         /// </remarks>
+        /// <param name="itemId">The id of the item being removed from the list.</param> 
         /// <param name="listId">The id of the list the item is being removed from.</param>
-        /// <param name="item">The item being removed from the list.</param>
         /// <response code="200">Success.</response>
         /// <response code="500">Unable to remove item from list.</response>
         /// <response code="404">Unable to find item in list.</response>

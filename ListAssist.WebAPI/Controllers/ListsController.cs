@@ -78,15 +78,15 @@ namespace ListAssist.WebAPI.Controllers
         /// <remarks>
         /// Find and retrieve a list from the database by it's id.
         /// </remarks>
-        /// <param name="id">The id of the list being selected.</param>
+        /// <param name="listId">The id of the list being selected.</param>
         /// <returns>The shopping list that was found in the database.</returns>
         /// <response code="404">Unable to find list with that id.</response>
         /// <response code="200">Success.</response>
         [HttpGet]
         [ResponseType(typeof(ShoppingList))]
-        public HttpResponseMessage SingleList(int id)
+        public HttpResponseMessage SingleList(int listId)
         {
-            var result = ListQueries.GetList(id);
+            var result = ListQueries.GetList(listId);
 
             if (result != null)
             {
@@ -96,13 +96,11 @@ namespace ListAssist.WebAPI.Controllers
         }
 
         /// <summary>
-        /// Update a list's name in the database.
+        /// Update a list including the name and list item descriptions.
         /// </summary>
         /// <remarks>
-        /// Change the name of a shopping list.
+        /// Change the name of a shopping list or descriptions of list items.
         /// </remarks>
-        /// <param name="newName">The new name of the list.</param>
-        /// <param name="id">The id of the list being updated.</param>
         /// <response code="200">Success.</response>
         /// <response code="500">Internal Error. Please try again.</response>
         [HttpPut]

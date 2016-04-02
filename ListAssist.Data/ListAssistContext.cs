@@ -14,6 +14,7 @@ namespace ListAssist.Data
 
         public DbSet<LAList> LALists { get; set; }
         public DbSet<LAListItem> LAListItems { get; set; }
+        public DbSet<LASuggestion> LASuggestions { get; set; }
 
         // This method allows you to override the default behaviors for how entity framework 
         // creates a database from the provided model classes. When overriding entity framework's

@@ -57,11 +57,32 @@
         </div>
         <div class="medium-6 columns show-for-medium-up listGrid">
             <div class="small-12 listHeader">
-                Details
+                Replacement Suggestions
             </div>
-            <div class="small-12 panel details">
-                Click on an item to see some details
-            </div>
+            @for (var i = 0; i < Model.LAListItems.Count; i++)
+            {
+                @Html.HiddenFor(model => model.LAListItems[i].ID)
+                @Html.HiddenFor(model => model.LAListItems[i].ListID)
+                <div class="small-12 columns itemWrapper">
+                    <div class="row">
+                        <div class="small-4 medium-3 columns itemCheck">
+                            @Html.CheckBoxFor(model => model.LAListItems[i].Done)
+                        </div>
+                        <div class="small-6 medium-7 columns itemDescription">
+                            @Html.EditorFor(model => model.LAListItems[i].Description)
+                            @Html.ValidationMessageFor(model => model.LAListItems[i].Description, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="small-2 columns removeItem">
+                            @Html.ActionLink("X", "RemoveListItem", new { itemID = Model.LAListItems[i].ID, listID = Model.LAListItems[i].ListID })
+                        </div>
+                        <div name="itemDetails" class="small-12 columns hide">
+                            <p>Put the details here...</p>
+                            @Html.DisplayFor(model => model.LAListItems[i].Description)
+                        </div>
+                    </div>
+                </div>
+            }
+
         </div>
     </div>      
 }

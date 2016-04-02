@@ -12,10 +12,12 @@ namespace ListAssist.Data.Models
         public LAList()
         {
             this.LAListItems = new List<LAListItem>();
+            this.LASuggestions = new List<LASuggestion>();
         }
 
         public int ID { get; set; }
         public string Name { get; set; }
         public virtual List<LAListItem> LAListItems { get; set; }
+        public virtual List<LASuggestion> LASuggestions { get; set; }
     }
 }

@@ -35,7 +35,13 @@ namespace ListAssist.Data
                         .HasRequired(l => l.LAList)
                         .WithMany(l => l.LAListItems)
                         .HasForeignKey(l => l.ListID);
-                        
+
+            // LASuggestions Configuration
+            modelBuilder.Entity<LASuggestion>()
+                        .HasRequired(l => l.LAList)
+                        .WithMany(l => l.LASuggestions)
+                        .HasForeignKey(l => l.ListID);
+
         }
     }    
 }

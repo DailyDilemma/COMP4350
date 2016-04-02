@@ -23,7 +23,7 @@ namespace ListAssist.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             // Removes the convention whereby table names are automatically pluralized (ie. entity
-            // framework will not longer add an "s" to table names)
+            // framework will no longer add an "s" to table names)
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             // LAList Configuration

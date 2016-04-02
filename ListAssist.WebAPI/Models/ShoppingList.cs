@@ -7,6 +7,15 @@ namespace ListAssist.WebAPI.Models
         public ShoppingList()
         {
             ShoppingListItems = new List<ShoppingListItem>();
+            ShoppingListSuggestions = new List<ShoppingListSuggestion>();
+        }
+
+        /// <summary>
+        /// Id used for database purposes.
+        /// </summary>
+        public int Id
+        {
+            get; set;
         }
 
         /// <summary>
@@ -26,11 +35,12 @@ namespace ListAssist.WebAPI.Models
         }
 
         /// <summary>
-        /// Id used for database purposes.
+        /// List of all the suggestions pending for this shopping list.
         /// </summary>
-        public int Id
+        public virtual ICollection<ShoppingListSuggestion> ShoppingListSuggestions
         {
             get; set;
         }
+
     }
 }

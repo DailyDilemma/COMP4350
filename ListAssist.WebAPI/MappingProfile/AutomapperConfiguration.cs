@@ -10,6 +10,7 @@ namespace ListAssist.WebAPI.MappingProfile
             {
                 x.AddProfile<ShoppingListProfile>();
                 x.AddProfile<ShoppingListItemProfile>();
+                x.AddProfile<ShoppingListSuggestionProfile>();
             });
         }
     }

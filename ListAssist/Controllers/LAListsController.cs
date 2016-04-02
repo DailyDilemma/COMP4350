@@ -13,6 +13,7 @@ namespace ListAssist.Controllers
     public class LAListsController : Controller
     {
         private HttpClient newClient;
+        ListAssistContext db = new ListAssistContext();
 
         public LAListsController()
         {
@@ -130,6 +131,7 @@ namespace ListAssist.Controllers
             JObject jsonObj = null;
             LAList lAList = null;
             List<LAListItem> listItems = null;
+            List<LASuggestion> listSuggestions = null;
 
             if (id == null)
             {
@@ -154,6 +156,7 @@ namespace ListAssist.Controllers
                 {
                     lAList.LAListItems.Add(item);
                 }
+
                 return View("Edit", lAList);
             }
             return View(lAList);

@@ -64,14 +64,21 @@ namespace ListAssist.Data.Queries
             {
                 if (list.Name != null && list.LAListItems != null)
                 {
+                    if (list.LAListItems.Contains(null))
+                    {
+                        list.LAListItems.Remove(null);
+                    }
                     db.Entry(dbList).CurrentValues.SetValues(list);
                     db.Entry(dbList).State = EntityState.Modified;                    
 
                     foreach (var listItem in list.LAListItems)
                     {
-                        var dbListItem = db.LAListItems.Find(listItem.ID);
-                        db.Entry(dbListItem).CurrentValues.SetValues(listItem);
-                        db.Entry(dbListItem).State = EntityState.Modified;
+                        if (listItem != null)
+                        {
+                            var dbListItem = db.LAListItems.Find(listItem.ID);
+                            db.Entry(dbListItem).CurrentValues.SetValues(listItem);
+                            db.Entry(dbListItem).State = EntityState.Modified;
+                        }
                     }
 
                     db.SaveChanges();
@@ -98,16 +105,15 @@ namespace ListAssist.Data.Queries
                     if (duplicate == null)
                     {
                         db.LAListItems.Add(item);
+                        db.SaveChanges();
+
+                        success = true;
                     }
                     //else if (duplicate.Done)
                     //{
                     //    duplicate.Done = false;
                     //    db.Entry(duplicate).State = EntityState.Modified;
                     //}
-
-                    db.SaveChanges();
-
-                    success = true;
                 }
             }
 

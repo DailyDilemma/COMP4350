@@ -28,7 +28,7 @@ namespace ListAssist.Tests.Controllers
             Assert.AreEqual("Details", result.ViewName);
 
             var nullResult = testController.Details(10) as ViewResult;
-            Assert.IsNull(nullResult);
+            Assert.IsNull(nullResult.View);
         }
 
         [TestMethod]

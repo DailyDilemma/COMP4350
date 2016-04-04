@@ -151,10 +151,14 @@ namespace ListAssist.Controllers
                 }
 
                 listItems = jsonObj["ShoppingListItems"].ToObject<List<LAListItem>>();
-
                 foreach (LAListItem item in listItems)
                 {
                     lAList.LAListItems.Add(item);
+                }
+
+                listSuggestions = jsonObj["ShoppingListSuggestions"].ToObject<List<LASuggestion>>();
+                foreach (LASuggestion item in listSuggestions) {
+                    lAList.LASuggestions.Add(item);
                 }
 
                 return View("Edit", lAList);

@@ -5,12 +5,10 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@section PageHeader {Welcome to ListAssist! Create and edit your lists here!}
+@section PageHeader {}
 
 <div class="row">
-    <div class="small-12 columns">
-        @Html.ActionLink("Create New List", "Create", "", new { @class = "button expand success round" })
-    </div>
+
     <div class="small-12 columns listGrid">
         <div class="small-3 columns show-for-medium-up listHeader">
             @Html.DisplayNameFor(model => model.Name)

@@ -69,6 +69,7 @@ namespace ListAssist.Controllers
             JObject jsonObj = null;
             LAList lAList = null;
             List<LAListItem> listItems = null;
+            List<LASuggestion> listSuggestions = null;
 
             if (id == null)
             {
@@ -92,6 +93,13 @@ namespace ListAssist.Controllers
                 {
                     lAList.LAListItems.Add(item);
                 }
+
+                listSuggestions = jsonObj["ShoppingListSuggestions"].ToObject<List<LASuggestion>>();
+                foreach (LASuggestion item in listSuggestions)
+                {
+                    lAList.LASuggestions.Add(item);
+                }
+
                 return View("Details", lAList);
             }
             return View(lAList);

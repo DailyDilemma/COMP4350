@@ -67,6 +67,7 @@ namespace ListAssist.Controllers
         {
             HttpResponseMessage responseMsg = null;
             JObject jsonObj = null;
+           // JObject jsonItemObj = null;
             LAList lAList = null;
             List<LAListItem> listItems = null;
             List<LASuggestion> listSuggestions = null;
@@ -88,9 +89,13 @@ namespace ListAssist.Controllers
                     return HttpNotFound();
                 }
 
-                listItems = jsonObj["ShoppingListItems"].ToObject<List<LAListItem>>();
-                foreach (LAListItem item in listItems)
+                foreach (JObject jsonItemObj in jsonObj["ShoppingListItems"])
                 {
+                    var item = new LAListItem();
+                    item.ID = (int)jsonItemObj["Id"];
+                    item.ListID = (int)jsonItemObj["ListId"];
+                    item.Done = (bool)jsonItemObj["Checked"];
+                    item.Description = (string)jsonItemObj["Description"];
                     lAList.LAListItems.Add(item);
                 }
 
@@ -158,9 +163,13 @@ namespace ListAssist.Controllers
                     return HttpNotFound();
                 }
 
-                listItems = jsonObj["ShoppingListItems"].ToObject<List<LAListItem>>();
-                foreach (LAListItem item in listItems)
+                foreach (JObject jsonItemObj in jsonObj["ShoppingListItems"])
                 {
+                    var item = new LAListItem();
+                    item.ID = (int)jsonItemObj["Id"];
+                    item.ListID = (int)jsonItemObj["ListId"];
+                    item.Done = (bool)jsonItemObj["Checked"];
+                    item.Description = (string)jsonItemObj["Description"];
                     lAList.LAListItems.Add(item);
                 }
 

@@ -21,6 +21,28 @@ namespace ListAssist.WebAPI.Controllers
         }
 
         /// <summary>
+        /// Move a suggestion into the list
+        /// </summary>
+        /// <remarks>
+        /// Move a suggestion into the list
+        /// </remarks>
+        /// <response code="200">Success.</response>
+        /// <response code="500">Unable to accept suggestion.</response>
+        [HttpPost]
+        [ResponseType(typeof(List<ShoppingList>))]
+        public HttpResponseMessage AcceptSuggestion(int suggestionId)
+        {
+            var result = listQueries.AcceptSuggestion(suggestionId);
+
+            if (result != null)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.InternalServerError, result);
+        }
+
+        /// <summary>
         /// Retrieve all existing shopping lists from the database
         /// </summary>
         /// <remarks>

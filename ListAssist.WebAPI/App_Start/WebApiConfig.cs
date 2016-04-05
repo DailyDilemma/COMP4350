@@ -56,6 +56,13 @@ namespace ListAssist.WebAPI
                 constraints: new { httpMethod = new HttpMethodConstraint(new string[] { "PUT" }) }
             );
 
+            config.Routes.MapHttpRoute(
+                name: "POST_AcceptSuggestion",
+                routeTemplate: "api/AcceptSuggestion/{suggestionId}",
+                defaults: new { listName = RouteParameter.Optional, controller = "Lists", action = "AcceptSuggestion" },
+                constraints: new { httpMethod = new HttpMethodConstraint(new string[] { "POST" }) }
+            );
+
             // ListItem Routes
             config.Routes.MapHttpRoute(
                 name: "POST_AddItemToList",

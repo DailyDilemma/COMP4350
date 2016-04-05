@@ -194,5 +194,41 @@ namespace ListAssist.WebAPI.Queries
 
             return success;
         }
+
+        public ShoppingList AcceptSuggestion(int suggestionId)
+        {
+            LASuggestion suggestion = null;
+            LAList list = null;
+            var success = false;
+
+            suggestion = db.LASuggestions.Where(s => s.ID == suggestionId).FirstOrDefault();
+
+            if (suggestion != null)
+            {
+                list = db.LALists.Where(l => l.ID == suggestion.ListID).FirstOrDefault();
+                if (list != null)
+                {
+                    // Create a new list item from the suggestion
+                    list.LAListItems.Add(new LAListItem() {
+                        ListID = suggestion.ListID,
+                        Description = suggestion.Description
+                    });
+
+                    // Delete the suggestion
+                    db.Entry(suggestion).State = EntityState.Deleted;
+                    list.LASuggestions.Remove(suggestion);
+                    db.SaveChanges();
+                }
+            }
+
+            if (list != null) {
+                var entityList = db.LALists.Where(l => l.ID == list.ID);
+                var shoppingList = entityList.ProjectTo<ShoppingList>().FirstOrDefault();
+                return shoppingList;
+            } else {
+                return null;
+            }       
+        }
+
     }
 }

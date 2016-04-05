@@ -338,6 +338,29 @@ namespace ListAssist.Controllers
             return View("AddListItem", lAListItem);
         }
 
+        [HttpPost, ActionName("AcceptSuggestion")]
+        public ActionResult AcceptSuggestion(int suggestionId)
+        {
+            HttpResponseMessage responseMsg = null;
+            JObject jsonObj = null;
+            LAList lAList = null;
+            List<LAListItem> listItems = null;
+            List<LASuggestion> listSuggestions = null;
+            HttpContent content = null;
+               
+        responseMsg = this.newClient.PostAsync("api/AcceptSuggestion/" + suggestionId, content).Result;
+        if (responseMsg.StatusCode == HttpStatusCode.OK)
+        {
+            jsonObj = JObject.Parse(responseMsg.Content.ReadAsStringAsync().Result);
+            lAList = jsonObj.ToObject<LAList>();
+            listItems = jsonObj["ShoppingListItems"].ToObject<List<LAListItem>>();
+            listSuggestions = jsonObj["ShoppingListSuggestions"].ToObject<List<LASuggestion>>();
+        }
+
+        return Json(new { url = Request.UrlReferrer.AbsoluteUri });
+
+        }
+
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);

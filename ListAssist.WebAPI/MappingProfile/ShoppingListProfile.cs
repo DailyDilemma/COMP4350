@@ -12,6 +12,8 @@ namespace ListAssist.WebAPI.MappingProfile
         {
             Mapper.CreateMap<LAList, ShoppingList>()
                 .ForMember(s => s.ShoppingListItems, opt => opt.MapFrom(e => e.LAListItems));
+            Mapper.CreateMap<LAList, ShoppingList>()
+                .ForMember(s => s.ShoppingListSuggestions, opt => opt.MapFrom(e => e.LASuggestions));
         }
     }
 }

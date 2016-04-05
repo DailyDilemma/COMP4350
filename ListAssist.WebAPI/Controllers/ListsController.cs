@@ -13,6 +13,35 @@ namespace ListAssist.WebAPI.Controllers
 {
     public class ListsController : ApiController
     {
+        private ListQueries listQueries;
+
+        public ListsController()
+        {
+            this.listQueries = new ListQueries();
+        }
+
+        /// <summary>
+        /// Move a suggestion into the list
+        /// </summary>
+        /// <remarks>
+        /// Move a suggestion into the list
+        /// </remarks>
+        /// <response code="200">Success.</response>
+        /// <response code="500">Unable to accept suggestion.</response>
+        [HttpPost]
+        [ResponseType(typeof(List<ShoppingList>))]
+        public HttpResponseMessage AcceptSuggestion(int suggestionId)
+        {
+            var result = listQueries.AcceptSuggestion(suggestionId);
+
+            if (result != null)
+            {
+                return Request.CreateResponse(HttpStatusCode.OK, result);
+            }
+
+            return Request.CreateResponse(HttpStatusCode.InternalServerError, result);
+        }
+
         /// <summary>
         /// Retrieve all existing shopping lists from the database
         /// </summary>
@@ -25,9 +54,9 @@ namespace ListAssist.WebAPI.Controllers
         [ResponseType(typeof(List<ShoppingList>))]
         public HttpResponseMessage AllLists()
         {
-            var test = ListQueries.GetLists();
+            var test = listQueries.GetLists();
 
-            return Request.CreateResponse(HttpStatusCode.OK,ListQueries.GetLists());
+            return Request.CreateResponse(HttpStatusCode.OK, listQueries.GetLists());
         }
 
         /// <summary>
@@ -42,7 +71,7 @@ namespace ListAssist.WebAPI.Controllers
         [HttpPost]
         public HttpResponseMessage AddList(string listName)
         {
-            int insertedId = ListQueries.AddList(listName);
+            int insertedId = listQueries.AddList(listName);
 
             if(insertedId > 0)
             {
@@ -64,7 +93,7 @@ namespace ListAssist.WebAPI.Controllers
         [HttpDelete]
         public HttpStatusCode RemoveList(int listId)
         {
-            if (ListQueries.RemoveList(listId))
+            if (listQueries.RemoveList(listId))
             {
                 return HttpStatusCode.OK;
             }
@@ -86,7 +115,7 @@ namespace ListAssist.WebAPI.Controllers
         [ResponseType(typeof(ShoppingList))]
         public HttpResponseMessage SingleList(int listId)
         {
-            var result = ListQueries.GetList(listId);
+            var result = listQueries.GetList(listId);
 
             if (result != null)
             {
@@ -126,13 +155,13 @@ namespace ListAssist.WebAPI.Controllers
                 newList.ShoppingListItems.Add(newItem);
             }
 
-            var result = ListQueries.UpdateList(newList.Id, newList.Name);
+            var result = listQueries.UpdateList(newList.Id, newList.Name);
 
             if(result)
             {
                 foreach (var item in newList.ShoppingListItems)
                 {
-                    if (!ListQueries.UpdateItemFromList(item))
+                    if (!listQueries.UpdateItemFromList(item))
                     {
                         return HttpStatusCode.InternalServerError;
                     }

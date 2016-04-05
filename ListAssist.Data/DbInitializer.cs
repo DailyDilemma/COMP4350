@@ -4,7 +4,7 @@ using System.Data.Entity;
 
 namespace ListAssist.Data
 {
-    public class DbInitializer : DropCreateDatabaseAlways<ListAssistContext>
+    public class DbInitializer : DropCreateDatabaseIfModelChanges<ListAssistContext>
     {
         protected override void Seed(ListAssistContext context)
         {
@@ -25,11 +25,19 @@ namespace ListAssist.Data
                 new LAListItem {Description="Eggs", ListID=1 },
                 new LAListItem {Description="Puppy", ListID=2 },
                 new LAListItem {Description="Skateboard", ListID=2 },
-                new LAListItem {Description="Choo Choo Train", ListID=2 },
+                new LAListItem {Description="Choo Choo Train", ListID=2 }
             };
             listItems.ForEach(s => context.LAListItems.Add(s));
             context.SaveChanges();
 
+            var listSuggestions = new List<LASuggestion>
+            {
+                new LASuggestion { ListID=1, Description="Bananas" },
+                new LASuggestion { ListID=1, Description="Bread" },
+                new LASuggestion { ListID=2, Description="Sample Thing" }
+            };
+            listSuggestions.ForEach(s => context.LASuggestions.Add(s));
+            context.SaveChanges();
         }
     }
 }

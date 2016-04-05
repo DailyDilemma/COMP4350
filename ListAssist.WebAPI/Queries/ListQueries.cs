@@ -9,18 +9,20 @@ using System.Linq;
 using AutoMapper.QueryableExtensions;
 using AutoMapper;
 
+using System.Diagnostics;
+
 namespace ListAssist.WebAPI.Queries
 {
-    public static class ListQueries
+    public class ListQueries
     {
-        private static ListAssistContext db = new ListAssistContext();
+        private ListAssistContext db = new ListAssistContext();
                 
-        public static List<ShoppingList> GetLists()
-        {
+        public List<ShoppingList> GetLists()
+        {            
             return db.LALists.ProjectTo<ShoppingList>().ToList();
         }
 
-        public static ShoppingList GetList(int listId)
+        public ShoppingList GetList(int listId)
         {
             var entityList = db.LALists.Where(s => s.ID == listId);
             var shoppingList = entityList.ProjectTo<ShoppingList>().FirstOrDefault();
@@ -28,7 +30,7 @@ namespace ListAssist.WebAPI.Queries
             return shoppingList;
         }
         
-        public static int AddList(string listName)
+        public int AddList(string listName)
         {
             int id = 0;
 
@@ -51,7 +53,7 @@ namespace ListAssist.WebAPI.Queries
             return id;
         }
 
-        public static bool RemoveList(int ListId)
+        public bool RemoveList(int ListId)
         {
             var ListToDelete = db.LALists.Find(ListId);
             var success = false;
@@ -67,7 +69,7 @@ namespace ListAssist.WebAPI.Queries
             return success;
         }
 
-        public static bool UpdateList(int listId, string newName)
+        public bool UpdateList(int listId, string newName)
         {
             var success = false;
 
@@ -88,7 +90,7 @@ namespace ListAssist.WebAPI.Queries
             return success;
         }
 
-        public static bool AddItemToList(ShoppingListItem item)
+        public bool AddItemToList(ShoppingListItem item)
         {
             Mapper.CreateMap<ShoppingListItem, LAListItem>()
                 .ForMember(e => e.Done, opt => opt.MapFrom(s => s.Checked));
@@ -123,7 +125,7 @@ namespace ListAssist.WebAPI.Queries
             return success;
         }
 
-        public static bool UpdateItemFromList(ShoppingListItem item)
+        public bool UpdateItemFromList(ShoppingListItem item)
         {
             Mapper.CreateMap<ShoppingListItem, LAListItem>()
                 .ForMember(e => e.Done, opt => opt.MapFrom(s => s.Checked));
@@ -147,7 +149,7 @@ namespace ListAssist.WebAPI.Queries
             return success;
         }
 
-        public static ShoppingListItem GetItemFromList(int listId, int itemId)
+        public ShoppingListItem GetItemFromList(int listId, int itemId)
         {
             var entityList = db.LAListItems.Where(s => (s.ListID == listId & s.ID == itemId));
             var shoppingListItem = entityList.ProjectTo<ShoppingListItem>().FirstOrDefault();
@@ -155,7 +157,7 @@ namespace ListAssist.WebAPI.Queries
             return shoppingListItem;
         }
 
-        public static bool DeleteItemFromList(int itemId, int listId)
+        public bool DeleteItemFromList(int itemId, int listId)
         {
             var success = false;
             var list = db.LALists.Find(listId);
@@ -176,7 +178,7 @@ namespace ListAssist.WebAPI.Queries
             return success;
         }
 
-        public static bool CheckOffItemFromList(int listId, int itemId)
+        public bool CheckOffItemFromList(int listId, int itemId)
         {
             var updatedItem = db.LAListItems.Where(n => (n.ID == itemId) && (n.ListID == listId)).FirstOrDefault();
             var success = false;
@@ -192,5 +194,41 @@ namespace ListAssist.WebAPI.Queries
 
             return success;
         }
+
+        public ShoppingList AcceptSuggestion(int suggestionId)
+        {
+            LASuggestion suggestion = null;
+            LAList list = null;
+            var success = false;
+
+            suggestion = db.LASuggestions.Where(s => s.ID == suggestionId).FirstOrDefault();
+
+            if (suggestion != null)
+            {
+                list = db.LALists.Where(l => l.ID == suggestion.ListID).FirstOrDefault();
+                if (list != null)
+                {
+                    // Create a new list item from the suggestion
+                    list.LAListItems.Add(new LAListItem() {
+                        ListID = suggestion.ListID,
+                        Description = suggestion.Description
+                    });
+
+                    // Delete the suggestion
+                    db.Entry(suggestion).State = EntityState.Deleted;
+                    list.LASuggestions.Remove(suggestion);
+                    db.SaveChanges();
+                }
+            }
+
+            if (list != null) {
+                var entityList = db.LALists.Where(l => l.ID == list.ID);
+                var shoppingList = entityList.ProjectTo<ShoppingList>().FirstOrDefault();
+                return shoppingList;
+            } else {
+                return null;
+            }       
+        }
+
     }
 }

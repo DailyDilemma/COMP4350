@@ -14,6 +14,7 @@ namespace ListAssist.Data
 
         public DbSet<LAList> LALists { get; set; }
         public DbSet<LAListItem> LAListItems { get; set; }
+        public DbSet<LASuggestion> LASuggestions { get; set; }
 
         // This method allows you to override the default behaviors for how entity framework 
         // creates a database from the provided model classes. When overriding entity framework's
@@ -22,7 +23,7 @@ namespace ListAssist.Data
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             // Removes the convention whereby table names are automatically pluralized (ie. entity
-            // framework will not longer add an "s" to table names)
+            // framework will no longer add an "s" to table names)
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
 
             // LAList Configuration
@@ -35,7 +36,13 @@ namespace ListAssist.Data
                         .HasRequired(l => l.LAList)
                         .WithMany(l => l.LAListItems)
                         .HasForeignKey(l => l.ListID);
-                        
+
+            // LASuggestions Configuration
+            modelBuilder.Entity<LASuggestion>()
+                        .HasRequired(l => l.LAList)
+                        .WithMany(l => l.LASuggestions)
+                        .HasForeignKey(l => l.ListID);
+
         }
     }    
 }

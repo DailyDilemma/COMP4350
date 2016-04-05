@@ -42,18 +42,37 @@
         </div>
     }
     </div>
-    <div class="medium-6 columns show-for-medium-up listGrid">
+    <div class="medium-6 columns show-for-medium-up listGrid replacement-suggestions">
         <div class="small-12 listHeader">
-            Details
+            Replacement Suggestions
         </div>
-        <div class="small-12 panel details">
-            Click on an item to see some details
-        </div>
+        @for (var j = 0; j < Model.LASuggestions.Count; j++)
+            {
+            @Html.HiddenFor(model => model.LASuggestions[j].ID)
+            @Html.HiddenFor(model => model.LASuggestions[j].ListID)
+            <div class="small-12 columns itemWrapper">
+                <div class="row">
+                    <div class="small-10 columns suggestion-description">
+                        @Html.DisplayFor(model => model.LASuggestions[j].Description)
+                    </div>
+                    <div class="small-2 columns">
+                        @Ajax.ActionLink("Add", "AcceptSuggestion",
+                                new { suggestionId = Model.LASuggestions[j].ID },
+                                new AjaxOptions { HttpMethod = "POST", OnSuccess = "success" },
+                                new { @class = "button expand success round" })
+                    </div>
+                </div>
+            </div>
+        }
     </div>
-</div>
+
+
 
 <script>
     $(function () {
         detailsControl();
     });
+    function success(data) {
+        window.location = data.url;
+    }
 </script>

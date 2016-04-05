@@ -9,6 +9,13 @@ namespace ListAssist.WebAPI.Controllers
 {
     public class ListItemsController : ApiController
     {
+        private ListQueries listQueries;
+
+        public ListItemsController()
+        {
+            this.listQueries = new ListQueries();
+        }
+
         /// <summary>
         /// Add a new item to a list.
         /// </summary>
@@ -21,7 +28,7 @@ namespace ListAssist.WebAPI.Controllers
         [HttpPost]
         public HttpStatusCode AddItemToList(ShoppingListItem item)
         {
-            if (ListQueries.AddItemToList(item))
+            if (listQueries.AddItemToList(item))
             {
                 return HttpStatusCode.OK;
             }
@@ -40,7 +47,7 @@ namespace ListAssist.WebAPI.Controllers
         [ResponseType(typeof(ShoppingListItem))]
         public HttpResponseMessage GetItemFromList(int listId, int itemId)
         {
-            var result = ListQueries.GetItemFromList(listId, itemId);
+            var result = listQueries.GetItemFromList(listId, itemId);
 
             if (result != null)
             {
@@ -62,7 +69,7 @@ namespace ListAssist.WebAPI.Controllers
         [HttpPut]
         public HttpStatusCode CheckOffItemFromList(int itemId, int listId)
         {
-            if (ListQueries.CheckOffItemFromList(listId, itemId))
+            if (listQueries.CheckOffItemFromList(listId, itemId))
             {
                 return HttpStatusCode.OK;
             }
@@ -84,7 +91,7 @@ namespace ListAssist.WebAPI.Controllers
         [HttpDelete]
         public HttpStatusCode DeleteItemFromList(int itemId, int listId)
         {
-            if(ListQueries.DeleteItemFromList(itemId, listId))
+            if(listQueries.DeleteItemFromList(itemId, listId))
             {
                 return HttpStatusCode.OK;
             }

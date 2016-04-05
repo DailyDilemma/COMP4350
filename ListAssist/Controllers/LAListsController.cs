@@ -13,6 +13,7 @@ namespace ListAssist.Controllers
     public class LAListsController : Controller
     {
         private HttpClient newClient;
+        ListAssistContext db = new ListAssistContext();
 
         public LAListsController()
         {
@@ -66,8 +67,10 @@ namespace ListAssist.Controllers
         {
             HttpResponseMessage responseMsg = null;
             JObject jsonObj = null;
+           // JObject jsonItemObj = null;
             LAList lAList = null;
             List<LAListItem> listItems = null;
+            List<LASuggestion> listSuggestions = null;
 
             if (id == null)
             {
@@ -86,11 +89,22 @@ namespace ListAssist.Controllers
                     return HttpNotFound();
                 }
 
-                listItems = jsonObj["ShoppingListItems"].ToObject<List<LAListItem>>();
-                foreach (LAListItem item in listItems)
+                foreach (JObject jsonItemObj in jsonObj["ShoppingListItems"])
                 {
+                    var item = new LAListItem();
+                    item.ID = (int)jsonItemObj["Id"];
+                    item.ListID = (int)jsonItemObj["ListId"];
+                    item.Done = (bool)jsonItemObj["Checked"];
+                    item.Description = (string)jsonItemObj["Description"];
                     lAList.LAListItems.Add(item);
                 }
+
+                listSuggestions = jsonObj["ShoppingListSuggestions"].ToObject<List<LASuggestion>>();
+                foreach (LASuggestion item in listSuggestions)
+                {
+                    lAList.LASuggestions.Add(item);
+                }
+
                 return View("Details", lAList);
             }
             return View(lAList);
@@ -130,6 +144,7 @@ namespace ListAssist.Controllers
             JObject jsonObj = null;
             LAList lAList = null;
             List<LAListItem> listItems = null;
+            List<LASuggestion> listSuggestions = null;
 
             if (id == null)
             {
@@ -148,12 +163,21 @@ namespace ListAssist.Controllers
                     return HttpNotFound();
                 }
 
-                listItems = jsonObj["ShoppingListItems"].ToObject<List<LAListItem>>();
-
-                foreach (LAListItem item in listItems)
+                foreach (JObject jsonItemObj in jsonObj["ShoppingListItems"])
                 {
+                    var item = new LAListItem();
+                    item.ID = (int)jsonItemObj["Id"];
+                    item.ListID = (int)jsonItemObj["ListId"];
+                    item.Done = (bool)jsonItemObj["Checked"];
+                    item.Description = (string)jsonItemObj["Description"];
                     lAList.LAListItems.Add(item);
                 }
+
+                listSuggestions = jsonObj["ShoppingListSuggestions"].ToObject<List<LASuggestion>>();
+                foreach (LASuggestion item in listSuggestions) {
+                    lAList.LASuggestions.Add(item);
+                }
+
                 return View("Edit", lAList);
             }
             return View(lAList);
@@ -321,6 +345,29 @@ namespace ListAssist.Controllers
             }
 
             return View("AddListItem", lAListItem);
+        }
+
+        [HttpPost, ActionName("AcceptSuggestion")]
+        public ActionResult AcceptSuggestion(int suggestionId)
+        {
+            HttpResponseMessage responseMsg = null;
+            JObject jsonObj = null;
+            LAList lAList = null;
+            List<LAListItem> listItems = null;
+            List<LASuggestion> listSuggestions = null;
+            HttpContent content = null;
+               
+        responseMsg = this.newClient.PostAsync("api/AcceptSuggestion/" + suggestionId, content).Result;
+        if (responseMsg.StatusCode == HttpStatusCode.OK)
+        {
+            jsonObj = JObject.Parse(responseMsg.Content.ReadAsStringAsync().Result);
+            lAList = jsonObj.ToObject<LAList>();
+            listItems = jsonObj["ShoppingListItems"].ToObject<List<LAListItem>>();
+            listSuggestions = jsonObj["ShoppingListSuggestions"].ToObject<List<LASuggestion>>();
+        }
+
+        return Json(new { url = Request.UrlReferrer.AbsoluteUri });
+
         }
 
         protected override void Dispose(bool disposing)

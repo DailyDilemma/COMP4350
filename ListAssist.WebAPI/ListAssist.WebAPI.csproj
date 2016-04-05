@@ -196,9 +196,11 @@
     <Compile Include="Controllers\ListItemsController.cs" />
     <Compile Include="Controllers\ListsController.cs" />
     <Compile Include="MappingProfile\AutoMapperConfiguration.cs" />
+    <Compile Include="MappingProfile\ShoppingListSuggestionProfile.cs" />
     <Compile Include="MappingProfile\ShoppingListItemProfile.cs" />
     <Compile Include="MappingProfile\ShoppingListProfile.cs" />
     <Compile Include="Models\ShoppingList.cs" />
+    <Compile Include="Models\ShoppingListSuggestion.cs" />
     <Compile Include="Models\ShoppingListItem.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
@@ -246,6 +248,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\ListSuggestions\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

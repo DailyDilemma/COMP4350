@@ -113,7 +113,8 @@ namespace ListAssist.Controllers
         // GET: LALists/Create
         public ActionResult Create()
         {
-            return View("Create");
+            LAList aList = new LAList();
+            return View(aList);
         }
 
         // POST: LALists/Create
@@ -121,20 +122,25 @@ namespace ListAssist.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Name")] LAList lAList)
+        public ActionResult Create([Bind(Include = "Name")] LAList AList)
         {
-            HttpResponseMessage responseMsg = this.newClient.PostAsync(string.Format("api/Lists/{0}", lAList.Name), new StringContent(lAList.Name)).Result;
-
-            if (responseMsg.StatusCode == HttpStatusCode.OK)
+            if(ModelState.IsValid)
             {
-                LAList newList = new LAList();
-                newList.Name = lAList.Name;
-                newList.ID = responseMsg.Content.ReadAsAsync<int>().Result;
+                HttpResponseMessage responseMsg = this.newClient.PostAsync(string.Format("api/Lists/{0}", AList.Name), new StringContent(AList.Name)).Result;
 
-                return RedirectToAction("Edit", newList);
+                if (responseMsg.StatusCode == HttpStatusCode.OK)
+                {
+                    LAList newList = new LAList();
+                    newList.Name = AList.Name;
+                    newList.ID = responseMsg.Content.ReadAsAsync<int>().Result;
+
+                    return RedirectToAction("Edit", newList);
+                }
+
+                return View("Create", AList);
             }
 
-            return View("Create", lAList);
+            return View("Create", AList);
         }
 
         // GET: LALists/Edit/5

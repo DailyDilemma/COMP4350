@@ -16,6 +16,8 @@ namespace ListAssist.Data.Models
         }
 
         public int ID { get; set; }
+
+        [Required(ErrorMessage ="Please input a name")]
         public string Name { get; set; }
         public virtual List<LAListItem> LAListItems { get; set; }
         public virtual List<LASuggestion> LASuggestions { get; set; }

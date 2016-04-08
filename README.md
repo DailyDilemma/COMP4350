@@ -2,6 +2,16 @@
 
 This is ListAssist, a smart list sharing application to help with getting things done.
 
+## Iteration 4 Deliverables
+
+[Android Studio Repository](https://github.com/DailyDilemma/ListAssist)
+
+[Chat Logs](docs/Iteration4ChatLogs.md)
+
+[Meeting Minutes](docs/Meeting_Minutes)
+
+For the full list of changes, [click here](docs/Iteration 4 Changes Summary.md).
+
 ## Iteration 3 Deliverables
 
 [Android Studio Repository](https://github.com/DailyDilemma/ListAssist)

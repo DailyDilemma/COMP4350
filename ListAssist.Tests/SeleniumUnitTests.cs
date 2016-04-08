@@ -26,7 +26,7 @@ namespace ListAssist.Tests
         3. Remove a list.
         */
         [TestMethod]
-        public void TestSeleniumOpenApp()
+        public void Test01_SeleniumOpenApp()
         {
             var expectedTitle = "Welcome to ListAssist!";
 
@@ -35,25 +35,24 @@ namespace ListAssist.Tests
         }
 
         [TestMethod]
-        public void TestSeleniumCreateNewEmptyList()
+        public void Test02_SeleniumCreateNewEmptyList()
         {
             var expectedListName = "Empty List";
 
-            driver.FindElement(By.LinkText("Create New List")).Click();
+            driver.FindElement(By.LinkText("Create")).Click();
 
-            IWebElement element = driver.FindElement(By.Name("Name"));
-            element.Clear();
-            element.SendKeys("Empty List");
+            driver.FindElement(By.Id("Name")).Clear();
+            driver.FindElement(By.Id("Name")).SendKeys("Empty List");
             driver.FindElement(By.XPath("//button[@type='submit']")).Click();
+            //driver.FindElement(By.LinkText("Save")).Click();
 
             driver.FindElement(By.CssSelector("button.button.expand")).Click();
 
-            element = driver.FindElement(By.TagName("body"));
-            Assert.IsTrue(element.Text.Contains(expectedListName));
+            Assert.IsTrue(driver.FindElement(By.TagName("body")).Text.Contains(expectedListName));
         }
 
         [TestMethod]
-        public void TestSeleniumRemoveNewEmptyList()
+        public void Test03_SeleniumRemoveNewEmptyList()
         {
             var deletedListName = "Empty List";
 
@@ -61,8 +60,7 @@ namespace ListAssist.Tests
             driver.FindElement(By.XPath("(//a[contains(text(),'Delete')])[3]")).Click();
             driver.FindElement(By.XPath("//button[@type='submit']")).Click();
 
-            IWebElement element = driver.FindElement(By.TagName("body"));
-            Assert.IsFalse(element.Text.Contains(deletedListName));
+            Assert.IsFalse(driver.FindElement(By.TagName("body")).Text.Contains(deletedListName));
         }
 
         /*Scenario 2: BUS - Add items to list.
@@ -71,7 +69,7 @@ namespace ListAssist.Tests
         3. Remove items from a list.
         */
         [TestMethod]
-        public void TestSeleniumViewListItems()
+        public void Test04_SeleniumViewListItems()
         {
             driver.Navigate().GoToUrl(baseURL + "/LALists");
             driver.FindElement(By.LinkText("Details")).Click();
@@ -86,7 +84,7 @@ namespace ListAssist.Tests
         }
 
         [TestMethod]
-        public void TestSeleniumAddListItems()
+        public void Test05_SeleniumAddListItems()
         {
             driver.Navigate().GoToUrl(baseURL + "/LALists");
             driver.FindElement(By.LinkText("Edit")).Click();
@@ -123,7 +121,7 @@ namespace ListAssist.Tests
         }
 
         [TestMethod]
-        public void TestSeleniumRemoveListItems()
+        public void Test06_SeleniumRemoveListItems()
         {
             driver.Navigate().GoToUrl(baseURL + "/LALists");
             driver.FindElement(By.LinkText("Edit")).Click();
@@ -145,23 +143,60 @@ namespace ListAssist.Tests
         2. Check off multiple items from a list.
         3. Uncheck item from list.
         */
+        [TestMethod]
+        public void Test07_SeleniumCheckItem()
+        {
+            driver.Navigate().GoToUrl(baseURL + "/LALists");
+            driver.FindElement(By.XPath("(//a[contains(text(),'Edit')])[2]")).Click();
+            driver.FindElement(By.Id("LAListItems_0__Done")).Click();
+            driver.FindElement(By.XPath("//button[@type='submit']")).Click();
 
-        /*Scenario 4: BUS - Share lists.
-        1. Share a list with a single person.
-        2. Share a list with a group of people.
-        */
+            driver.FindElement(By.LinkText("Home")).Click();
+        }
 
-        /*Scenario 5: BUS - Purchase frequeny.
-        1. Add a user specified replacement frequency to an item on a list.
-        2. View how often an item on a list is added to the list.
-        3. View the date an item was checked off on a list.
-        */
+        [TestMethod]
+        public void Test08_SeleniumCheckMultipleItems()
+        {
+            driver.Navigate().GoToUrl(baseURL + "/LALists");
+            driver.FindElement(By.LinkText("Edit")).Click();
+            driver.FindElement(By.Id("LAListItems_0__Done")).Click();
+            driver.FindElement(By.Id("LAListItems_1__Done")).Click();
+            driver.FindElement(By.Id("LAListItems_2__Done")).Click();
+            driver.FindElement(By.XPath("//button[@type='submit']")).Click();
 
-        /*Scenario 6: BUS - Specialized lists.
-        1. Create a specialized Christmas list.
-        2. Create a sub-list in a Christmas list, for a specific person.
-        3. Set viewing restrictions for sub-list.
+            driver.FindElement(By.LinkText("Home")).Click();
+        }
+
+        [TestMethod]
+        public void Test09_SeleniumUncheckItems()
+        {
+            driver.Navigate().GoToUrl(baseURL + "/LALists");
+            driver.FindElement(By.LinkText("Edit")).Click();
+            driver.FindElement(By.Id("LAListItems_0__Done")).Click();
+            driver.FindElement(By.Id("LAListItems_1__Done")).Click();
+            driver.FindElement(By.Id("LAListItems_2__Done")).Click();
+            driver.FindElement(By.XPath("//button[@type='submit']")).Click();
+
+            driver.FindElement(By.XPath("(//a[contains(text(),'Edit')])[2]")).Click();
+            driver.FindElement(By.Id("LAListItems_0__Done")).Click();
+            driver.FindElement(By.XPath("//button[@type='submit']")).Click();
+
+            driver.FindElement(By.LinkText("Home")).Click();
+        }
+
+        /*Scenario 4: BUS - Add suggested item to list.
+        1. Add suggested item to a list.
         */
+        /*[TestMethod]
+        public void Test10_SeleniumAddSuggestedItem()
+        {
+            driver.Navigate().GoToUrl(baseURL + "/LALists");
+            driver.FindElement(By.LinkText("Edit")).Click();
+            driver.FindElement(By.LinkText("Add")).Click();
+            driver.FindElement(By.LinkText("Add")).Click();
+            driver.FindElement(By.LinkText("Save")).Click();
+            driver.FindElement(By.CssSelector("button.button.expand")).Click();
+        }*/
 
         [AssemblyCleanup]
         public static void TearDown()

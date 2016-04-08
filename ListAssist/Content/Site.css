@@ -88,11 +88,11 @@ button.secondary a {
     margin-top: 10px;
 }
 
-.listGrid .itemWrapper:nth-child(odd) {
+.listGrid .itemWrapper:nth-child(odd), .listGrid.replacement-suggestions .itemWrapper:nth-child(even) {
     background-color: #e1e1e1;
 }
 
-.listGrid .itemWrapper:nth-child(even) {
+.listGrid .itemWrapper:nth-child(even), .listGrid.replacement-suggestions .itemWrapper:nth-child(odd) {
     background-color: #FFF;
 }
 
@@ -207,4 +207,12 @@ button.secondary a {
     color: red;
     font-size: 22px;
     padding: 8px;
+}
+
+.itemWrapper div.columns.suggestion-description {
+    padding: 10px 15px;
+}
+
+.itemWrapper div.columns.suggestion-button {
+    margin: 4px 0;
 }

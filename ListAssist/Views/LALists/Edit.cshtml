@@ -68,7 +68,7 @@
                         <div class="small-10 columns suggestion-description">
                                 @Html.DisplayFor(model => model.LASuggestions[j].Description)
                         </div>
-                        <div class="small-2 columns">
+                        <div class="small-2 columns suggestion-button">
                             @Ajax.ActionLink("Add", "AcceptSuggestion",
                                 new { suggestionId = Model.LASuggestions[j].ID }, 
                                 new AjaxOptions { HttpMethod = "POST", OnSuccess="success" },

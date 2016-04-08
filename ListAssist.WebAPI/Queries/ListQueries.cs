@@ -15,7 +15,17 @@ namespace ListAssist.WebAPI.Queries
 {
     public class ListQueries
     {
-        private ListAssistContext db = new ListAssistContext();
+        private ListAssistContext db;
+
+        public ListQueries()
+        {
+             this.db = new ListAssistContext();
+        }
+
+        public ListQueries(string connection)
+        {
+            this.db = new ListAssistContext(connection);
+        }
                 
         public List<ShoppingList> GetLists()
         {            

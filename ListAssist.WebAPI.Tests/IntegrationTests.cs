@@ -23,9 +23,14 @@ namespace ListAssist.WebAPI.Tests
             [TestInitialize]
             public void TestInitialize()
             {
+                Database.SetInitializer(new DbInitializer());
+                this.db = new ListAssistContext(new DbConStringBuilder("WebAPITests").getConnectionString());
+                db.Database.Initialize(true);                
+                Assert.IsNotNull(this.db, "List assist context is null.");
+
                 AutoMapperConfiguration.Configure();
 
-                listQueries = new ListQueries();
+                listQueries = new ListQueries(new DbConStringBuilder("WebAPITests").getConnectionString());
 
                 LAList testList1 = new LAList() { Name = "Test List 1" };
                 LAList testList2 = new LAList() { Name = "Test List 2" };
@@ -45,12 +50,6 @@ namespace ListAssist.WebAPI.Tests
 
                 Assert.IsNotNull(testInsertItem3, "Test insert item 3 is null,");
                 testList2.LAListItems.Add(testInsertItem3);
-
-                Database.SetInitializer(new DbInitializer());
-                this.db = new ListAssistContext();
-
-                this.db.Database.Initialize(false);
-                Assert.IsNotNull(this.db, "List assist context is null.");
 
                 var lists = new List<LAList>
             {
